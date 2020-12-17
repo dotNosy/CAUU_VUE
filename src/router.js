@@ -10,17 +10,7 @@ export default new Router({
             path: "/",
             alias: "/home",
             name: "home",
-            component: () => import("./components/Home")
-        },
-        {
-            path: "/blog/:id",
-            name: "blog-detail",
-            component: () => import("./components/Blog")
-        },
-        {
-            path: "/blog/add",
-            name: "add-blog",
-            component: () => import("./components/AddBlog")
+            component: () => import("./components/HelloWorld")
         }
     ]
 });
