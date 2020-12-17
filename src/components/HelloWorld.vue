@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+        <router-link to="/si" class="nav-link">Si</router-link>
     <h1>{{ test }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>

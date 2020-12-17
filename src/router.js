@@ -11,6 +11,11 @@ export default new Router({
             alias: "/home",
             name: "home",
             component: () => import("./components/HelloWorld")
-        }
+        },
+        {
+            path: "/si",
+            name: "si",
+            component: () => import("./components/si")
+          }
     ]
 });
