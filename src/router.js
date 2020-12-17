@@ -16,6 +16,11 @@ export default new Router({
             path: "/si",
             name: "si",
             component: () => import("./components/si")
-          }
+        },
+        {
+            path: "/prueba",
+            name: "prueba",
+            component: () => import("./components/Plantilla")
+        }
     ]
 });

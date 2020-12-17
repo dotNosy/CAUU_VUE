@@ -9,14 +9,15 @@
 </template>
 
 <script>
-    import Header from './components/Header'
-    import Footer from './components/Footer'
+    import Header from './Header'
+    import Footer from './Footer'
+    
     export default {
+        name: 'App',
         components:{
-            'my-header':Header,
-            'my-footer':Footer
+        'my-header': Header,
+        'my-footer': Footer
         }
-
     }
 </script>
 
