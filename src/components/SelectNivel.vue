@@ -29,7 +29,7 @@
 
         
         <!-- TO-DO: Controlar por Vue qué info button se ha seleccionado y mostrar la info correspondiente de ese nivel -->
-        <b-modal id="modal-info" hide-footer>
+        <b-modal id="modal-info"  hide-footer>
             <template #modal-title>{{ titulo }}</template>
             <div class="d-block text-center">
                 <h3> {{ explanation }}</h3>
@@ -47,13 +47,13 @@
         data() {
             return {
                 titulo: 'AAAAA',
-                explanation: 'lorem ipsum blablabla'
+                explanation: ["a", "b", "c"]
             }
         },
         name: 'ElegirNivel',
         methods: {
-            explanationModal() {
-                
+            explanationModalShow() {
+
             }
         }
         

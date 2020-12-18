@@ -32,5 +32,11 @@ export default new Router({
             name: "selectNivel",
             component: () => import("./components/SelectNivel")
         }
+        ,
+        {
+            path: "/juego",
+            name: "juego",
+            component: () => import("./components/Juego")
+        }
     ]
 });
