@@ -2,7 +2,7 @@
     <div>
         <h3>*panic*</h3>
         <my-header></my-header>
-        <section></section>
+        <section></section> 
         <my-footer></my-footer>
     </div>
 

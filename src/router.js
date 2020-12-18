@@ -21,6 +21,16 @@ export default new Router({
             path: "/prueba",
             name: "prueba",
             component: () => import("./components/Plantilla")
+        },
+        {
+            path: "/perfil",
+            name: "perfil",
+            component: () => import("./components/Perfil")
+        },
+        {
+            path: "/selectNivel",
+            name: "selectNivel",
+            component: () => import("./components/SelectNivel")
         }
     ]
 });
