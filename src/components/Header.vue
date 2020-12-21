@@ -22,31 +22,31 @@
 </header>
 </template>
 <script>
-  export default {
-   name: 'header',
-   data(){
-     return {
-       laRuta: "",
-       login: "",
-     }
-   },
-   methods: {
-       checkUserLogued () {
-           const user = sessionStorage.getItem("user");
-            if (!user) {
-                this.laRuta = "/login";
-                this.login = "LOGIN";
-            } else {
-                    this.laRuta = "/logout";
-                    this.login = "LOGOUT"
-            }
-       }
-   }
-   ,
-   mounted () {
-      this.checkUserLogued();
-   }
- };
+    export default {
+    name: 'header',
+    data(){
+        return {
+        laRuta: "",
+        login: "",
+        }
+    },
+    methods: {
+        checkUserLogued () {
+            const user = sessionStorage.getItem("user");
+                if (!user) {
+                    this.laRuta = "/login";
+                    this.login = "LOGIN";
+                } else {
+                        this.laRuta = "/logout";
+                        this.login = "LOGOUT"
+                }
+        }
+    }
+    ,
+    mounted () {
+        this.checkUserLogued();
+    }
+    };
 
 </script>
 <style>

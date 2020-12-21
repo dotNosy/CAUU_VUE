@@ -1,19 +1,20 @@
 <template>
+<form>
     <div class="modal-body row">
         <!-- <div class="container login-container col-md-6">
             <img src="../assets/logoDF.png" alt="logo" class="" style="width:86%; border-radius: 50%;">
         </div> -->
         <!-- <div class="container login-container col-md-3">
         </div> -->
-        <div class="container login-container col-md-4">
+        <div class="container login-container col-md-3">
             <div class="row">
                 <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
                     <br><h3>Login</h3><br>
                         <div class="form-group">
-                            <input id="email" class="form-control" type="email" placeholder="Email *" v-model="user.email"/><br>
+                            <input id="email" class="form-control" type="email" placeholder="Email *" required v-model="user.email"/><br>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" placeholder="Pasahitza *" v-model="user.password"/><br>
+                            <input type="password" class="form-control" id="password" placeholder="Pasahitza *" required minlength="8" v-model="user.password"/><br>
                         </div>
                         <div class="form-group">
                             <button value="SARTU" @click="login">SARTU</button><br>
@@ -30,60 +31,61 @@
         <!-- <div class="container login-container col-md-3">
         </div> -->
     </div>
+</form>
 </template>
 
 
 
 <script>
-  import LoginDataService from "../Services/LoginDataService";
+    import LoginDataService from "../Services/LoginDataService";
 
-  export default {
-    name: "login",
-    data () {
-      return {
-        user: {
-          id: null,
-          email: "",
-          password: "",
+    export default {
+        name: "login",
+        data () {
+        return {
+            user: {
+            id: null,
+            email: "",
+            password: "",
+            },
+            submitted: false
+        }
         },
-        submitted: false
-      }
-    },
-    methods: {
-      login() {
-          
-        let data = {
-            email: this.user.email,
-            password: this.user.password
-        };
+        methods: {
+        login() {
 
-        LoginDataService.login(data)
-          .then(response => {
-            //Persistis sesion
-            const user = {
-              token : response.data.access_token,
-              email : data.email,
-              rol : response.data.rol
-            }
-            sessionStorage.setItem('user', JSON.stringify(user));
-            //Redirigir segun rol
-            
-            switch (user.rol) {
-              case 'admin':
-                this.$router.push('admin');
-              break;
-            
-              default:
+            let data = {
+                email: this.user.email,
+                password: this.user.password
+            };
+
+            LoginDataService.login(data)
+            .then(response => {
+                //Persistis sesion
+                const user = {
+                token : response.data.access_token,
+                email : data.email,
+                rol : response.data.rol
+                }
+                sessionStorage.setItem('user', JSON.stringify(user));
+                //Redirigir segun rol
+                
+                switch (user.rol) {
+                case 'admin':
+                    this.$router.push('admin');
                 break;
-            }
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
+                
+                default:
+                    break;
+                }
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        }
+        }
     }
-  }
 </script>
 
 <style scoped>
@@ -99,5 +101,10 @@
     border-width: 2px;
     border-style: double;
 }
-
+input:invalid {
+    border: 2px solid red;
+}
+input:valid {
+    border: 2px solid black;
+}
 </style>
