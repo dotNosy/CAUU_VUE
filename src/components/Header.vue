@@ -15,14 +15,34 @@
         <button type="button" class="btn btn-primary"><a class="nav-link text-light" href="#">Link3</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn btn-primary" style="position: absolute; right: 0; margin-right:1%;"><a class="nav-link text-light" href="#">Login</a></button>
+        <button type="button" class="btn btn-primary" style="position: absolute; right: 0; margin-right:1%;"><a class="nav-link text-light" v-bind:href="laRuta">{{Login}}</a></button>
     </li>
 
     </ul>
 </nav>
 </header>
 </template>
+<script>
+ export default{
+   data(){
+     return {
+       laRuta: "",
+       login: ""
+     }
+   },
+   mounted(){
+      const user = sessionStorage.getItem("user");
+      if (!user){
+        this.laRuta = "/login";
+        this.login = "LOGIN";
+      }else{
+        this.laRuta = "/logout";
+        this.login = "LOGOUT"
+      }
+   }
+ };
 
+</script>
 <style>
 .logo{
     width: 4%;
