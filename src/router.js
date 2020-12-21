@@ -13,14 +13,9 @@ export default new Router({
             component: () => import("./components/HelloWorld")
         },
         {
-            path: "/si",
-            name: "si",
-            component: () => import("./components/si")
-        },
-        {
-            path: "/prueba",
-            name: "prueba",
-            component: () => import("./components/Plantilla")
+            path: "/login",
+            name: "login",
+            component: () => import("./components/Login")
         },
         {
             path: "/perfil",
