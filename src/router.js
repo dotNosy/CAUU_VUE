@@ -33,6 +33,11 @@ export default new Router({
             name: "juego",
             component: () => import("./components/Juego")
         },
+        {
+            path: "/admin",
+            name: "admin",
+            component: () => import("./components/adminPanel")
+        },
         // Si no coincide con nada
         { path: '*', redirect: '/' }
     ]
