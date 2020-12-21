@@ -22,9 +22,28 @@
 </template>
 
 <script>
-export default {
-name: "login"
-}
+  import LoginDataService from "../Services/LoginDataService";
+
+  export default {
+    name: "login",
+    data () {
+      return {
+        test : ""
+      }
+    },
+    methods: {
+      login() {
+        LoginDataService.get()
+          .then(response => {
+            
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
+    }
+  }
 </script>
 
 <style scoped>
