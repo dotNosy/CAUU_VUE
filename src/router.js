@@ -31,12 +31,16 @@ export default new Router({
             path: "/selectNivel",
             name: "selectNivel",
             component: () => import("./components/SelectNivel")
-        }
-        ,
+        },
         {
             path: "/juego",
             name: "juego",
             component: () => import("./components/Juego")
+        },
+        {
+            path: "/auth/register",
+            name: "registro",
+            component: () => import("./components/Registro")
         }
     ]
 });
