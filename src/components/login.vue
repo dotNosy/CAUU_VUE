@@ -1,23 +1,38 @@
 <template>
-  <div class="formulario">
-      <div class="titulo">
-        <h3>Login Form</h3>
-      </div>
-      <div class="input">
-        <label for="email">email</label>
-        <input id="email" type="email" v-model="user.email"/>
-      </div>
-      <div class="input">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" v-model="user.password"/>
-      </div>
-      <div>
-        <button value="SARTU" @click="login">SARTU</button>
-        <a href="#">Pasahitza ahaztu duzu?</a>
-      </div>
-  </div>
-
+    <div class="modal-body row">
+        <!-- <div class="container login-container col-md-6">
+            <img src="../assets/logoDF.png" alt="logo" class="" style="width:86%; border-radius: 50%;">
+        </div> -->
+        <!-- <div class="container login-container col-md-3">
+        </div> -->
+        <div class="container login-container col-md-4">
+            <div class="row">
+                <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
+                    <br><h3>Login</h3><br>
+                        <div class="form-group">
+                            <input id="email" class="form-control" type="email" placeholder="Email *" v-model="user.email"/><br>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" placeholder="Pasahitza *" v-model="user.password"/><br>
+                        </div>
+                        <div class="form-group">
+                            <button value="SARTU" @click="login">SARTU</button><br>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="ForgetPwd">Ez daukazu konturik? Klik emen egin.</a><br>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container login-container col-md-3">
+        </div> -->
+    </div>
 </template>
+
+
 
 <script>
   import LoginDataService from "../Services/LoginDataService";
@@ -71,5 +86,17 @@
 </script>
 
 <style scoped>
+
+.formulario{
+    /* width: 49%; */
+    /* background-color: #6A737C; */
+    /* margin: 1% 1%; */
+    background-color: #e0d1e9
+}
+.form{
+    border-color: black;
+    border-width: 2px;
+    border-style: double;
+}
 
 </style>
