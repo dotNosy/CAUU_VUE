@@ -2,7 +2,14 @@
   <div class="hello">
         <router-link to="/si" class="nav-link">Si</router-link>
     <h1>{{ test }}</h1>
-    <p>
+
+    <b-col>
+      <b-link variant="Link" to="Perfil"><b-button variant="dark" size="lg" pill>Iniciar sesión</b-button></b-link>
+      <b-link variant="Link" to="Registro"><b-button variant="dark" size="lg" pill>Registrarse</b-button></b-link>
+    </b-col>
+
+    <!-- Venia por defecto -->
+    <!-- <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
@@ -27,7 +34,9 @@
       <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    </ul> -->
+
+
   </div>
 </template>
 
