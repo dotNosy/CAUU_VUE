@@ -1,46 +1,23 @@
+<template>
+  <div></div>
+</template>
+
 <script>
   import LoginDataService from "../Services/LoginDataService";
 
   export default {
-    name: "login",
-    data () {
-      return {
-        user: {
-          id: null,
-          email: "",
-          password: "",
-        },
-        submitted: false
-      }
+    mounted() {
+      this.logout();
     },
     methods: {
-      login() {
+      logout() {
           
-        let data = {
-            email: this.user.email,
-            password: this.user.password
-        };
-
-        LoginDataService.login(data)
+        LoginDataService.logout()
           .then(response => {
-            //Persistis sesion
-            const user = {
-              token : response.data.access_token,
-              email : data.email,
-              rol : response.data.rol
-            }
-            sessionStorage.setItem('user', JSON.stringify(user));
-            //Redirigir segun rol
-            
-            switch (user.rol) {
-              case 'admin':
-                this.$router.push('admin');
-              break;
-            
-              default:
-                break;
-            }
+            //Delete sesion
+            sessionStorage.removeItem('user');
             console.log(response.data);
+            this.$router.push('home');
           })
           .catch(e => {
             console.log(e);
