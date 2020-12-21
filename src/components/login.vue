@@ -51,6 +51,7 @@
     },
     methods: {
       login() {
+          
         let data = {
             email: this.user.email,
             password: this.user.password

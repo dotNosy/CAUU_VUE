@@ -15,30 +15,36 @@
         <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link3</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn" id="btn" style="position: absolute; right: 0; margin-right:1%;"><a class="nav-link text-light" href="./login">Login</a></button>
+        <button @click="checkUserLogued()" type="button" class="btn" id="btn" style="position: absolute; right: 0; margin-right:1%;"><a v-bind:href="laRuta" class="nav-link text-light">{{ login }}</a></button>
     </li>
-
     </ul>
 </nav>
 </header>
 </template>
 <script>
- export default{
+  export default {
+   name: 'header',
    data(){
      return {
        laRuta: "",
-       login: ""
+       login: "",
      }
    },
-   mounted(){
-      const user = sessionStorage.getItem("user");
-      if (!user){
-        this.laRuta = "/login";
-        this.login = "LOGIN";
-      }else{
-        this.laRuta = "/logout";
-        this.login = "LOGOUT"
-      }
+   methods: {
+       checkUserLogued () {
+           const user = sessionStorage.getItem("user");
+            if (!user) {
+                this.laRuta = "/login";
+                this.login = "LOGIN";
+            } else {
+                    this.laRuta = "/logout";
+                    this.login = "LOGOUT"
+            }
+       }
+   }
+   ,
+   mounted () {
+      this.checkUserLogued();
    }
  };
 
@@ -74,9 +80,3 @@ ul{
     border-color: #918897;
 }
 </style>
-
-<script>
-    export default {
-        
-    }
-</script>
