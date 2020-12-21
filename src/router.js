@@ -21,6 +21,11 @@ export default new Router({
             path: "/blog/add",
             name: "add-blog",
             component: () => import("./components/AddBlog")
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("./components/Login")
         }
     ]
 });
