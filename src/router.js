@@ -32,6 +32,8 @@ export default new Router({
             path: "/juego",
             name: "juego",
             component: () => import("./components/Juego")
-        }
+        },
+        // Si no coincide con nada
+        { path: '*', redirect: '/' }
     ]
 });
