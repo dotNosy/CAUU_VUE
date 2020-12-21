@@ -1,22 +1,20 @@
 <template>
   <div class="formulario">
-    <form>
       <div class="titulo">
         <h3>Login Form</h3>
       </div>
       <div class="input">
         <label for="email">email</label>
-        <input id="email" type="email"/>
+        <input id="email" type="email" v-model="user.email"/>
       </div>
       <div class="input">
         <label for="password">Contraseña</label>
-        <input type="password" id="password"/>
+        <input type="password" id="password" v-model="user.password"/>
       </div>
       <div>
-        <input type="submit" value="SARTU">
+        <button value="SARTU" @click="login">SARTU</button>
         <a href="#">Pasahitza ahaztu duzu?</a>
       </div>
-    </form>
   </div>
 
 </template>
@@ -28,19 +26,47 @@
     name: "login",
     data () {
       return {
-        test : ""
+        user: {
+          id: null,
+          email: "",
+          password: "",
+        },
+        submitted: false
       }
     },
     methods: {
       login() {
-        LoginDataService.get()
+        let data = {
+            email: this.user.email,
+            password: this.user.password
+        };
+
+        LoginDataService.login(data)
           .then(response => {
+            //Persistis sesion
+            const user = {
+              token : response.access_token,
+              email : data.email,
+              rol : response.rol
+            }
+            sessionStorage.setItem('user', user);
+            //Redirigir segun rol
             
+            switch (user.rol) {
+              case 'admin':
+                
+              break;
+            
+              default:
+                break;
+            }
             console.log(response.data);
           })
           .catch(e => {
             console.log(e);
           });
+
+        console.log(data);
       }
     }
   }
