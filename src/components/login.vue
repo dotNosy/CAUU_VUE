@@ -45,16 +45,16 @@
           .then(response => {
             //Persistis sesion
             const user = {
-              token : response.access_token,
+              token : response.data.access_token,
               email : data.email,
-              rol : response.rol
+              rol : response.data.rol
             }
-            sessionStorage.setItem('user', user);
+            sessionStorage.setItem('user', JSON.stringify(user));
             //Redirigir segun rol
             
             switch (user.rol) {
               case 'admin':
-                
+                this.$router.push('admin');
               break;
             
               default:
@@ -65,8 +65,6 @@
           .catch(e => {
             console.log(e);
           });
-
-        console.log(data);
       }
     }
   }
