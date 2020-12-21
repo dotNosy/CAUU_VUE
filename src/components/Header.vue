@@ -6,16 +6,16 @@
 </a>
     <ul class="navbar-nav">
     <li class="nav-item" style="margin-left: 8%">
-        <button type="button" class="btn btn-primary"><a class="nav-link text-light" href="#">Link1</a></button>
+        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link1</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn btn-primary"><a class="nav-link text-light" href="#">Link2</a></button>
+        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link2</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn btn-primary"><a class="nav-link text-light" href="#">Link3</a></button>
+        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link3</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn btn-primary" style="position: absolute; right: 0; margin-right:1%;"><a class="nav-link text-light" href="#">Login</a></button>
+        <button type="button" class="btn" id="btn" style="position: absolute; right: 0; margin-right:1%;"><a class="nav-link text-light" href="./login">Login</a></button>
     </li>
 
     </ul>
@@ -44,11 +44,13 @@ li{
 ul{
     display: inline;
 }
-.btn{
+#btn{
     background-color: #4e3757;
     border-color:#4e3757;
+    color:red;
 }
-.btn:hover{
+
+#btn:hover{
     background-color: #918897;
     border-color: #918897;
 }
