@@ -27,7 +27,6 @@
     data () {
       return {
         user: {
-          id: null,
           email: "",
           password: "",
         },
@@ -58,6 +57,7 @@
               break;
             
               default:
+                this.$router.push('juego');
                 break;
             }
             console.log(response.data);
