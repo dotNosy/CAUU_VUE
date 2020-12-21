@@ -54,7 +54,7 @@
             
             switch (user.rol) {
               case 'admin':
-                console.log(sessionStorage.getItem('user'));
+                this.$router.push('admin');
               break;
             
               default:
