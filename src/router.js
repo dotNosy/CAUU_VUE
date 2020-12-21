@@ -10,22 +10,28 @@ export default new Router({
             path: "/",
             alias: "/home",
             name: "home",
-            component: () => import("./components/Home")
-        },
-        {
-            path: "/blog/:id",
-            name: "blog-detail",
-            component: () => import("./components/Blog")
-        },
-        {
-            path: "/blog/add",
-            name: "add-blog",
-            component: () => import("./components/AddBlog")
+            component: () => import("./components/HelloWorld")
         },
         {
             path: "/login",
             name: "login",
             component: () => import("./components/Login")
+        },
+        {
+            path: "/perfil",
+            name: "perfil",
+            component: () => import("./components/Perfil")
+        },
+        {
+            path: "/selectNivel",
+            name: "selectNivel",
+            component: () => import("./components/SelectNivel")
+        }
+        ,
+        {
+            path: "/juego",
+            name: "juego",
+            component: () => import("./components/Juego")
         }
     ]
 });
