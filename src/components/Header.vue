@@ -22,7 +22,27 @@
 </nav>
 </header>
 </template>
+<script>
+ export default{
+   data(){
+     return {
+       laRuta: "",
+       login: ""
+     }
+   },
+   mounted(){
+      const user = sessionStorage.getItem("user");
+      if (!user){
+        this.laRuta = "/login";
+        this.login = "LOGIN";
+      }else{
+        this.laRuta = "/logout";
+        this.login = "LOGOUT"
+      }
+   }
+ };
 
+</script>
 <style>
 .logo{
     width: 4%;
