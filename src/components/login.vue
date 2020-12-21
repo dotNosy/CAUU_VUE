@@ -1,24 +1,31 @@
 <template>
-  <div class="formulario">
-    <form>
-      <div class="titulo">
-        <h3>Login Form</h3>
-      </div>
-      <div class="input">
-        <label for="email">email</label>
-        <input id="email" type="email"/>
-      </div>
-      <div class="input">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password"/>
-      </div>
-      <div>
-        <input type="submit" value="SARTU">
-        <a href="#">Pasahitza ahaztu duzu?</a>
-      </div>
-    </form>
-  </div>
-
+  <div class="formulario modal-body row">
+    <div class="col-md-6">
+    <!-- <img src="../assets/logoDF.png" alt="logo" class="logologin"> -->
+    </div>
+    <div class="container login-container col-md-6">
+            <div class="row">
+                <div class="col-md-6 login-form-1 form" style="background-color: ;">
+                    <br><h3>Login</h3><br>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email *" value="email" /><br>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Pasahitza *" value="pasahiza" /><br>
+                        </div>
+                        <div class="form-group">
+                            <button>Sartu</button><br>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="ForgetPwd">Ez daukazu konturik? Klik emen egin.</a><br>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -27,6 +34,11 @@ name: "login"
 }
 </script>
 
-<style scoped>
-
+<style>
+.formulario{
+    /* width: 49%; */
+    /* background-color: #6A737C; */
+    /* margin: 1% 1%; */
+    background-color: #e0d1e9;
+}
 </style>
