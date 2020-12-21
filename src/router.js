@@ -32,6 +32,11 @@ export default new Router({
             path: "/juego",
             name: "juego",
             component: () => import("./components/Juego")
+        },
+        {
+            path: "/admin",
+            name: "admin",
+            component: () => import("./components/adminPanel")
         }
     ]
 });

@@ -1,6 +1,6 @@
 <template>
   <div class="formulario">
-    <form>
+
       <div class="titulo">
         <h3>Login Form</h3>
       </div>
@@ -16,7 +16,6 @@
         <input type="submit" value="SARTU">
         <a href="#">Pasahitza ahaztu duzu?</a>
       </div>
-    </form>
   </div>
 
 </template>
