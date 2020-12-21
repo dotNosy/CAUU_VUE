@@ -3,7 +3,7 @@
     <!-- Copyright -->
     <div class="divfooter text-center p-3">
     © 2020 Copyright:
-    <a class="text-light" href="https://www.youtube.com/watch?v=6TolbTZXDjI&ab_channel=ぽにきゃん-AnimePONYCANYONhttps://www.youtube.com/watch?v=6TolbTZXDjI&ab_channel=ぽにきゃん-AnimePONYCANYON">Desayunos Feministas</a>
+    <a class="text-light" href="./home">Desayunos Feministas</a>
     </div>
     <!-- Copyright -->
 </footer>
