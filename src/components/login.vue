@@ -1,11 +1,6 @@
 <template>
 <form>
     <div class="modal-body row">
-        <!-- <div class="container login-container col-md-6">
-            <img src="../assets/logoDF.png" alt="logo" class="" style="width:86%; border-radius: 50%;">
-        </div> -->
-        <!-- <div class="container login-container col-md-3">
-        </div> -->
         <div class="container login-container col-md-3">
             <div class="row">
                 <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
@@ -23,13 +18,11 @@
                             <a href="#" class="ForgetPwd">Ez daukazu konturik? Klik emen egin.</a><br>
                         </div>
                         <div class="form-group">
-                            <a href="#" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>
+                            <a href="./passrec" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>
                         </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="container login-container col-md-3">
-        </div> -->
     </div>
 </form>
 </template>
@@ -91,9 +84,6 @@
 <style scoped>
 
 .formulario{
-    /* width: 49%; */
-    /* background-color: #6A737C; */
-    /* margin: 1% 1%; */
     background-color: #e0d1e9
 }
 .form{
