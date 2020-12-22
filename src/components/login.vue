@@ -59,7 +59,7 @@
                 }
 
                 sessionStorage.setItem('user', JSON.stringify(user));
-
+                console.log(response.data);
                 this.$router.push('juego');
             })
             .catch(e => {
