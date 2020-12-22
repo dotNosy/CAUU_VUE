@@ -1,44 +1,89 @@
 <template>
-  <div class="formulario modal-body row">
-    <div class="col-md-6">
-    <!-- <img src="../assets/logoDF.png" alt="logo" class="logologin"> -->
-    </div>
-    <div class="container login-container col-md-6">
+<form>
+    <div class="modal-body row">
+        <div class="container login-container col-md-3">
             <div class="row">
-                <div class="col-md-6 login-form-1 form" style="background-color: ;">
+                <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
                     <br><h3>Login</h3><br>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Email *" value="email" /><br>
+                            <input id="email" class="form-control" type="email" placeholder="Email *" required v-model="user.email"/><br>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Pasahitza *" value="pasahiza" /><br>
+                            <input type="password" class="form-control" id="password" placeholder="Pasahitza *" required minlength="8" v-model="user.password"/><br>
                         </div>
                         <div class="form-group">
-                            <button>Sartu</button><br>
+                            <button value="SARTU" @click="login">SARTU</button><br>
                         </div>
                         <div class="form-group">
                             <a href="#" class="ForgetPwd">Ez daukazu konturik? Klik emen egin.</a><br>
                         </div>
                         <div class="form-group">
-                            <a href="#" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>
+                            <a href="./passrec" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>
                         </div>
                 </div>
             </div>
         </div>
     </div>
+</form>
 </template>
 
 <script>
-export default {
-name: "login"
-}
+    import LoginDataService from "../Services/LoginDataService";
+
+    export default {
+        name: "login",
+        data () {
+        return {
+            user: {
+            id: null,
+            email: "",
+            password: "",
+            },
+            submitted: false
+        }
+        },
+        methods: {
+        login() {
+
+            let data = {
+                email: this.user.email,
+                password: this.user.password
+            };
+
+            LoginDataService.login(data)
+            .then(response => {
+                const user = {
+                    token : response.data.access_token,
+                    email : data.email,
+                    rol : response.data.rol
+                }
+
+                sessionStorage.setItem('user', JSON.stringify(user));
+
+                this.$router.push('juego');
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        }
+        }
+    }
 </script>
 
-<style>
+<style scoped>
+
 .formulario{
-    /* width: 49%; */
-    /* background-color: #6A737C; */
-    /* margin: 1% 1%; */
-    background-color: #e0d1e9;
+    background-color: #e0d1e9
+}
+.form{
+    border-color: black;
+    border-width: 2px;
+    border-style: double;
+}
+input:invalid {
+    border: 2px solid red;
+}
+input:valid {
+    border: 2px solid black;
 }
 </style>
