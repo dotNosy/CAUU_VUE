@@ -38,13 +38,11 @@ const router = new Router({
             component: () => import("./components/Juego")
         },
         {
-<<<<<<< Updated upstream
             path: "/Registro",
             name: "registro",
             component: () => import("./components/Registro")
-<<<<<<< HEAD
-        }
-=======
+        },
+        {
             path: "/passrec",
             name: "passrec",
             component: () => import("./components/passrec")
@@ -57,12 +55,6 @@ const router = new Router({
         },
         // Si no coincide con nada
         { path: '*', redirect: '/' }
->>>>>>> Stashed changes
-=======
-        },
-        // Si no coincide con nada
-        { path: '*', redirect: '/' }
->>>>>>> bc53ab0993ffdbcef8733de2459204e01d9ff2da
     ]
 });
 
