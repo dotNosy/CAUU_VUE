@@ -11,7 +11,6 @@
     },
     methods: {
       logout() {
-          
         LoginDataService.logout()
           .then(response => {
             //Delete sesion

@@ -1,6 +1,6 @@
 class GetToken {
     getUserToken() {
-        const user = sessionStorage.getItem('user');
+        const user = JSON.parse(sessionStorage.getItem('user'));
 
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
