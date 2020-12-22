@@ -38,9 +38,24 @@ export default new Router({
             component: () => import("./components/Juego")
         },
         {
+<<<<<<< Updated upstream
             path: "/Registro",
             name: "registro",
             component: () => import("./components/Registro")
         }
+=======
+            path: "/passrec",
+            name: "passrec",
+            component: () => import("./components/passrec")
+        },
+        {
+            path: "/admin",
+            name: "admin",
+            meta: {rol: 'admin'},
+            component: () => import("./components/adminPanel")
+        },
+        // Si no coincide con nada
+        { path: '*', redirect: '/' }
+>>>>>>> Stashed changes
     ]
 });
