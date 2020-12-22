@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     mode: "history",
     routes: [
         {
@@ -18,9 +18,9 @@ export default new Router({
             component: () => import("./components/login")
         },
         {
-            path: "/prueba",
-            name: "prueba",
-            component: () => import("./components/Plantilla")
+            path: "/logout",
+            name: "logout",
+            component: () => import("./components/logout")
         },
         {
             path: "/perfil",
@@ -41,6 +41,33 @@ export default new Router({
             path: "/Registro",
             name: "registro",
             component: () => import("./components/Registro")
-        }
+        },
+        // Si no coincide con nada
+        { path: '*', redirect: '/' }
     ]
 });
+
+
+export default router
+
+router.beforeEach((to, from, next) => {
+    // redirect to login page if not logged in and trying to access a restricted page
+    const authorize = to.meta;
+    const user = sessionStorage.getItem('user');
+
+    if (authorize.rol) {
+        
+        if (!user) {
+            // not logged in so redirect to login page with the return url
+            return next({ path: '/login'});
+        }
+
+        // check if route is restricted by role
+        if (authorize.length && !authorize.rol.includes(user.rol)) {
+            // role not authorised so redirect to home page
+            return next({ path: '/' });
+        }
+    }
+
+    next();
+})
