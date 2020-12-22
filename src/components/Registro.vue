@@ -9,25 +9,38 @@
 
         <b-col>
             
-            <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+            <b-form @reset="onReset" v-if="show">
             <!-- Nombre -->
             <b-form-group id="input-group-1" label="Nombre:" label-for="input-1">
                 <b-form-input
                 id="input-1"
-                v-model="form.name"
+                v-model="register.name"
                 placeholder="Introduce nombre"
-                required
+                @keypress="isOnlyChar($event)"
+                :state="register.name.length > 2 && register.name.length < 25"
                 ></b-form-input>
+                <b-form-invalid-feedback :state="validation">
+                    Tu nombre debe tener entre 2 y 25 carácteres.
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback :state="validation">
+                </b-form-valid-feedback>
             </b-form-group>
 
             <!-- Apellido -->
             <b-form-group id="input-group-2" label="Apellido:" label-for="input-2">
                 <b-form-input
                 id="input-2"
-                v-model="form.surname"
+                v-model="register.surname"
                 placeholder="Introduce apellido"
                 required
+                @keypress="isOnlyChar($event)"
+                :state="register.surname.length > 2 && register.surname.length < 25"
                 ></b-form-input>
+                <b-form-invalid-feedback :state="validation">
+                    Tu apellido debe tener entre 2 y 25 carácteres.
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback :state="validation">
+                </b-form-valid-feedback>
             </b-form-group>
 
             <!-- Email -->
@@ -39,7 +52,7 @@
             >
                 <b-form-input
                 id="input-3"
-                v-model="form.email"
+                v-model="register.email"
                 type="email"
                 placeholder="Introduce tu email"
                 required
@@ -54,10 +67,17 @@
             <b-form-group id="input-group-4" label="Usuario:" label-for="input-4">
                 <b-form-input
                 id="input-4"
-                v-model="form.username"
+                v-model="register.username"
                 placeholder="Introduce nombre usuario"
                 required
+                @keypress="isNumberAndChar($event)"
+                :state="register.username.length > 2 && register.username.length < 25"
                 ></b-form-input>
+                <b-form-invalid-feedback :state="validation">
+                    Tu usuario debe tener entre 2 y 25 carácteres.
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback :state="validation">
+                </b-form-valid-feedback>
             </b-form-group>
 
             <!-- Contraseña -->
@@ -65,13 +85,20 @@
                 <b-form-input 
                 type="password" 
                 id="password1" 
-                v-model="form.password1"
+                v-model="register.password1"
                 aria-describedby="password-help-block"
                 placeholder="Introduce una contraseña"
+                required
+                @keypress="isPassValid($event)"
+                :state="register.password1.length > 8 && register.password1.length < 30"
                 ></b-form-input>
+                <b-form-invalid-feedback :state="validation">
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback :state="validation">
+                </b-form-valid-feedback>
                 <b-form-text id="password-help-block">
-                Your password must be 8-20 characters long, contain letters and numbers, and must not
-                contain spaces, special characters, or emoji.
+                    Tu contraseña debe de tener 8-30 carácteres, letras y números. 
+                    También debe contener una mayúscula y una minúscula por lo menos.
                 </b-form-text>
             </b-form-group>
 
@@ -80,7 +107,7 @@
                 <b-form-input 
                 type="password" 
                 id="password2" 
-                v-model="form.password2"
+                v-model="register.password2"
                 aria-describedby="password-help-block"
                 placeholder="Repite la contraseña"
                 ></b-form-input>
@@ -92,7 +119,7 @@
         </b-row>
 
             <!-- Botones y registros -->
-            <b-button type="submit" variant="primary">Registrarme</b-button>
+            <b-button @click="createUser()" variant="primary">Registrarme</b-button>
             <b-button type="reset" variant="danger">Limpiar</b-button>
             </b-form>
 
@@ -102,35 +129,84 @@
 </template>
 
 <script>
+    import RegisterDataService from "../Services/RegisterDataService";
+    import { required} from 'vuelidate/lib/validators';
+    // import 'vue-form-wizard/dist/vue-form-wizard.min.css';
+
     export default {
         name: 'Registro',
         data() {
             return {
-                form: {
-                name: '',
-                surname: '',
-                email: '',
-                username: '',
-                password1: '',
-                password2: '',
+                register: {
+                    name: '',
+                    surname: '',
+                    email: '',
+                    username: '',
+                    password1: '',
+                    password2: '',
                 },
-                show: true
+                show: true,
             }
+            },
+            validations: {
+                register: {
+                    name: {
+                        required
+                    },
+                    email: { 
+                        required
+                    }
+                }
             },
             methods: {
             onSubmit(event) {
                 event.preventDefault()
-                alert(JSON.stringify(this.form))
+                alert(JSON.stringify(this.register))
+            },
+            createUser() {
+                var data = {
+                    name: this.register.name,
+                    surname: this.register.surname,
+                    email: this.register.email,
+                    username: this.register.username,
+                    password: this.register.password1,
+                };
+
+                RegisterDataService.register(data)
+                    .then(Response => {
+                        this.$router.push("perfil");
+                        console.log(Response.data);
+                        this.submitted = true;
+                    })
+                    .catch(e=> {
+                        console.log(e);
+                    })
+                console.log(data);
+            },
+            isNumberAndChar (event) {
+                if (!/^[A-Za-z0-9]+$/.test(event.key) || event.key === '.') return event.preventDefault();
+            },
+            // isEmailValid(event) {
+            //     if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/.test(event.key) || event.key === '.') {
+            //         console.log(event);
+            //         return event;
+            //     }
+            // },
+            isOnlyChar(event) {
+                if (!/^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/.test(event.key) || event.key === '.') return event.preventDefault();
+            },
+            isPassValid(event) {
+                if (!/^(?=.*[a-z])+(?=.*[A-Z])+(?=.*[0-9])+(?=.{8,30})$/.test(event.key) || event.key === '.') return event.preventDefault();
             },
             onReset(event) {
                 event.preventDefault()
                 // Reset our form values
-                this.form.name = ''
-                this.form.surname = ''
-                this.form.email = ''
-                this.form.username = ''
-                this.form.password1 = ''
-                this.form.password2 = ''
+                this.register.name = ''
+                this.register.surname = ''
+                this.register.email = ''
+                this.register.username = ''
+                this.register.password1 = ''
+                this.register.password2 = ''
 
                 // Trick to reset/clear native browser form validation state
                 this.show = false

@@ -2,10 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import Router from "./router"
 
-import { BootstrapVue, BootstrapVueIcons, ProgressPlugin } from 'bootstrap-vue'
+import { BootstrapVue, BootstrapVueIcons, ProgressPlugin, FormPlugin } from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(ProgressPlugin);
+Vue.use(FormPlugin);
+
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 
 
 import "bootstrap/dist/css/bootstrap.min.css"

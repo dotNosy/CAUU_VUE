@@ -38,7 +38,7 @@ export default new Router({
             component: () => import("./components/Juego")
         },
         {
-            path: "/auth/register",
+            path: "/Registro",
             name: "registro",
             component: () => import("./components/Registro")
         }
