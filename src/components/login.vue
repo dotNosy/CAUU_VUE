@@ -54,24 +54,15 @@
 
             LoginDataService.login(data)
             .then(response => {
-                //Persistis sesion
                 const user = {
-                token : response.data.access_token,
-                email : data.email,
-                rol : response.data.rol
+                    token : response.data.access_token,
+                    email : data.email,
+                    rol : response.data.rol
                 }
+
                 sessionStorage.setItem('user', JSON.stringify(user));
-                //Redirigir segun rol
-                
-                switch (user.rol) {
-                case 'admin':
-                    this.$router.push('admin');
-                break;
-                
-                default:
-                    break;
-                }
-                console.log(response.data);
+
+                this.$router.push('juego');
             })
             .catch(e => {
                 console.log(e);
