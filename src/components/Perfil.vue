@@ -2,6 +2,9 @@
     <div>
 
         <b-row>
+            <h1>Hola {{user.email}}</h1>
+        </b-row>
+        <b-row>
             <b-col>
                 <router-link to="SelectNivel"><b-button variant="dark" size="lg" pill>Jugar</b-button></router-link>
             </b-col>
@@ -29,7 +32,17 @@
 </template>
 
 <script>
+    import User from  "../User";
+
     export default {
-        name: 'Perfil'
+        name: 'Perfil',
+        data() {
+            return {
+                user: ''
+            }
+        },
+        mounted() {
+            this.user = User.getUser();
+        }
     }
 </script>

@@ -8,7 +8,6 @@ class RegisterDataService {
     createUser(username) {
         return http.get(`/perfil/${username}`);
     }
-
 }
 
 export default new RegisterDataService();

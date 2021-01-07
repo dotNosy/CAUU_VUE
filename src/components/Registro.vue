@@ -18,6 +18,8 @@
                 placeholder="Introduce nombre"
                 @keypress="isOnlyChar($event)"
                 :state="register.name.length > 2 && register.name.length < 25"
+                :status="this.$v.register.name.$error ? 'error' : null"
+                @blur="this.$v.register.name.$touch()"
                 ></b-form-input>
                 <b-form-invalid-feedback :state="validation">
                     Tu nombre debe tener entre 2 y 25 carácteres.
@@ -130,11 +132,13 @@
 
 <script>
     import RegisterDataService from "../Services/RegisterDataService";
-    import { required} from 'vuelidate/lib/validators';
+    import { required } from 'vuelidate/lib/validators';
+    import { validationMixin } from 'vuelidate';
     // import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 
     export default {
         name: 'Registro',
+        mixins: [validationMixin],
         data() {
             return {
                 register: {
@@ -159,61 +163,57 @@
                 }
             },
             methods: {
-            onSubmit(event) {
-                event.preventDefault()
-                alert(JSON.stringify(this.register))
-            },
-            createUser() {
-                var data = {
-                    name: this.register.name,
-                    surname: this.register.surname,
-                    email: this.register.email,
-                    username: this.register.username,
-                    password: this.register.password1,
-                };
+                createUser() {
+                    var data = {
+                        name: this.register.name,
+                        surname: this.register.surname,
+                        email: this.register.email,
+                        username: this.register.username,
+                        password: this.register.password1,
+                    };
 
-                RegisterDataService.register(data)
-                    .then(Response => {
-                        this.$router.push("perfil");
-                        console.log(Response.data);
-                        this.submitted = true;
-                    })
-                    .catch(e=> {
-                        console.log(e);
-                    })
-                console.log(data);
-            },
-            isNumberAndChar (event) {
-                if (!/^[A-Za-z0-9]+$/.test(event.key) || event.key === '.') return event.preventDefault();
-            },
-            // isEmailValid(event) {
-            //     if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/.test(event.key) || event.key === '.') {
-            //         console.log(event);
-            //         return event;
-            //     }
-            // },
-            isOnlyChar(event) {
-                if (!/^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/.test(event.key) || event.key === '.') return event.preventDefault();
-            },
-            isPassValid(event) {
-                if (!/^(?=.*[a-z])+(?=.*[A-Z])+(?=.*[0-9])+(?=.{8,30})$/.test(event.key) || event.key === '.') return event.preventDefault();
-            },
-            onReset(event) {
-                event.preventDefault()
-                // Reset our form values
-                this.register.name = ''
-                this.register.surname = ''
-                this.register.email = ''
-                this.register.username = ''
-                this.register.password1 = ''
-                this.register.password2 = ''
+                    RegisterDataService.register(data)
+                        .then(Response => {
+                            this.$router.push("perfil");
+                            console.log(Response.data);
+                            this.submitted = true;
+                        })
+                        .catch(e=> {
+                            console.log(e);
+                        })
+                    console.log(data);
+                },
+                isNumberAndChar (event) {
+                    if (!/^[A-Za-z0-9]+$/.test(event.key) || event.key === '.') return event.preventDefault();
+                },
+                // isEmailValid(event) {
+                //     if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/.test(event.key) || event.key === '.') {
+                //         console.log(event);
+                //         return event;
+                //     }
+                // },
+                isOnlyChar(event) {
+                    if (!/^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/.test(event.key) || event.key === '.') return event.preventDefault();
+                },
+                isPassValid(event) {
+                    if (!/^(?=.*[a-z])+(?=.*[A-Z])+(?=.*[0-9])+(?=.{8,30})$/.test(event.key) || event.key === '.') return event.preventDefault();
+                },
+                onReset(event) {
+                    event.preventDefault()
+                    // Reset our form values
+                    this.register.name = ''
+                    this.register.surname = ''
+                    this.register.email = ''
+                    this.register.username = ''
+                    this.register.password1 = ''
+                    this.register.password2 = ''
 
-                // Trick to reset/clear native browser form validation state
-                this.show = false
-                this.$nextTick(() => {
-                this.show = true
-                })
-            }
+                    // Trick to reset/clear native browser form validation state
+                    this.show = false
+                    this.$nextTick(() => {
+                    this.show = true
+                    })
+                }
             }
     }
 </script>
