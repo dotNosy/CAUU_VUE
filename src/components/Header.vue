@@ -23,7 +23,7 @@
 </template>
 <script>
     export default {
-    name: 'header',
+    name: 'my-header',
     data(){
         return {
         laRuta: "",
