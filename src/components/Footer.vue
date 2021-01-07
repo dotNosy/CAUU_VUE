@@ -24,5 +24,4 @@ footer {
 .divfooter{
     color: white;
 }
-
 </style>

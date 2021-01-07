@@ -71,7 +71,6 @@
 </script>
 
 <style scoped>
-
 .formulario{
     background-color: #e0d1e9
 }
