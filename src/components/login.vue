@@ -9,10 +9,10 @@
                             <input id="email" class="form-control" type="email" placeholder="Email *" v-model="user.email"/><br>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" placeholder="Pasahitza *" minlength="8" v-model="user.password"/><br>
+                            <input type="password" class="form-control" id="password" placeholder="Pasahitza *" v-model="user.password"/><br>
                         </div>
                         <div class="form-group">
-                            <button value="SARTU" @click="login">SARTU</button><br>
+                            <button type="button" value="SARTU" @click="login">SARTU</button><br>
                         </div>
                         <div class="form-group">
                             <a href="./registro" class="ForgetPwd">Ez daukazu konturik? Klik emen egin.</a><br>
@@ -35,11 +35,9 @@
         data () {
         return {
             user: {
-            id: null,
-            email: "",
-            password: "",
-            },
-            submitted: false
+                email: null,
+                password: null,
+            }
         }
         },
         methods: {
