@@ -5,7 +5,7 @@
         <br>
         <form action="">
             <h3>Recuperar contraseña:</h3><br><br>
-            <input id="email" class="form-control" type="email" placeholder="Email *" required><br>
+            <input id="email" class="form-control" type="email" placeholder="Email *"><br>
             <p><button>Recuperar contraseña</button></p>
         </form>
         </div>

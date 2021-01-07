@@ -3,19 +3,19 @@
     <div class="modal-body row">
         <div class="container login-container col-md-3">
             <div class="row">
-                <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
+                <div class="col-md-12 login-form-1 formulario form">
                     <br><h3>Login</h3><br>
                         <div class="form-group">
-                            <input id="email" class="form-control" type="email" placeholder="Email *" required v-model="user.email"/><br>
+                            <input id="email" class="form-control" type="email" placeholder="Email *" v-model="user.email"/><br>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" placeholder="Pasahitza *" required minlength="8" v-model="user.password"/><br>
+                            <input type="password" class="form-control" id="password" placeholder="Pasahitza *" minlength="8" v-model="user.password"/><br>
                         </div>
                         <div class="form-group">
                             <button value="SARTU" @click="login">SARTU</button><br>
                         </div>
                         <div class="form-group">
-                            <a href="#" class="ForgetPwd">Ez daukazu konturik? Klik emen egin.</a><br>
+                            <a href="./registro" class="ForgetPwd">Ez daukazu konturik? Klik emen egin.</a><br>
                         </div>
                         <div class="form-group">
                             <a href="./passrec" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>

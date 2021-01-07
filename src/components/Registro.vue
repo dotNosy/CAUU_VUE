@@ -1,11 +1,13 @@
 <template>
+    <div class="modal-body row">
+    <div class="container login-container col-md-3">
     <div>
+                    <div class="row">
+                <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
 
         <b-row>
-            <h1>Registro</h1>
+            <h3 class="titulo">Register</h3>
         </b-row>
-
-        <b-row>aa</b-row>
 
         <b-col>
             
@@ -17,7 +19,7 @@
                 v-model="register.name"
                 placeholder="Introduce nombre"
                 @keypress="isOnlyChar($event)"
-                :state="register.name.length > 2 && register.name.length < 25"
+                :state="register.name.length > 1 && register.name.length < 26"
                 :status="this.$v.register.name.$error ? 'error' : null"
                 @blur="this.$v.register.name.$touch()"
                 ></b-form-input>
@@ -34,9 +36,8 @@
                 id="input-2"
                 v-model="register.surname"
                 placeholder="Introduce apellido"
-                required
                 @keypress="isOnlyChar($event)"
-                :state="register.surname.length > 2 && register.surname.length < 25"
+                :state="register.surname.length > 1 && register.surname.length < 26"
                 ></b-form-input>
                 <b-form-invalid-feedback :state="validation">
                     Tu apellido debe tener entre 2 y 25 carácteres.
@@ -57,7 +58,6 @@
                 v-model="register.email"
                 type="email"
                 placeholder="Introduce tu email"
-                required
                 ></b-form-input>
             </b-form-group>
 
@@ -71,9 +71,8 @@
                 id="input-4"
                 v-model="register.username"
                 placeholder="Introduce nombre usuario"
-                required
                 @keypress="isNumberAndChar($event)"
-                :state="register.username.length > 2 && register.username.length < 25"
+                :state="register.username.length > 1 && register.username.length < 26"
                 ></b-form-input>
                 <b-form-invalid-feedback :state="validation">
                     Tu usuario debe tener entre 2 y 25 carácteres.
@@ -84,15 +83,31 @@
 
             <!-- Contraseña -->
             <b-form-group id="input-group-5" label="Contraseña:" label-for="input-5">
+                <!-- <b-form-input 
+                type="password" 
+                id="password1" 
+                v-model="register.password1"
+                aria-describedby="password-help-block"
+                placeholder="Introduce una contraseña"
+                @keypress="isPassValid($event)"
+                :state="register.password1.length > 8 && register.password1.length < 30"
+                ></b-form-input>
+                <b-form-invalid-feedback :state="validation">
+                </b-form-invalid-feedback>
+                <b-form-valid-feedback :state="validation">
+                </b-form-valid-feedback>
+                <b-form-text id="password-help-block">
+                    Tu contraseña debe de tener 8-30 carácteres, letras y números. 
+                    También debe contener una mayúscula y una minúscula por lo menos.
+                </b-form-text> -->
                 <b-form-input 
                 type="password" 
                 id="password1" 
                 v-model="register.password1"
                 aria-describedby="password-help-block"
                 placeholder="Introduce una contraseña"
-                required
                 @keypress="isPassValid($event)"
-                :state="register.password1.length > 8 && register.password1.length < 30"
+                :state="register.password1.length > 7 && register.password1.length < 31"
                 ></b-form-input>
                 <b-form-invalid-feedback :state="validation">
                 </b-form-invalid-feedback>
@@ -117,7 +132,7 @@
 
         <!-- Iniciar sesion -->
         <b-row>
-            <b-link variant="Link">Ya tengo cuenta, iniciar sesión</b-link>
+            <b-link variant="Link" href=".\login">Ya tengo cuenta, iniciar sesión</b-link>
         </b-row>
 
             <!-- Botones y registros -->
@@ -126,9 +141,28 @@
             </b-form>
 
         </b-col>
-
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 </template>
+<style scoped>
+.formulario{
+    background-color: #e0d1e9
+}
+.form{
+    border-color: black;
+    border-width: 2px;
+    border-style: double;
+}
+input:invalid {
+    border: 2px solid red;
+}
+input:valid {
+    border: 2px solid black;
+}
+</style>
 
 <script>
     import RegisterDataService from "../Services/RegisterDataService";
