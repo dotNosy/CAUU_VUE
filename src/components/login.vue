@@ -1,24 +1,24 @@
 <template>
 <form>
-    <div class="modal-body row">
+    <div class="modal-body">
         <div class="container login-container col-md-3">
             <div class="row">
                 <div class="col-md-12 login-form-1 formulario form">
-                    <br><h3>Login</h3><br>
+                    <br><h3>Iniciar Sesión</h3><br>
                         <div class="form-group">
                             <input id="email" class="form-control" type="email" placeholder="Email *" v-model="user.email"/><br>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" placeholder="Pasahitza *" v-model="user.password"/><br>
+                            <input type="password" class="form-control" id="password" placeholder="Contraseña *" v-model="user.password"/><br>
                         </div>
                         <div class="form-group">
-                            <button type="button" value="SARTU" @click="login">SARTU</button><br>
+                            <button type="button" value="SARTU" class="btn btn-primary" @click="login">SARTU</button><br>
                         </div>
                         <div class="form-group">
-                            <a href="./registro" class="ForgetPwd">Ez daukazu konturik? Klik emen egin.</a><br>
+                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Haz click aquí.</a><br>
                         </div>
                         <div class="form-group">
-                            <a href="./passrec" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>
+                            <a href="./passrec" class="ForgetPwd">¿Has olvidado tu contraseña?</a><br>
                         </div>
                 </div>
             </div>

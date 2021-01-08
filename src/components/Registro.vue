@@ -1,14 +1,10 @@
 <template>
-    <div class="modal-body row">
+    <div class="modal-body container-fluid">
     <div class="container login-container col-md-3">
     <div>
-                    <div class="row">
                 <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
 
-        <b-row>
-            <h3 class="titulo">Register</h3>
-        </b-row>
-
+            <h3>Registro</h3>
         <b-col>
             
             <b-form @reset="onReset" v-if="show">
@@ -61,9 +57,6 @@
                 ></b-form-input>
             </b-form-group>
 
-            <b-col>
-                <hr class="mt-2 mb-3"/>
-            </b-col> 
 
             <!-- Usuario -->
             <b-form-group id="input-group-4" label="Usuario:" label-for="input-4">
@@ -83,30 +76,12 @@
 
             <!-- Contraseña -->
             <b-form-group id="input-group-5" label="Contraseña:" label-for="input-5">
-                <!-- <b-form-input 
-                type="password" 
-                id="password1" 
-                v-model="register.password1"
-                aria-describedby="password-help-block"
-                placeholder="Introduce una contraseña"
-                @keypress="isPassValid($event)"
-                :state="register.password1.length > 8 && register.password1.length < 30"
-                ></b-form-input>
-                <b-form-invalid-feedback :state="validation">
-                </b-form-invalid-feedback>
-                <b-form-valid-feedback :state="validation">
-                </b-form-valid-feedback>
-                <b-form-text id="password-help-block">
-                    Tu contraseña debe de tener 8-30 carácteres, letras y números. 
-                    También debe contener una mayúscula y una minúscula por lo menos.
-                </b-form-text> -->
                 <b-form-input 
                 type="password" 
                 id="password1" 
                 v-model="register.password1"
                 aria-describedby="password-help-block"
                 placeholder="Introduce una contraseña"
-                @keypress="isPassValid($event)"
                 :state="register.password1.length > 7 && register.password1.length < 31"
                 ></b-form-input>
                 <b-form-invalid-feedback :state="validation">
@@ -120,7 +95,7 @@
             </b-form-group>
 
             <!-- Confirmacion contraseña -->
-            <b-form-group id="input-group-6" label="Contraseña:" label-for="input-6">
+            <b-form-group id="input-group-6" label="Confirmar contraseña:" label-for="input-6">
                 <b-form-input 
                 type="password" 
                 id="password2" 
@@ -136,8 +111,8 @@
         </b-row>
 
             <!-- Botones y registros -->
-            <b-button @click="createUser()" variant="primary">Registrarme</b-button>
-            <b-button type="reset" variant="danger">Limpiar</b-button>
+            <b-button @click="createUser()" variant="primary" class="bottom">Registrarme</b-button>
+            <b-button type="reset" variant="danger" class="bottom">Limpiar</b-button>
             </b-form>
 
         </b-col>
@@ -145,9 +120,11 @@
     </div>
     </div>
     </div>
-    </div>
 </template>
 <style scoped>
+.bottom{
+    margin-bottom: 4%;
+}
 .formulario{
     background-color: #e0d1e9
 }
@@ -162,6 +139,7 @@ input:invalid {
 input:valid {
     border: 2px solid black;
 }
+
 </style>
 
 <script>
@@ -229,9 +207,9 @@ input:valid {
                 isOnlyChar(event) {
                     if (!/^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/.test(event.key) || event.key === '.') return event.preventDefault();
                 },
-                isPassValid(event) {
-                    if (!/^(?=.*[a-z])+(?=.*[A-Z])+(?=.*[0-9])+(?=.{8,30})$/.test(event.key) || event.key === '.') return event.preventDefault();
-                },
+                // isPassValid(event) {
+                //     if (!/^[A-Za-z0-9]+$/.test(event.key) || event.key === '.') return event.preventDefault();
+                // },
                 onReset(event) {
                     event.preventDefault()
                     // Reset our form values
