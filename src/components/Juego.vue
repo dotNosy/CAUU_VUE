@@ -6,6 +6,9 @@
             <hr>
         </b-row>
         <b-row>
+            <b-link variant="Link" to="SelectNivel">Volver</b-link>
+        </b-row>
+        <b-row>
             <!-- Cards of the game -->
             <b-col>
                 <b-row>
@@ -39,15 +42,15 @@
                 <b-row>DATO</b-row>
                 <b-row>Mujer descubierta</b-row>
                 <b-row>Dato descubierto</b-row>
-
             </b-col>
 
             <!-- Return + Punctuation + Highscore + Begin -->
             <b-col>
-                <b-link variant="Link" to="SelectNivel">Volver</b-link>
-                <h6>Tu puntuacion</h6>
+
+                <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')"></b-icon></p>
+                <h6>Tu puntuación</h6>
                 <h6>{{ puntos }}</h6>
-                <b-button variant="dark" size="lg" pill @click="startTimer">Empezar!</b-button>
+                <b-button v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="startTimer">Empezar!</b-button>
             </b-col>
         </b-row>
 
@@ -56,30 +59,118 @@
             <b-progress :value="value" :max="max" show-progress animated class="w-50 mb-2" variant="purple"></b-progress>
         </b-row>
 
+        <!-- Formulario de reportar error -->
+        <b-modal id="report-error"  hide-footer>
+            <template #modal-title>{{ titulo }}</template>
+            <div class="d-block text-center">
+                <b-form>
+
+                    <p class="my-4"> {{ explanationWhere }}</p>
+                        <b-row>
+                            <b-col><b-form-checkbox value="cartas" v-model="reasonsChecked">Cartas</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox value="juego" v-model="reasonsChecked">Juego</b-form-checkbox></b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col><b-form-checkbox value="puntuacion" v-model="reasonsChecked">Puntuacion</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox value="otros" v-model="reasonsChecked">Otros, por favor, indique</b-form-checkbox></b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col></b-col>
+                            <b-col><b-form-input v-show="otrosSelected == true" v-model="reasonsChecked" v-on:change="otrosSeleccionado()"></b-form-input></b-col>
+                        </b-row>
+
+                    <p> {{ explanationReason }}</p>
+                        <b-form-textarea
+                            id="textarea"
+                            v-model="reason"
+                            placeholder="Escriba aquí"
+                            rows="3"
+                            max-rows="6"
+                            required
+                        ></b-form-textarea>
+                    <br />
+
+                    <b-button @click="mandarError()" variant="dark">{{send}}</b-button>
+                </b-form>
+
+
+                
+            </div>
+        </b-modal>
 
     </div>
 
 </template>
 
 <script>
+// import func from '../../vue-temp/vue-editor-bridge';
+
     export default {
         data() {
             return {
-                timer: 0,
+                btnEmpezarClass : '',
+                timer: null,
+                puntos: 0,
                 value: 100,
-                max: 100
+                max: 100,
+                titulo: 'Bienvenido al reporte de errores',
+                explanationWhere: 'Por favor, indique dónde has encontrado el error*:',
+                explanationReason: 'Por favor, indique el motivo del error*:',
+                reason: '',
+                send: "Enviar",
+                otrosSelected: false,
+                reasonsChecked: {},
             }
         },
         methods: {
             startTimer() {
-                var vm = this;
-                var timer = setInterval(function() {
-                    vm.value -= .1;
-                    if (vm.value >= 100) {
-                        clearInterval(timer)                        ;
+                this.btnEmpezarClass = 'disabled outline-dark';
+                this.finished = false;
+
+                let global = this;
+
+                 global.timer = setInterval(function() {
+                    if (global.value > 0) {
+                        global.value -= .1;
+                        
+                        console.log(global.value);
+
+                        if (global.value >= 100) {
+                            clearInterval(global.timer);
+                        }  else if (global.value < 0) {
+                            document.getElementById('btnEmpezar').innerText = "Empezar";
+                            global.btnEmpezarClass = '';
+                            global.value = 100;
+                            alert("se acabo!");
+                            clearInterval(global.timer);
+                        }
                     }
                 }, 100);
+            
+            },
+            otrosSeleccionado() {
+                if (this.otrosSelected) {
+                    this.otrosSelected = false;
+                } else {
+                    this.otrosSelected = true;
+                }
+            },
+            mandarError() {
+                console.log("aaaa");
+                alert('Processing');
             }
+        },
+         mounted() {
+            this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
+                if (modalId === "report-error") {
+                     clearInterval(this.timer);
+
+                     let btn = document.getElementById('btnEmpezar');
+                    
+                    btn.innerText = "continuar";
+                    this.btnEmpezarClass = '';
+                }
+            })
         }
     }
 </script>
@@ -87,5 +178,4 @@
 <style>
 * {margin-left: 5px;}
 .bg-purple {background-color: purple;}
-
 </style>
