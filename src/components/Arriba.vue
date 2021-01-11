@@ -3,25 +3,25 @@
     <section>
         <div id="iconosA">
             <ul style="list-style-type:none">
-                <li><img src="../assets/ambitos/antropologia.png" alt="antropologia"></li>
-                <li><img src="../assets/ambitos/derecho.png" alt="derecho"></li>
-                <li><img src="../assets/ambitos/economia.png" alt="economia"></li>
-                <li><img src="../assets/ambitos/filosofia.png" alt="filosofia"></li>
-                <li><img src="../assets/ambitos/geografia.png" alt="geografia"></li>
-                <li><img src="../assets/ambitos/historia.png" alt="historia"></li>
-                <li><img src="../assets/ambitos/pedagogia.png" alt="pedagogia"></li>
-                <li><img src="../assets/ambitos/psicologia.png" alt="psicologia"></li>
-                <li><img src="../assets/ambitos/sociologia.png" alt="sociologia"></li>
+                <li><img src="../assets/ambitos/antropologia.png" alt="antropologia" class="animacion"></li>
+                <li><img src="../assets/ambitos/derecho.png" alt="derecho" class="animacion"></li>
+                <li><img src="../assets/ambitos/economia.png" alt="economia" class="animacion"></li>
+                <li><img src="../assets/ambitos/filosofia.png" alt="filosofia" class="animacion"></li>
+                <li><img src="../assets/ambitos/geografia.png" alt="geografia" class="animacion"></li>
+                <li><img src="../assets/ambitos/historia.png" alt="historia" class="animacion"></li>
+                <li><img src="../assets/ambitos/pedagogia.png" alt="pedagogia" class="animacion"></li>
+                <li><img src="../assets/ambitos/psicologia.png" alt="psicologia" class="animacion"></li>
+                <li><img src="../assets/ambitos/sociologia.png" alt="sociologia" class="animacion"></li>
 
-                <li><img id="SegundaTandaIconos" src="../assets/ambitos/antropologia.png" alt="antropologia"></li>
-                <li><img src="../assets/ambitos/derecho.png" alt="derecho"></li>
-                <li><img src="../assets/ambitos/economia.png" alt="economia"></li>
-                <li><img src="../assets/ambitos/filosofia.png" alt="filosofia"></li>
-                <li><img src="../assets/ambitos/geografia.png" alt="geografia"></li>
-                <li><img src="../assets/ambitos/historia.png" alt="historia"></li>
-                <li><img src="../assets/ambitos/pedagogia.png" alt="pedagogia"></li>
-                <li><img src="../assets/ambitos/psicologia.png" alt="psicologia"></li>
-                <li><img src="../assets/ambitos/sociologia.png" alt="sociologia"></li>
+                <li><img id="SegundaTandaIconos" src="../assets/ambitos/antropologia.png" alt="antropologia" class="animacion"></li>
+                <li><img src="../assets/ambitos/derecho.png" alt="derecho" class="animacion"></li>
+                <li><img src="../assets/ambitos/economia.png" alt="economia" class="animacion"></li>
+                <li><img src="../assets/ambitos/filosofia.png" alt="filosofia" class="animacion"></li>
+                <li><img src="../assets/ambitos/geografia.png" alt="geografia" class="animacion"></li>
+                <li><img src="../assets/ambitos/historia.png" alt="historia" class="animacion"></li>
+                <li><img src="../assets/ambitos/pedagogia.png" alt="pedagogia" class="animacion"></li>
+                <li><img src="../assets/ambitos/psicologia.png" alt="psicologia" class="animacion"></li>
+                <li><img src="../assets/ambitos/sociologia.png" alt="sociologia" class="animacion"></li>
             </ul>
         </div>
     </section>
@@ -75,14 +75,14 @@
     body{
         margin-left:50px;
     }
-    img{
+    .animacion{
         width: 50%;
         height: 50%;
         display:block;
         overflow: hidden;
         transition: width 2s, height 2s, transform 2s;
     }
-    ul{
+    /* ul{
         padding:0;
         margin:0;
 
@@ -90,21 +90,29 @@
     li{
         padding:0;
         margin:0;
-    }
-    img:hover {
+    } */
+    .animacion:hover {
         transform:scale(2,2);
         margin-top: 6%;
         margin-bottom: 6%;
     }
     #iconosA {
         /* position: fixed; */
-        padding-left: 4.5%;   
+        /* padding-left: 4.5%;    */
         float: left;
-        width: 15%;
+        width: 10%;
+        background-color: red;
         /* background: green; */
-        margin-left: -3%;
-
-
-
+        /* margin-left: -3%; */
     }
+    @media (max-width: 576px) {
+    #iconosA{
+        display:none;
+        
+    }
+    body{
+        overflow-y:auto;
+        margin-left:0px;
+    }
+}
 </style>
