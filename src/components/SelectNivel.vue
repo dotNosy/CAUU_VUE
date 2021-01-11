@@ -29,6 +29,12 @@
             </b-col>
         </b-row>
 
+        <!-- Checkboxes -->
+        <div v-for="(ambito, index) in ambitoLista" v-bind:key="ambito.id">
+            <input type="checkbox" v-model='ambito[index]'> {{ ambito.nombre }}
+            
+        </div>  
+
         
 
 
@@ -37,6 +43,8 @@
 
 <script>
 
+import InfoDataService from "../Services/InfoDataService"
+
     export default {
         data() {
             return {
@@ -44,7 +52,23 @@
                 nivel1: "Fácil",
                 nivel2: "Normal",
                 nivel3: "A3",
+                ambitoLista: [],
+                ambitos: []
             }
+        },
+        mounted () {
+            let th = this;
+            this.ambitos = InfoDataService.ambitos().then(response => {
+                console.log(response.data);
+
+                th.ambitoLista = response.data.ambitos;
+
+            }
+            ).catch(e => {
+                console.log(e);
+                }
+            );
+            console.log(this.ambitos);
         }
         
     }

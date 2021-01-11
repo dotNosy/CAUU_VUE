@@ -129,7 +129,7 @@
 
                 let global = this;
 
-                 global.timer = setInterval(function() {
+                global.timer = setInterval(function() {
                     if (global.value > 0) {
                         global.value -= .1;
                         
@@ -160,12 +160,12 @@
                 alert('Processing');
             }
         },
-         mounted() {
+        mounted() {
             this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
                 if (modalId === "report-error") {
-                     clearInterval(this.timer);
+                    clearInterval(this.timer);
 
-                     let btn = document.getElementById('btnEmpezar');
+                    let btn = document.getElementById('btnEmpezar');
                     
                     btn.innerText = "continuar";
                     this.btnEmpezarClass = '';
