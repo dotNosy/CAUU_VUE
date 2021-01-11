@@ -77,7 +77,6 @@
 <style>
 
     body{
-        overflow-y:hidden;
         margin-right:50px;
     }
     img{
