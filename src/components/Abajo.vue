@@ -77,8 +77,7 @@
 <style>
 
     body{
-        overflow-y:hidden;
-        /* margin-right:50px; */
+        margin-right:50px;
     }
     .animacion{
         width: 50%;

@@ -73,7 +73,7 @@
 
 <style>
     body{
-        overflow-y:hidden;
+        margin-left:50px;
     }
     .animacion{
         width: 50%;
