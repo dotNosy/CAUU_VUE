@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div class="juego">
         <b-row>
             <h3>Mujeres en las ciencias sociales</h3>
             <hr>
@@ -47,7 +47,7 @@
             <!-- Return + Punctuation + Highscore + Begin -->
             <b-col>
 
-                <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')"></b-icon></p>
+                <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')" class="exclamation" style="cursor: hand;"></b-icon></p>
                 <h6>Tu puntuación</h6>
                 <h6>{{ puntos }}</h6>
                 <b-button v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="startTimer">Empezar!</b-button>
@@ -67,15 +67,17 @@
 
                     <p class="my-4"> {{ explanationWhere }}</p>
                         <b-row>
-                            <b-col><b-form-checkbox value="cartas" v-model="reasonsChecked">Cartas</b-form-checkbox></b-col>
-                            <b-col><b-form-checkbox value="juego" v-model="reasonsChecked">Juego</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="cartas" v-model="reasonsChecked">Cartas</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="juego" v-model="reasonsChecked">Juego</b-form-checkbox></b-col>
                         </b-row>
                         <b-row>
-                            <b-col><b-form-checkbox value="puntuacion" v-model="reasonsChecked">Puntuacion</b-form-checkbox></b-col>
-                            <b-col><b-form-checkbox value="otros" v-model="reasonsChecked">Otros, por favor, indique</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="puntuacion" v-model="reasonsChecked">Puntuacion</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="otros" id="otros" v-model="reasonsChecked" v-on:change="otros()">Otros, por favor, indique</b-form-checkbox></b-col>
                         </b-row>
                         <b-row>
-                            <b-col></b-col>
+                            <b-form-textarea id="otrostext" v-model="text" placeholder="Inserte el título del problema" rows="2" max-rows="6"></b-form-textarea>
+                        </b-row>
+                        <b-row>
                             <b-col><b-form-input v-show="otrosSelected == true" v-model="reasonsChecked" v-on:change="otrosSeleccionado()"></b-form-input></b-col>
                         </b-row>
 
@@ -88,7 +90,13 @@
                             max-rows="6"
                             required
                         ></b-form-textarea>
-                    <br />
+                        <br>
+                        <b-row>
+                            <b-col>
+                            <b-form-file id="file-small" size="sm"  placeholder="Inserte una captura del problema" drop-placeholder="Drop file here..." accept=".jpg, .png, .gif, video/mp4, video/x-m4v, video/*"></b-form-file>
+                            </b-col>
+                        </b-row>
+                    <br>
 
                     <b-button @click="mandarError()" variant="dark">{{send}}</b-button>
                 </b-form>
@@ -114,7 +122,7 @@
                 value: 100,
                 max: 100,
                 titulo: 'Bienvenido al reporte de errores',
-                explanationWhere: 'Por favor, indique dónde has encontrado el error*:',
+                explanationWhere: 'Por favor, indique dónde ha encontrado el error*:',
                 explanationReason: 'Por favor, indique el motivo del error*:',
                 reason: '',
                 send: "Enviar",
@@ -155,6 +163,16 @@
                     this.otrosSelected = true;
                 }
             },
+            otros() {
+            var checkBox = document.getElementById("otros");
+            var text = document.getElementById("otrostext");
+
+            if (checkBox.checked == true){
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+            },
             mandarError() {
                 console.log("aaaa");
                 alert('Processing');
@@ -176,6 +194,14 @@
 </script>
 
 <style>
-* {margin-left: 5px;}
-.bg-purple {background-color: purple;}
+/* * {margin-left: 5px;} */
+    .bg-purple {
+    background-color: purple;
+    }
+    .exclamation:hover {
+        transform:scale(1.2,1.2);
+    }
+    #otrostext{
+        display: none;
+    }
 </style>
