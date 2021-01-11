@@ -19,37 +19,47 @@
         <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link3</a></button>
     </li>
     <li class="nav-item">
-        <button @click="checkUserLogued()" type="button" class="btn botonlogin" id="btn"><a v-bind:href="laRuta" class="nav-link text-light">{{ login }}</a></button>
+        <button @click="logout()" type="button" class="btn botonlogin" id="btn">{{ login }}</button>
     </li>
     </ul>
 </nav>
 </header>
 </template>
 <script>
+    import User from "../User";
+
     export default {
-    name: 'my-header',
-    data(){
-        return {
-        laRuta: "",
-        login: "",
-        }
-    },
-    methods: {
-        checkUserLogued () {
-            const user = sessionStorage.getItem("user");
-                if (!user) {
-                    this.laRuta = "/login";
-                    this.login = "LOGIN";
-                } else {
-                        this.laRuta = "/logout";
-                        this.login = "LOGOUT"
+        
+        name: 'my-header',
+        data(){
+            return {
+                laRuta: "",
+                login: "",
+            }
+        },
+        methods: {
+            checkUserLogued () {
+                const user = User.getUser();
+
+                    if (!user) {
+                        this.laRuta = "/login";
+                        this.login = "LOGIN";
+                    } else {
+                            this.laRuta = "/logout";
+                            this.login = "LOGOUT"
+                    }
+            },
+            logout () {
+                if (User.getUser()) {
+                    User.revokeToken();
                 }
+                this.$router.push('login');
+            }
         }
-    }
-    ,
-    mounted () {
-        this.checkUserLogued();
-    }
+        ,
+        mounted () {
+            this.checkUserLogued();
+        }
     };
 
 </script>

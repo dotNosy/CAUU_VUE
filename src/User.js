@@ -1,9 +1,11 @@
+import LoginDataService from "./Services/LoginDataService";
+
 class User {
     constructor (){
         this.user = JSON.parse(sessionStorage.getItem('user'));
     }
 
-    getUserToken() {
+    getToken() {
     
         const config = {
             headers: { Authorization: `Bearer ${this.user.token}` }
@@ -14,6 +16,17 @@ class User {
 
     getUser() {
         return this.user;
+    }
+
+    revokeToken() {
+        LoginDataService.logout()
+            .then(() => {
+                //Delete sesion
+                sessionStorage.removeItem('user');
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
 }
 

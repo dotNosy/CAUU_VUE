@@ -18,11 +18,6 @@ const router = new Router({
             component: () => import("./components/login")
         },
         {
-            path: "/logout",
-            name: "logout",
-            component: () => import("./components/logout")
-        },
-        {
             path: "/perfil",
             name: "perfil",
             component: () => import("./components/Perfil")
