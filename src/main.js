@@ -2,14 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import Router from "./router"
 
-import { BootstrapVue, BootstrapVueIcons, ProgressPlugin, FormPlugin } from 'bootstrap-vue'
+import { BootstrapVue, BootstrapVueIcons, ProgressPlugin, FormPlugin, FormCheckboxPlugin } from 'bootstrap-vue'
 import { VBPopoverPlugin } from 'bootstrap-vue'
 
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(ProgressPlugin);
 Vue.use(FormPlugin);
-Vue.use(VBPopoverPlugin)
+Vue.use(VBPopoverPlugin);
+Vue.use(FormCheckboxPlugin);
 
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
