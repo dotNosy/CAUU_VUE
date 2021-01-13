@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import User from './User';
 
 Vue.use(Router);
 
@@ -20,17 +21,20 @@ const router = new Router({
         {
             path: "/perfil",
             name: "perfil",
-            component: () => import("./components/Perfil")
+            component: () => import("./components/Perfil"),
+            meta: { rule: 'logued'} 
         },
         {
             path: "/selectNivel",
             name: "selectNivel",
-            component: () => import("./components/SelectNivel")
+            component: () => import("./components/SelectNivel"),
+            meta: { rule: 'logued'} 
         },
         {
             path: "/juego",
             name: "juego",
-            component: () => import("./components/Juego")
+            component: () => import("./components/Juego"),
+            meta: { rule: 'logued'} 
         },
         {
             path: "/Registro",
@@ -53,11 +57,9 @@ export default router
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const authorize = to.meta;
-    const user = sessionStorage.getItem('user');
-
-    if (authorize.rol) {
+    const user = User.getUser();
         
-        if (!user) {
+        if (authorize.rule == 'logued' && !user) {
             // not logged in so redirect to login page with the return url
             return next({ path: '/login'});
         }
@@ -67,7 +69,6 @@ router.beforeEach((to, from, next) => {
             // role not authorised so redirect to home page
             return next({ path: '/' });
         }
-    }
 
     next();
 })
