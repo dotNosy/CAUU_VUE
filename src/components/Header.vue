@@ -41,7 +41,7 @@
             checkUserLogued () {
                 const user = User.getUser();
 
-                    if (!user) {
+                    if (user == null || user.token == '') {
                         this.laRuta = "/login";
                         this.login = "LOGIN";
                     } else {
@@ -50,15 +50,26 @@
                     }
             },
             logout () {
-                if (User.getUser()) {
+                const user = User.getUser();
+
+                if (user.token !== '') {
                     User.revokeToken();
                 }
-                this.$router.push('login');
+                this.$router.push({name: 'login'}) 
             }
         }
         ,
         mounted () {
             this.checkUserLogued();
+        },
+        watch: {
+            laRuta(value) {
+                console.log(value);
+                this.checkUserLogued();
+            },
+            login(value) {
+                console.log(value);
+            }
         }
     };
 

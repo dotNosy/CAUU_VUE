@@ -58,14 +58,16 @@ router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const authorize = to.meta;
     const user = User.getUser();
-        
-        if (authorize.rule == 'logued' && !user) {
+
+        if (authorize.rule == 'logued' && (user == null || user.token == '')) {
+            console.log('rule logued');
             // not logged in so redirect to login page with the return url
             return next({ path: '/login'});
         }
 
         // check if route is restricted by role
         if (authorize.length && !authorize.rol.includes(user.rol)) {
+            console.log('Rol admin');
             // role not authorised so redirect to home page
             return next({ path: '/' });
         }

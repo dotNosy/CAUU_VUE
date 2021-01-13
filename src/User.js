@@ -6,7 +6,8 @@ class User {
     }
 
     getToken() {
-    
+        this.getUser();
+
         const config = {
             headers: { Authorization: `Bearer ${this.user.token}` }
         };
@@ -15,6 +16,7 @@ class User {
     }
 
     getUser() {
+        this.user = JSON.parse(sessionStorage.getItem('user'));
         return this.user;
     }
 
