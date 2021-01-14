@@ -12,7 +12,7 @@
                             <input type="password" class="form-control" id="password" placeholder="Contraseña *" v-model="user.password"/><br>
                         </div>
                         <div class="form-group">
-                            <button type="button" value="SARTU" class="btn btn-primary" @click="login">SARTU</button><br>
+                            <button type="button" value="SARTU" class="btn btn-primary" @click="login">ENTRAR</button><br>
                         </div>
                         <div class="form-group">
                             <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Haz click aquí.</a><br>
@@ -73,7 +73,8 @@
 
 <style scoped>
 .formulario{
-    background-color: #e0d1e9
+    background-color: #e0d1e9;
+    
 }
 .form{
     border-color: black;

@@ -5,28 +5,29 @@
     <a href="./home" class="logo">
     <img src="../assets/logoDF.png" alt="logo" class="imglogo">
 </a>
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
     <li class="nav-item link0">
         <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./">Inicio</a></button>
     </li>
     <li class="nav-item link1">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Perfil">Perfil</a></button>
+        <button v-show="perfil" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Perfil">Perfil</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./SelectNivel">Jugar</a></button>
+        <button v-show="juego" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./SelectNivel">Jugar</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Coleccion">Colección</a></button>
+        <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Coleccion">Colección</a></button>
     </li>
-    
+    </ul>
     <!-- TO-DO Boton notificaciones -->
+    <ul class="navbar-nav ml-auto">
     <li class="nav-item">
         <!-- <b-button variant="light" class="btn" pill > -->
-                <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light"  font-scale="2.5">></b-icon>
+                <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="2.5"></b-icon>
         <!-- </b-button> -->
     </li>
     <li class="nav-item">
-        <button @click="logout()" type="button" class="btn botonlogin" id="btn">{{ login }}</button>
+        <button @click="logout()" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Login">{{ login }}</a></button>
     </li>
     </ul>
 </nav>
@@ -63,7 +64,7 @@
                     User.revokeToken();
                 }
                 this.$router.push({name: 'login'}) 
-            }
+            },
         }
         ,
         mounted () {
@@ -77,14 +78,23 @@
             login() {
                 // console.log(value);
             }
+        },
+        computed: {
+            perfil(){
+                console.log("fdasfdsf");
+                return this.$route.name != 'perfil';
+            },     
+            juego(){
+                return this.$route.name != 'juego';
+            },
+            coleccion(){
+                return this.$route.name != 'coleccion';
+            },
         }
     };
 
 </script>
 <style>
-/* .logo{
-    width: 4%;
-} */
 .imglogo{
     width:100%;
     border-radius: 50%;
@@ -98,26 +108,22 @@ li{
     font-size: 1.3em;
     padding-left: 2%;
     padding-right: 2%;
+    
 }
 ul{
     display: inline;
+    
 }
-
 #btn{
     background-color: #4e3757;
     border-color:#4e3757;
+    color: white;
 }
-
 #btn:hover{
     background-color: #918897;
     border-color: #918897;
 }
 @media (min-width: 576px) {
-    .botonlogin{
-        position: absolute;
-        right: 0;
-        margin-right:1%;
-    }
     .link1{
     margin-left: 8%;
     }
