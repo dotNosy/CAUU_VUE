@@ -6,7 +6,7 @@
             <router-view />
         </section>
         <!-- <my-abajo></my-abajo> -->
-        <my-footer></my-footer>
+        <my-footer  v-if="isHomePage"></my-footer>
   </div>
 </template>
 
@@ -24,10 +24,10 @@
       // 'my-arriba': Arriba,
       // 'my-abajo': Abajo
       },
-      methods: {
+      computed: {
         isHomePage () {
             console.log(this.$route.name);
-            return this.$route.name !=  'home';
+            return this.$route.name != 'home';
         }
       }
     }
