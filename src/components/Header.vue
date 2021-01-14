@@ -26,6 +26,7 @@
 </header>
 </template>
 <script>
+
     export default {
     name: 'my-header',
     data(){
@@ -78,7 +79,6 @@ ul{
 #btn{
     background-color: #4e3757;
     border-color:#4e3757;
-    color:red;
 }
 
 #btn:hover{

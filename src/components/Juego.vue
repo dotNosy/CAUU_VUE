@@ -1,14 +1,14 @@
 <template>
 
     <div class="juego">
-        <b-row>
+        <b-row class="si">
             <h3>Mujeres en las ciencias sociales</h3>
             <hr>
         </b-row>
-        <b-row>
+        <b-row class="si">
             <b-link variant="Link" to="SelectNivel">Volver</b-link>
         </b-row>
-        <b-row>
+        <b-row class="si">
             <!-- Cards of the game -->
             <b-col>
                 <b-row>
@@ -45,7 +45,7 @@
             </b-col>
 
             <!-- Return + Punctuation + Highscore + Begin -->
-            <b-col>
+            <b-col class="si">
 
                 <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')" class="exclamation" style="cursor: hand;"></b-icon></p>
                 <h6>Tu puntuación</h6>
@@ -54,17 +54,18 @@
             </b-col>
         </b-row>
 
-        <b-row>
+        <b-row class="si"> 
             <!-- Temporizador -->
             <b-progress :value="value" :max="max" show-progress animated class="w-50 mb-2" variant="purple"></b-progress>
         </b-row>
 
         <!-- Formulario de reportar error -->
-        <b-modal id="report-error"  hide-footer>
+        <b-modal id="report-error"  hide-footer >
             <template #modal-title>{{ titulo }}</template>
-            <div class="d-block text-center">
-                <b-form>
-
+            <div class="d-block text-center ">
+                <b-form v-on:submit.prevent class="formscss">
+                    <b-form-group v-slot="{ ariaDescribedby }">
+                    <b-form-checkbox-group v-model="selected" :options="options" :aria-describedby="ariaDescribedby" name="flavour-1a">
                     <p class="my-4"> {{ explanationWhere }}</p>
                         <b-row>
                             <b-col><b-form-checkbox name="check" value="cartas" v-model="reasonsChecked">Cartas</b-form-checkbox></b-col>
@@ -72,14 +73,16 @@
                         </b-row>
                         <b-row>
                             <b-col><b-form-checkbox name="check" value="puntuacion" v-model="reasonsChecked">Puntuacion</b-form-checkbox></b-col>
-                            <b-col><b-form-checkbox name="check" value="otros" id="otros" v-model="reasonsChecked" v-on:change="otros()">Otros, por favor, indique</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="otros" id="otros" v-model="reasonsChecked" v-on:change="otros()">Otros</b-form-checkbox></b-col>
                         </b-row>
                         <b-row>
-                            <b-form-textarea id="otrostext" v-model="text" placeholder="Inserte el título del problema" rows="2" max-rows="6"></b-form-textarea>
+                            <b-form-textarea id="otrostext" v-model="text" placeholder="Inserte la categoría del problema" rows="2" max-rows="6"></b-form-textarea>
                         </b-row>
                         <b-row>
-                            <b-col><b-form-input v-show="otrosSelected == true" v-model="reasonsChecked" v-on:change="otrosSeleccionado()"></b-form-input></b-col>
+                            <!-- <b-col><b-form-input v-show="otrosSelected == true" v-model="reasonsChecked" v-on:change="otrosSeleccionado()"></b-form-input></b-col> -->
                         </b-row>
+                    </b-form-checkbox-group>
+                    </b-form-group>
 
                     <p> {{ explanationReason }}</p>
                         <b-form-textarea
@@ -97,8 +100,11 @@
                             </b-col>
                         </b-row>
                     <br>
-
-                    <b-button @click="mandarError()" variant="dark">{{send}}</b-button>
+                        <b-row>
+                            <b-form-textarea id="categoriatext" v-model="text" placeholder="Su problema será revisado por nuestros técnicos en un plazo de 24-48 horas" rows="2" cols="50" max-rows="2" readonly></b-form-textarea>
+                        </b-row>
+                        <br>
+                    <b-button type="submit" variant="primary" id="btn" @click="mandarError()">{{send}}</b-button>
                 </b-form>
 
 
@@ -174,8 +180,14 @@
             }
             },
             mandarError() {
-                console.log("aaaa");
-                alert('Processing');
+                let checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+                if(checkboxes.length == 0) {
+                    alert("Por favor seleccione al menos una categoría de error");
+                }
+                else{
+                    console.log("aaaa");
+                    alert('Processing');
+                }
             }
         },
         mounted() {
@@ -189,19 +201,41 @@
                     this.btnEmpezarClass = '';
                 }
             })
-        }
+        },
     }
+
 </script>
+
+
 
 <style>
 /* * {margin-left: 5px;} */
-    .bg-purple {
-    background-color: purple;
-    }
     .exclamation:hover {
         transform:scale(1.2,1.2);
     }
     #otrostext{
         display: none;
     }
+    #categoriatext{
+        resize: none;
+    }
+    .si{
+        /* background-color:red ; */
+        max-width: 100%;
+        padding-left:1%;
+        }
+</style>
+<style lang="sass">
+    $color: #4e3757
+    $bg: #2d2c2f
+
+    #btn
+        background-color: $color
+        border-color: $color
+    
+    .custom-checkbox .custom-control-input:checked~.custom-control-label::before
+        background-color: $color
+
+    .bg-purple
+        background-color: $color
 </style>
