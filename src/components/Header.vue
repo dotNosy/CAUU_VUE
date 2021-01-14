@@ -106,7 +106,6 @@ ul{
 #btn{
     background-color: #4e3757;
     border-color:#4e3757;
-    color:red;
 }
 
 #btn:hover{

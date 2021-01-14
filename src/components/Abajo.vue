@@ -76,16 +76,15 @@
 
 <style>
 
-    body{
+    /* body{
         margin-right:50px;
-    }
+    } */
     .animacion{
-        width: 50%;
-        height: 50%;
+        /* width: 100%;
+        height: 100%; */
         display:block;
         overflow: hidden;
-        transition: width 2s, height 2s, transform 2s;
-    
+        transition: width 4s, height 4s, transform 4s;
     } 
     /* ul{
         padding:0;
@@ -103,13 +102,11 @@
     #iconos {
         /* position: fixed;        */
         /* padding-left: 4.5%;    */
-
         float: right;
         width: 10%;
         background-color: red;
         /* background: red; */
         /* margin-right: -3%; */
-
     }
 
     @media (max-width: 576px) {

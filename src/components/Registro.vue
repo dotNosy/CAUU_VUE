@@ -1,6 +1,6 @@
 <template>
     <div class="modal-body container-fluid">
-        <div class="container login-container col-md-3">
+        <div class="container login-container col-md-4">
             <div>
                 <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
                     <h3>Registro</h3>
@@ -31,8 +31,7 @@
                             <b-form-group
                                 id="input-group-3"
                                 label="Email:"
-                                label-for="input-3"
-                                description="Nunca compartiremos tu email con nadie.">
+                                label-for="input-3">
                                 <b-form-input
                                 id="input-3"
                                 v-model="$v.email.$model"
@@ -86,8 +85,6 @@
                                 placeholder="Repite la contraseña"
                                 ></b-form-input>
 
-                                <div class="error" v-if="!$v.password2.required">Campo obligatorio</div>
-                                <div class="error" v-if="!$v.password2.minLength">Minimo {{$v.password2.$params.minLength.min}} caracteres</div>
                                 <div class="error" v-if="!$v.password2.sameAs">Las contraseñas no coinciden.</div>
                             </b-form-group>
 

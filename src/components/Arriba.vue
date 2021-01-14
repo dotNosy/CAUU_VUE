@@ -72,9 +72,9 @@
 </script>
 
 <style>
-    body{
+    /* body{
         margin-left:50px;
-    }
+    } */
     .animacion{
         width: 50%;
         height: 50%;
