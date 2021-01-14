@@ -67,15 +67,13 @@
         
         </b-form-group>
             
-        <router-link to="Juego"><b-button variant="dark" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button></router-link>
-        
-
-
+        <b-button variant="dark" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
     </div>
 </template>
 
 <script>
 import InfoDataService from "../Services/InfoDataService"
+import Juego from "../Juego"
 
     export default {
         data() {
@@ -101,26 +99,23 @@ import InfoDataService from "../Services/InfoDataService"
             },
 
             comprobarSeleccion() {
-
                 if (this.nivel_id === null) {
                     alert("Debes seleccionar un nivel");
-                } else {
-                    
-                    if (this.nivel_id != 0 || this.nivel_id != 1 || this.nivel_id != 2 ) {
-                        alert("El nivel que has seleccionado no está contemplado en nuestro juego, seleccione otro, por favor");
-                    } else {
-                        return false;
-                    }
-                }
-
-                if (this.selected.length < 1) {
-                    alert("Debes seleccionar un ámbito por lo menos");
-                } else {
+                    return false;
+                } 
+                else if (this.nivel_id != 0 && this.nivel_id != 1 && this.nivel_id != 2 ) {
+                    alert("El nivel que has seleccionado no está contemplado en nuestro juego, seleccione otro, por favor");
                     return false;
                 }
-
-                return true;
-
+                else if (this.selected.length < 1) {
+                    alert("Debes seleccionar un ámbito por lo menos");
+                    return false;
+                } 
+                else {
+                    Juego.setNivel(this.nivel_id);
+                    Juego.setAmbito(this.selected);
+                    this.$router.push({name: 'juego'});
+                }
             }
         },
         mounted () {
