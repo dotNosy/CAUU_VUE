@@ -1,9 +1,9 @@
 import http from "../http-common";
-import token from "./getToken";
+import User from "../User";
 
 class InfoDataService {
     ambitos() {
-        return http.get("auth/data/Ambitos",  token.getUserToken());
+        return http.get("auth/data/Ambitos", User.getToken());
     }
 }
 

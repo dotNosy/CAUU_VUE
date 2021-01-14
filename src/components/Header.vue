@@ -10,47 +10,74 @@
         <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./">Inicio</a></button>
     </li>
     <li class="nav-item link1">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link1</a></button>
+        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Perfil">Perfil</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link2</a></button>
+        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./SelectNivel">Jugar</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link3</a></button>
+        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Coleccion">Colección</a></button>
+    </li>
+    
+    <!-- TO-DO Boton notificaciones -->
+    <li class="nav-item">
+        <!-- <b-button variant="light" class="btn" pill > -->
+                <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light"  font-scale="2.5">></b-icon>
+        <!-- </b-button> -->
     </li>
     <li class="nav-item">
-        <button @click="checkUserLogued()" type="button" class="btn botonlogin" id="btn"><a v-bind:href="laRuta" class="nav-link text-light">{{ login }}</a></button>
+        <button @click="logout()" type="button" class="btn botonlogin" id="btn">{{ login }}</button>
     </li>
     </ul>
 </nav>
 </header>
 </template>
 <script>
+    import User from "../User";
 
     export default {
-    name: 'my-header',
-    data(){
-        return {
-        laRuta: "",
-        login: "",
-        }
-    },
-    methods: {
-        checkUserLogued () {
-            const user = sessionStorage.getItem("user");
-                if (!user) {
-                    this.laRuta = "/login";
-                    this.login = "LOGIN";
-                } else {
-                        this.laRuta = "/logout";
-                        this.login = "LOGOUT"
+        
+        name: 'my-header',
+        data(){
+            return {
+                laRuta: "",
+                login: "",
+            }
+        },
+        methods: {
+            checkUserLogued () {
+                const user = User.getUser();
+
+                    if (user == null || user.token == '') {
+                        this.laRuta = "/login";
+                        this.login = "LOGIN";
+                    } else {
+                            this.laRuta = "/logout";
+                            this.login = "LOGOUT"
+                    }
+            },
+            logout () {
+                const user = User.getUser();
+
+                if (user.token !== '') {
+                    User.revokeToken();
                 }
+                this.$router.push({name: 'login'}) 
+            }
         }
-    }
-    ,
-    mounted () {
-        this.checkUserLogued();
-    }
+        ,
+        mounted () {
+            this.checkUserLogued();
+        },
+        watch: {
+            laRuta() {
+                // console.log(value);
+                this.checkUserLogued();
+            },
+            login() {
+                // console.log(value);
+            }
+        }
     };
 
 </script>

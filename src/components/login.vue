@@ -29,6 +29,7 @@
 
 <script>
     import LoginDataService from "../Services/LoginDataService";
+    import User from "../User";
 
     export default {
         name: "login",
@@ -41,29 +42,31 @@
         }
         },
         methods: {
-        login() {
+            login() {
 
-            let data = {
-                email: this.user.email,
-                password: this.user.password
-            };
+                let data = {
+                    email: this.user.email,
+                    password: this.user.password
+                };
 
-            LoginDataService.login(data)
-            .then(response => {
-                const user = {
-                    token : response.data.access_token,
-                    email : data.email,
-                    rol : response.data.rol
-                }
+                LoginDataService.login(data)
+                    .then(response => {
+                        const userData = {
+                            token : response.data.access_token,
+                            email : data.email,
+                            rol : response.data.rol
+                        }
 
-                sessionStorage.setItem('user', JSON.stringify(user));
-                console.log(response.data);
-                this.$router.push('juego');
-            })
-            .catch(e => {
-                console.log(e);
-            });
-        }
+                        sessionStorage.setItem('user', JSON.stringify(userData));
+
+                        if (User.getUser().token !== "") {
+                            this.$router.push({name: 'selectNivel'});
+                        }  
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+            }
         }
     }
 </script>

@@ -5,36 +5,69 @@
             <b-col>
                 <b-link variant="Link" to="Perfil">Volver</b-link>
             </b-col>
-            <b-col>{{titulo}}</b-col>
+            <b-col><h5>{{titulo}}</h5></b-col>
             <b-col></b-col>
         </b-row>
-        <b-row>
-            <b-col>
-                <b-button variant="dark" size="lg" pill>Nivel 1</b-button>
-                <b-button v-b-popover.hover.righttop="nivel1" title="Nivel 1" variant="light" pill ><b-icon icon="info-circle-fill" scale="2" variant="info" id="1"></b-icon></b-button>
 
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col>
-                <b-button variant="dark" size="lg" pill>Nivel 2</b-button>
-                <b-button v-b-popover.hover.righttop="nivel2" title="Nivel 2" variant="light" pill ><b-icon icon="info-circle-fill" scale="2" variant="info" id="2"></b-icon></b-button>
-
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col>
-                <b-button variant="dark" size="lg" pill >Nivel 3</b-button>
-                <b-button v-b-popover.hover.righttop="nivel3" title="Nivel 3" variant="light" pill ><b-icon icon="info-circle-fill" scale="2" variant="info" id="3"></b-icon></b-button>
-            </b-col>
-        </b-row>
+        <!-- Niveles -->
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-outline-secondary" :class="nivel_id === Number(key) ? 'active': ''" v-for="(n, key) in niveles" :key="key">
+                <input type="radio"
+                    class="btn-group-toggle"
+                    name="nivel_id"
+                    :id="'level_' + key"
+                    :value="key"
+                    v-model.number="nivel_id">
+                {{ n.nombre }}
+                <b-button 
+                    v-b-popover.hover.top="n.dificultad" 
+                    :title="n.nombre" 
+                    variant="light" 
+                    pill >
+                    <b-icon 
+                        icon="info-circle-fill" 
+                        scale="2" 
+                        variant="info" 
+                        :id=key></b-icon>
+                </b-button>
+                
+            </label>
+            {{ nivel_id }}
+        </div>
 
         <!-- Checkboxes -->
-        <div v-for="(ambito, index) in ambitoLista" v-bind:key="ambito.id">
-            <input type="checkbox" v-model='ambito[index]'> {{ ambito.nombre }}
-            
-        </div>  
 
+        <b-form-group>
+            <template #label>
+                <b-form-checkbox
+                    v-model="allSelected"
+                    :indeterminate="indeterminate"
+                    aria-describedby="ambitos"
+                    aria-controls="ambitos"
+                    @change="selectAll"
+                >
+                    {{ allSelected ? 'Deseleccionar' : 'Seleccionar' }}
+                    All Selected: <strong>{{ allSelected }}</strong><br>
+                </b-form-checkbox>
+            </template>
+
+            <template v-slot="{ ariaDescribedby }" >
+                <b-form-checkbox-group
+                    id="ambitos"
+                    v-model="selected"
+                    stacked
+                    :options="ambitoLista"
+                    :aria-describedby="ariaDescribedby"
+                    name="ambitos"
+                    aria-label="Ambitos individuales"           
+                >
+                </b-form-checkbox-group>
+                Seleccionados: {{ selected }}
+            </template>
+        
+        </b-form-group>
+            
+        <router-link to="Juego"><b-button variant="dark" size="lg" pill >Ir al juego</b-button></router-link>
         
 
 
@@ -42,34 +75,61 @@
 </template>
 
 <script>
-
 import InfoDataService from "../Services/InfoDataService"
 
     export default {
         data() {
             return {
                 titulo: "Seleccione nivel y ámbitos para jugar, después pulse comenzar",
-                nivel1: "Fácil",
-                nivel2: "Normal",
-                nivel3: "A3",
+                niveles: [
+                    {nombre: "Nivel 1", dificultad: "Fácil"},
+                    {nombre: "Nivel 2", dificultad: "Normal"},
+                    {nombre: "Nivel 3", dificultad: "Difícil"},
+                ],
+                nivel_id: null,
                 ambitoLista: [],
-                ambitos: []
+                selected: [],
+                allSelected: false,
+                indeterminate: false
+            }
+        },
+        methods: {
+            selectAll(checked) {
+                this.selected = (checked) ? this.ambitoLista.slice() : []
             }
         },
         mounted () {
             let th = this;
-            this.ambitos = InfoDataService.ambitos().then(response => {
-                console.log(response.data);
 
-                th.ambitoLista = response.data.ambitos;
+            InfoDataService.ambitos()
+                .then(response => {
+                    let array = response.data.ambitos;
 
-            }
-            ).catch(e => {
-                console.log(e);
+                    array.forEach(element=>{
+                        th.ambitoLista.push(element.nombre);
+                    });
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+        watch: {
+            selected(newValue) {
+                console.log(newValue);
+
+                if (newValue.length === 0) {
+                    this.indeterminate = false
+                    this.allSelected = false
+                } 
+                else if (newValue.length === this.ambitoLista.length) {
+                    this.indeterminate = false
+                    this.allSelected = true
+                } 
+                else {
+                    this.indeterminate = true
+                    this.allSelected = false
                 }
-            );
-            console.log(this.ambitos);
+            }
         }
-        
     }
 </script>
