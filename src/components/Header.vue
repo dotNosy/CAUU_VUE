@@ -10,13 +10,20 @@
         <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./">Inicio</a></button>
     </li>
     <li class="nav-item link1">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link1</a></button>
+        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Perfil">Perfil</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link2</a></button>
+        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./SelectNivel">Jugar</a></button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link3</a></button>
+        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Coleccion">Colección</a></button>
+    </li>
+    
+    <!-- TO-DO Boton notificaciones -->
+    <li class="nav-item">
+        <!-- <b-button variant="light" class="btn" pill > -->
+                <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light"  font-scale="2.5">></b-icon>
+        <!-- </b-button> -->
     </li>
     <li class="nav-item">
         <button @click="logout()" type="button" class="btn botonlogin" id="btn">{{ login }}</button>
@@ -63,12 +70,12 @@
             this.checkUserLogued();
         },
         watch: {
-            laRuta(value) {
-                console.log(value);
+            laRuta() {
+                // console.log(value);
                 this.checkUserLogued();
             },
-            login(value) {
-                console.log(value);
+            login() {
+                // console.log(value);
             }
         }
     };
