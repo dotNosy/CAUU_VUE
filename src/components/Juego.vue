@@ -76,7 +76,7 @@
                             <b-col><b-form-checkbox name="check" value="otros" id="otros" v-model="reasonsChecked" v-on:change="otros()">Otros</b-form-checkbox></b-col>
                         </b-row>
                         <b-row>
-                            <b-form-textarea id="otrostext" v-model="text" placeholder="Inserte la categoría del problema" rows="2" max-rows="6"></b-form-textarea>
+                            <b-form-textarea id="otrostext" placeholder="Inserte la categoría del problema" rows="2" max-rows="6"></b-form-textarea>
                         </b-row>
                         <b-row>
                             <!-- <b-col><b-form-input v-show="otrosSelected == true" v-model="reasonsChecked" v-on:change="otrosSeleccionado()"></b-form-input></b-col> -->
@@ -101,7 +101,7 @@
                         </b-row>
                     <br>
                         <b-row>
-                            <b-form-textarea id="categoriatext" v-model="text" placeholder="Su problema será revisado por nuestros técnicos en un plazo de 24-48 horas" rows="2" cols="50" max-rows="2" readonly></b-form-textarea>
+                            <b-form-textarea id="categoriatext" placeholder="Su problema será revisado por nuestros técnicos en un plazo de 24-48 horas" rows="2" cols="50" max-rows="2" readonly></b-form-textarea>
                         </b-row>
                         <br>
                     <b-button type="submit" variant="primary" id="btn" @click="mandarError()">{{send}}</b-button>
@@ -118,6 +118,7 @@
 
 <script>
 // import func from '../../vue-temp/vue-editor-bridge';
+import Juego from "../Juego"
 
     export default {
         data() {
@@ -191,6 +192,12 @@
             }
         },
         mounted() {
+            //CHECK IF DATA EXIST
+            if ((Juego.getNivel() == null || Juego.getAmbito() == null) || (Juego.getAmbito().length <= 0) || (Juego.getNivel() < 0 || Juego.getNivel() > 2)) {
+                    this.$router.push({name: 'selectNivel'});
+            }       
+
+            //
             this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
                 if (modalId === "report-error") {
                     clearInterval(this.timer);
