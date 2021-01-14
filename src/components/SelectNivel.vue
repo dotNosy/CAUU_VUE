@@ -67,7 +67,7 @@
         
         </b-form-group>
             
-        <router-link to="Juego"><b-button variant="dark" size="lg" pill >Ir al juego</b-button></router-link>
+        <router-link to="Juego"><b-button variant="dark" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button></router-link>
         
 
 
@@ -99,6 +99,29 @@ import InfoDataService from "../Services/InfoDataService"
             selectAll(checked) {
 
                 this.selected = checked ? this.ambitoLista.slice() : []
+
+            },
+
+            comprobarSeleccion() {
+
+                if (this.nivel_id === null) {
+                    alert("Debes seleccionar un nivel");
+                } else {
+                    
+                    if (this.nivel_id != 0 || this.nivel_id != 1 || this.nivel_id != 2 ) {
+                        alert("El nivel que has seleccionado no está contemplado en nuestro juego, seleccione otro, por favor");
+                    } else {
+                        return false;
+                    }
+                }
+
+                if (this.selected.length < 1) {
+                    alert("Debes seleccionar un ámbito por lo menos");
+                } else {
+                    return false;
+                }
+
+                return true;
 
             }
 
