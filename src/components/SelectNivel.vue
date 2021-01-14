@@ -75,7 +75,6 @@
 </template>
 
 <script>
-
 import InfoDataService from "../Services/InfoDataService"
 
     export default {
@@ -95,7 +94,6 @@ import InfoDataService from "../Services/InfoDataService"
             }
         },
         methods: {
-
             selectAll(checked) {
 
                 this.selected = checked ? this.ambitoLista.slice() : []
@@ -124,41 +122,39 @@ import InfoDataService from "../Services/InfoDataService"
                 return true;
 
             }
-
         },
         mounted () {
             let th = this;
-            InfoDataService.ambitos().then(response => {
-                
-                var array=response.data.ambitos;
-                console.log(response.data.ambitos);
-                array.forEach(element=>{
-                    th.ambitoLista.push(element.nombre);
-                });
-                console.log(this.ambitoLista);
 
-            }
-            ).catch(e => {
-                console.log(e);
-                }
-            );
+            InfoDataService.ambitos()
+                .then(response => {
+                    let array = response.data.ambitos;
+
+                    array.forEach(element=>{
+                        th.ambitoLista.push(element.nombre);
+                    });
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         },
         watch: {
             selected(newValue) {
- 
-                let indexarreglado=newValue++;
-                if (indexarreglado.length === 0) {
+                console.log(newValue);
+
+                if (newValue.length === 0) {
                     this.indeterminate = false
                     this.allSelected = false
-                } else if (indexarreglado.length === this.ambitoLista.length) {
+                } 
+                else if (newValue.length === this.ambitoLista.length) {
                     this.indeterminate = false
                     this.allSelected = true
-                } else {
+                } 
+                else {
                     this.indeterminate = true
                     this.allSelected = false
                 }
             }
-    }
-        
+        }
     }
 </script>
