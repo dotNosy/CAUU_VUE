@@ -3,6 +3,7 @@ import LoginDataService from "./Services/LoginDataService";
 class User {
     constructor (){
         this.user = JSON.parse(sessionStorage.getItem('user'));
+        
     }
 
     getToken() {
@@ -18,6 +19,11 @@ class User {
     getUser() {
         this.user = JSON.parse(sessionStorage.getItem('user'));
         return this.user;
+    }
+
+    getEmail() {
+        this.getUser();
+        return this.user.email;
     }
 
     revokeToken() {
