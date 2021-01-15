@@ -1,46 +1,28 @@
 <template>
-<div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img
-        src="https://mdbootstrap.com/img/new/slides/041.jpg"
-        class="d-block w-100"
-        alt="..."
-      />
-    </div>
-    <div class="carousel-item">
-      <img
-        src="https://mdbootstrap.com/img/new/slides/042.jpg"
-        class="d-block w-100"
-        alt="..."
-      />
-    </div>
-    <div class="carousel-item">
-      <img
-        src="https://mdbootstrap.com/img/new/slides/043.jpg"
-        class="d-block w-100"
-        alt="..."
-      />
-    </div>
-  </div>
-  <a
-    class="carousel-control-prev"
-    href="#carouselExampleControls"
-    role="button"
-    data-mdb-slide="prev"
-  >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </a>
-  <a
-    class="carousel-control-next"
-    href="#carouselExampleControls"
-    role="button"
-    data-mdb-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </a>
+<div class="si">
+  <b-carousel
+      id="carousel-1"
+      fade
+      :interval="1000"
+      background="#ababab"
+      style="text-shadow: 1px 1px 2px #333;"
+      @sliding-start="onSlideStart"
+      @sliding-end="onSlideEnd"
+      
+    >
+    <b-carousel-slide
+      caption="First slide"
+      img-src="https://wallpaperaccess.com/full/3513670.jpg"
+    ></b-carousel-slide>
+    <b-carousel-slide
+      caption="Second Slide"
+      img-src="https://picsum.photos/1024/480/?image=12"
+    ></b-carousel-slide>
+    <b-carousel-slide
+      caption="Third Slide"
+      img-src="https://picsum.photos/1024/480/?image=22"
+    ></b-carousel-slide>
+  </b-carousel>
 </div>
 </template>
 
@@ -70,6 +52,7 @@ export default {
       console.log("TEEEEEEEEST");
     }
 };
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -89,6 +72,10 @@ a {
   color: #42b983;
 }
 .si{
-  background-color: red;
+  width: 100%;
+  max-height: 1080px;
+}
+.coso{
+  min-height: 100%;
 }
 </style>
