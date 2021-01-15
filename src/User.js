@@ -10,7 +10,7 @@ class User {
         this.getUser();
 
         const config = {
-            headers: { Authorization: `Bearer ${this.user.token}` }
+            headers: { Authorization: `Bearer ${this.user.access_token}` }
         };
 
         return config;
@@ -19,6 +19,11 @@ class User {
     getUser() {
         this.user = JSON.parse(sessionStorage.getItem('user'));
         return this.user;
+    }
+
+    getId() {
+        this.getUser();
+        return this.user.id 
     }
 
     getEmail() {
@@ -35,6 +40,13 @@ class User {
             .catch(e => {
                 console.log(e);
             });
+    }
+    
+    setDatosUser(nombre, email) {
+        this.user.nombre = nombre;
+        this.user.email = email;
+
+        sessionStorage.setItem('user', JSON.stringify(this.user));
     }
 }
 

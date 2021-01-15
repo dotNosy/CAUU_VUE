@@ -75,16 +75,14 @@
         },
         watch: {
             laRuta() {
-                // console.log(value);
                 this.checkUserLogued();
             },
             login() {
-                // console.log(value);
+                
             }
         },
         computed: {
             perfil(){
-                console.log("fdasfdsf");
                 return this.$route.name != 'perfil';
             },     
             juego(){

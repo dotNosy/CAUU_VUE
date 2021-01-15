@@ -2,7 +2,10 @@
     <div>
 
         <b-row>
-            <h1>Hola {{user.email}}</h1>
+            <b-col></b-col>
+            <b-col><h1>Hola {{user.nombre}}</h1></b-col>
+            <b-col></b-col>
+
             <!-- <div data-title="Farewell!" 
                 data-intro="And this is the last step!"
                 v-intro="'Edit Project\'s Name Here'"
@@ -26,14 +29,19 @@
             </b-col>
         </b-row> -->
         <b-row>
-            <b-col>
+            <b-col style="padding-left: 50px">
                 <b-row>
                     <label for="nomUsuario">Nombre:</label>
-                    <b-form-input id="nomUsuario" v-model="text" placeholder="{{ user.name }}"></b-form-input>
+                    <b-form-input id="nomUsuario" v-model="name"></b-form-input>
+                        <div class="error" v-if="!$v.name.required">Campo obligatorio</div>
+                        <div class="error" v-if="!$v.name.minLength">Minimo {{$v.name.$params.minLength.min}} caracteres</div>
                 </b-row>
                 <b-row>
-                    <label for="emailUsuario">Nombre:</label>
-                    <b-form-input id="emailUsuario" v-model="text" placeholder="{{ user.email }}"></b-form-input>
+                    <label for="emailUsuario">Email:</label>
+                    <b-form-input id="emailUsuario" v-model="email"></b-form-input>
+                        <div class="error" v-if="!$v.email.required">Campo obligatorio</div>
+                        <div class="error" v-if="!$v.email.minLength">Minimo {{$v.email.$params.minLength.min}} caracteres</div>
+                        <div class="error" v-if="!$v.email.email">Formato de email incorrecto</div>
                 </b-row>
                 <b-row>
                     <!-- Contraseña -->
@@ -69,12 +77,12 @@
                             <div class="error" v-if="!$v.password2.sameAs">Las contraseñas no coinciden.</div>
                         </b-form-group>
                 </b-row>
-
+                <b-row>
+                    <b-button type="button" @click="editProfile()" variant="primary" class="bottom">Actualizar mis datos</b-button>
+                </b-row>
 
             </b-col>
             <b-col>
-                <h2>Nombre {{ user.name }}</h2>
-                <h2>{{ user.email }}</h2>
                 <h2>Tu posición en el ranking</h2>
 
                 <!-- <b-link variant="Link">Cerrar sesion</b-link> -->
@@ -92,6 +100,7 @@
 <script>
     import User from  "../User";
     import ProfileDataService from "../Services/ProfileDataService"
+    import { required, minLength, email, sameAs} from 'vuelidate/lib/validators';
 
         // import introJs from "intro.js";
         // import "intro.js/introjs.css";
@@ -102,9 +111,7 @@
             return {
                 user: User.getUser(),
                 name: '',
-                surname: '',
                 email: '',
-                username: '',
                 password1: '',
                 password2: '',
             }
@@ -124,12 +131,42 @@
             // }
             // )
 
-
+            this.name = this.user.nombre;
+            this.email = this.user.email;
         },
         methods: {
             editProfile() {
+                let data = {
+                    id: this.user.id,
+                    name: this.name,
+                    email: this.email,
+                    password: this.password1,
+                };
 
-                console.log("aaaaaa");
+                //Log sending data
+                console.log(data);
+
+                if (this.$v.name.$invalid 
+                        || this.$v.email.$invalid
+                        || this.$v.password1.$invalid
+                        || this.$v.password2.$invalid    
+                    )
+                    {
+                        alert("DATOS o FORMATO incorrectos!!");
+                        return false;
+                    }
+                
+                ProfileDataService.editProfile(data)
+                    .then(() => {
+                        // console.log(this.name);
+                        // console.log(this.email);
+                        console.log(data);
+                        User.setDatosUser(this.name, this.email);
+                    })
+                    .catch(e=>{
+                        console.log(e);
+                    })
+
 
             }
         },
@@ -144,16 +181,11 @@
                     email,
                 },
                 password1: {
-                    required,
                     minLength: minLength(8),
                 },
                 password2: {
-                    required,
                     minLength: minLength(8),
                     sameAs: sameAs('password1')
-                },
-                surname: {
-
                 }
         }
         
