@@ -18,6 +18,9 @@
     <li class="nav-item">
         <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Coleccion">Colección</a></button>
     </li>
+        <li class="nav-item">
+        <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./obtenerJuego">Obtener juego</a></button>
+    </li>
     </ul>
     <!-- TO-DO Boton notificaciones -->
     <ul class="navbar-nav ml-auto">

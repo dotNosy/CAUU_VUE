@@ -32,7 +32,17 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      test : ""
+      test : "",
+      carouselImages: [
+        {id: 1, image: "../assets/portada/1.jpg"},
+        {id: 2, image: "../assets/portada/2.jpg"},
+        {id: 3, image: "../assets/portada/3.jpg"},
+        {id: 4, image: "../assets/portada/4.jpg"},
+        {id: 5, image: "../assets/portada/5.jpg"},
+        {id: 6, image: "../assets/portada/6.jpg"},
+        {id: 7, image: "../assets/portada/7.jpg"},
+        {id: 8, image: "../assets/portada/8.jpg"}
+      ]
     }
   },
   methods: {
@@ -49,7 +59,7 @@ export default {
   },
   mounted() {
       this.getTest();
-      console.log("TEEEEEEEEST");
+      // console.log("TEEEEEEEEST");
     }
 };
 
