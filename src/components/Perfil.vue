@@ -83,7 +83,15 @@
 
             </b-col>
             <b-col>
-                <h2>Tu posición en el ranking</h2>
+                <b-row>
+                    <h2>Tu posición en el ranking</h2>
+                </b-row>
+                <b-row>
+                    {{ miPosicion }}
+                </b-row>
+                <b-row>
+                    <!-- TO-DO mostrar con un template las ultimas 5 posiciones -->
+                </b-row>
 
                 <!-- <b-link variant="Link">Cerrar sesion</b-link> -->
                 <!-- <div v-intro="'The content of tooltip'">AAAAA</div>
@@ -114,6 +122,7 @@
                 email: '',
                 password1: '',
                 password2: '',
+                miPosicion: ''
             }
         },
         mounted() {

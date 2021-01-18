@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>*panic*</h3>
+        <!-- <h3>*panic*</h3> -->
         <my-header></my-header>
         <section></section> 
         <my-arriba></my-arriba>
