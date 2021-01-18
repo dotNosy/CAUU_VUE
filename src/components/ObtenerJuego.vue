@@ -2,6 +2,8 @@
 
     <section>
 
+
+
     </section>
 
 </template>
@@ -10,8 +12,10 @@
     
     export default {
         name: 'obtener-juego',
-        data: {
-            nomArchivo: ''
+        data() {
+            return {
+                nomArchivo: ''
+            }
         },
         methods: {
             imprimir() {
@@ -21,13 +25,13 @@
                 document.title = "mujeresCienSoc";
                 window.print();
                 document.title = this.nomArchivo;
+
             }
         },
-        mounted: {
-            cargarCartas() {
+        mounted() {
                 console.log("Cargamos las cartas");
-                // TO-DO Cargar las cartas cuando se abre la pagina y después ejecutamos imprimir()
-            }
+                // TO-DO Cargar las cartas cuando se abre la pagina
+                this.imprimir();
         }
     }
 </script>
