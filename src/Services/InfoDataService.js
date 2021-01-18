@@ -9,6 +9,10 @@ class InfoDataService {
     coleccion () {
         return http.get("auth/data/Coleccion", User.getToken());
     }
+
+    coleccionMujerDatos (id) {
+        return http.get("auth/data/Coleccion/mujer", id,User.getToken());
+    }
 }
 
 export default new InfoDataService();
