@@ -16,6 +16,8 @@
     "font-awesome": "^4.7.0",
     "intro.js": "^3.2.1",
     "jquery": "^3.5.1",
+    "slide": "^1.1.6",
+    "slidr": "0.0.1",
     "util": "^0.12.3",
     "vue": "^2.6.11",
     "vue-bootstrap-slider": "^2.1.8",
@@ -24,6 +26,7 @@
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
