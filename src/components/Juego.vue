@@ -40,6 +40,8 @@
             <!-- Facts + Alerts -->
             <b-col>
                 <b-row>DATO</b-row>
+
+                <!-- Notificacion -->
                 <b-row>Mujer descubierta</b-row>
                 <b-row>Dato descubierto</b-row>
             </b-col>
@@ -50,13 +52,13 @@
                 <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')" class="exclamation" style="cursor: hand;"></b-icon></p>
                 <h6>Tu puntuación</h6>
                 <h6>{{ puntos }}</h6>
-                <b-button v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="startTimer">Empezar!</b-button>
+                <b-button v-show="!easyNormalGame"  v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="startTimer">Empezar!</b-button>
             </b-col>
         </b-row>
 
         <b-row class="si"> 
             <!-- Temporizador -->
-            <b-progress :value="value" :max="max" show-progress animated class="w-50 mb-2" variant="purple"></b-progress>
+            <b-progress v-show="!easyNormalGame" :value="value" :max="max" show-progress animated class="w-50 mb-2" variant="purple"></b-progress>
         </b-row>
 
         <!-- Formulario de reportar error -->
@@ -106,8 +108,6 @@
                         <br>
                     <b-button type="submit" variant="primary" id="btn" @click="mandarError()">{{send}}</b-button>
                 </b-form>
-
-
                 
             </div>
         </b-modal>
@@ -125,6 +125,7 @@ import Juego from "../Juego"
             return {
                 btnEmpezarClass : '',
                 timer: null,
+                easyNormalGame: false,
                 puntos: 0,
                 value: 100,
                 max: 100,
@@ -171,14 +172,14 @@ import Juego from "../Juego"
                 }
             },
             otros() {
-            var checkBox = document.getElementById("otros");
-            var text = document.getElementById("otrostext");
+                var checkBox = document.getElementById("otros");
+                var text = document.getElementById("otrostext");
 
-            if (checkBox.checked == true){
-                text.style.display = "block";
-            } else {
-                text.style.display = "none";
-            }
+                if (checkBox.checked == true){
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
             },
             mandarError() {
                 let checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
@@ -195,7 +196,15 @@ import Juego from "../Juego"
             //CHECK IF DATA EXIST
             if ((Juego.getNivel() == null || Juego.getAmbito() == null) || (Juego.getAmbito().length <= 0) || (Juego.getNivel() < 0 || Juego.getNivel() > 2)) {
                     this.$router.push({name: 'selectNivel'});
-            }       
+            }  
+            
+            if (Juego.getNivel() != 2) {
+                
+                this.easyNormalGame = true;
+
+            }
+
+            console.log(Juego.getNivel());
 
             //
             this.$root.$on('bv::modal::show', (bvEvent, modalId) => {

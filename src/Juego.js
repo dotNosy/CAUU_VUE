@@ -7,6 +7,7 @@ class Juego {
     setNivel(nivel) {
         this.nivel = nivel;
     }
+
     setAmbito(ambito) {
         this.ambito = ambito;
     }
@@ -14,10 +15,10 @@ class Juego {
     getNivel() {
         return this.nivel;
     }
+
     getAmbito() {
         return this.ambito;
     }
-
 }
 
 export default new Juego();

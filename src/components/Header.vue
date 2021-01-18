@@ -19,7 +19,7 @@
         <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Coleccion">Colección</a></button>
     </li>
         <li class="nav-item">
-        <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./obtenerJuego">Obtener juego</a></button>
+        <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./ObtenerJuego">Obtener juego</a></button>
     </li>
     </ul>
     <!-- TO-DO Boton notificaciones -->
@@ -75,16 +75,14 @@
         },
         watch: {
             laRuta() {
-                // console.log(value);
                 this.checkUserLogued();
             },
             login() {
-                // console.log(value);
+                
             }
         },
         computed: {
             perfil(){
-                console.log("fdasfdsf");
                 return this.$route.name != 'perfil';
             },     
             juego(){

@@ -202,10 +202,8 @@
                     }
 
                 RegisterDataService.register(data)
-                    .then(Response => {
-                        this.$router.push("perfil");
-                        console.log(Response.data);
-                        this.submitted = true;
+                    .then(() => {
+                        this.$router.push("login");
                     })
                     .catch(e=> {
                         console.log(e);

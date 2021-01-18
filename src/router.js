@@ -46,6 +46,16 @@ const router = new Router({
             name: "passrec",
             component: () => import("./components/passrec")
         },
+        {
+            path: "/Coleccion",
+            name: "coleccion",
+            component: () => import("./components/Coleccion")
+        },
+        {
+            path: "/ObtenerJuego",
+            name: "obtenerJuego",
+            component: () => import("./components/ObtenerJuego")
+        },
         // Si no coincide con nada
         { path: '*', redirect: '/' }
     ]

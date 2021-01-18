@@ -51,13 +51,7 @@
 
                 LoginDataService.login(data)
                     .then(response => {
-                        const userData = {
-                            token : response.data.access_token,
-                            email : data.email,
-                            rol : response.data.rol
-                        }
-
-                        sessionStorage.setItem('user', JSON.stringify(userData));
+                        sessionStorage.setItem('user', JSON.stringify(response.data));
 
                         if (User.getUser().token !== "") {
                             this.$router.push({name: 'selectNivel'});
