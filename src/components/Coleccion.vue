@@ -27,26 +27,36 @@
 </template>
 
 <script>
-    
+    import InfoDataService from "../Services/InfoDataService";
+
     export default {
         name: 'obtener-juego',
-        data: {
-            miDesbloqueadas: '',
-            totalMujeres: ''
-
+        data() {
+            return {
+                miDesbloqueadas: '',
+                totalMujeres: ''
+            }
         },
         methods: {
-            mostrarDatosCarta(event) {
+            mostrarDatosCarta() {
                 console.log("Cuando clickamos sobre una carta recogemos el id y mostramos los datos de esa carta");
             },
             sugerirMujer() {
-                
+                console.log("btn sugerir");
+            },
+            cargarCartas() {
+                InfoDataService.coleccion()
+                    .then((response) => {
+                        console.log("Peticion coleccion ok");
+                        console.log(response.data);
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                    });
             }
         },
-        mounted: {
-            cargarCartas() {
-                console.log("Cargamos las cartas");
-            }
+        mounted() {
+            this.cargarCartas();
         }
     }
 </script>
