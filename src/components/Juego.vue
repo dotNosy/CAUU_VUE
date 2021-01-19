@@ -60,16 +60,20 @@
             <!-- Temporizador -->
             <b-progress id="temporizador" v-show="!easyNormalGame" :value="value" :max="max" show-progress animated class="w-50 mb-2" variant="purple"></b-progress>
             <circular-count-down-timer
-                :initial-value="value"
+                :initial-value="100"
                 :steps=".1"
-                :stroke-width="6"
+                :stroke-width="8"
                 :seconds-stroke-color="'#4e3757'"
                 :underneath-stroke-color="'lightgrey'"
                 :size="200"
                 :padding="45"
-                :paused=true
+                :paused= timerMobile
+                :second-label="''"
+                id="countdown"
+                @finish="finished"
                 v-show="!easyNormalGame"
             ></circular-count-down-timer>
+
         </b-row>
 
         <!-- Formulario de reportar error -->
@@ -137,6 +141,7 @@ import Juego from "../Juego"
                 btnEmpezarClass : '',
                 timer: null,
                 easyNormalGame: false,
+                timerMobile: true,
                 puntos: 0,
                 value: 100,
                 max: 100,
@@ -154,14 +159,13 @@ import Juego from "../Juego"
                 this.btnEmpezarClass = 'disabled outline-dark';
                 this.finished = false;
 
+                this.timerMobile = false;
+
                 let global = this;
 
                 global.timer = setInterval(function() {
                     if (global.value > 0) {
                         global.value -= .1;
-                        
-                        
-                        // console.log(global.value);
 
                         if (global.value >= 100) {
                             clearInterval(global.timer);
@@ -169,7 +173,6 @@ import Juego from "../Juego"
                             document.getElementById('btnEmpezar').innerText = "Empezar";
                             global.btnEmpezarClass = '';
                             global.value = 100;
-                            
                             alert("se acabo!");
                             clearInterval(global.timer);
                         }
@@ -177,14 +180,12 @@ import Juego from "../Juego"
                 }, 100);
             
             },
-            // finished: () => {
-            //     this.$refs.countdown.updateTime(global.value);
-            //     this.$refs.countdown.stop();
+            finished: () => {
+                this.$refs.countdown.updateTime(100);
+                this.timerMobile = false;
+                console.log("patata");
 
-            // },
-            // updated: (status) => {
-            //     console.log(status);
-            // },
+            },
             otrosSeleccionado() {
                 if (this.otrosSelected) {
                     this.otrosSelected = false;
@@ -219,9 +220,7 @@ import Juego from "../Juego"
             }  
             
             if (Juego.getNivel() != 2) {
-                
                 this.easyNormalGame = true;
-
             }
 
             //
@@ -257,6 +256,25 @@ import Juego from "../Juego"
         /* background-color:red ; */
         max-width: 100%;
         padding-left:1%;
+    }
+
+    @media (max-width: 600px) {
+
+        #temporizador {
+            visibility: hidden;
+        }
+        #countdown {
+            visibility: visible;
+        }
+
+    }
+
+    @media (min-width: 600px) {
+
+        #countdown {
+            visibility: hidden;
+        }
+
     }
 
 </style>

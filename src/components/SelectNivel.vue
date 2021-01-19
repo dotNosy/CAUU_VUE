@@ -32,7 +32,6 @@
                 </b-button>
                 
             </label>
-            {{ nivel_id }}
         </div>
 
         <!-- Checkboxes -->
@@ -46,8 +45,7 @@
                     aria-controls="ambitos"
                     @change="selectAll"
                 >
-                    {{ allSelected ? 'Deseleccionar' : 'Seleccionar' }}
-                    All Selected: <strong>{{ allSelected }}</strong><br>
+                    {{ allSelected ? 'Deseleccionar' : 'Seleccionar todos' }}
                 </b-form-checkbox>
             </template>
 
@@ -62,7 +60,6 @@
                     aria-label="Ambitos individuales"           
                 >
                 </b-form-checkbox-group>
-                Seleccionados: {{ selected }}
             </template>
         
         </b-form-group>
