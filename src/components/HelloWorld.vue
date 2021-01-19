@@ -1,10 +1,10 @@
 <template>
 <div>
-<input type="radio" id="trigger1" name="slider">
+<input type="radio" id="trigger1" name="slider" checked autofocus>
 <label for="trigger1"></label>
 <div class="slide bg1"></div>
 
-<input type="radio" id="trigger2" name="slider" checked autofocus>
+<input type="radio" id="trigger2" name="slider">
 <label for="trigger2"></label>
 <div class="slide bg2"></div>
 
@@ -31,23 +31,24 @@
 <input type="radio" id="trigger8" name="slider">
 <label for="trigger8"></label>
 <div class="slide bg8"></div>
-<a href="http://localhost:8080/registro"><b-button variant="dark" id="btn" style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:1em;right:1em;position:fixed;" >REGISTRARSE</b-button></a>
-<article style="position:fixed;bottom:8em;left:1em;right:1em;font-size:1.8em;text-align:left;font-weight:bold;color:white;background-color:#533B67;opacity:0.94;">desayunos no se que poner pero registrate por favor te lo suplico si te registras te doy dinero y esto tiene que ocupar dos lineas asi que voy a escribir un poco mas para poder ver como quedaria al reescalarlo</article>
+<!-- <a href="http://localhost:8080/Login"><b-button variant="dark" id="btn" style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:1em;right:1em;position:fixed;" >ENTRAR</b-button></a>
+<article>Doctrina y movimiento social que pide para la mujer el reconocimiento de unas capacidades y unos derechos que tradicionalmente han estado reservados para los hombres.</article> -->
 </div>
 </template>
 
 <style>
-#btn{
-    background-color: #4e3757;
-    border-color:#4e3757;
-    color: white;
-}
-
-#btn:hover{
-    background-color: #918897;
-    border-color: #918897;
-}
-
+/* article{
+  position:fixed;
+  bottom:8em;
+  left:1em;
+  right:1em;
+  font-size:1.8em;
+  text-align:justify;
+  font-weight:bold;
+  color:white;
+  background-color:#533B67;
+  opacity:0.94;
+} */
 body, html {
   padding: 0;
   margin: 0;
@@ -96,7 +97,7 @@ input:focus + label{
   left: 0;
   z-index: -1;
   transform: translateX(-100%);
-  transition-duration: .4s;
+  transition-duration: .8s;
   opacity: 1;
 }
 
@@ -133,5 +134,32 @@ input:checked + label + .slide {
 .bg8{
   background-image: url(../assets/portada/8.jpg);
 }
+@media (max-width: 576px) {
+  article{
+    text-align:left;
+  }
+}
 </style>
 
+<script>
+const $ = require('jquery')
+window.$ = $
+
+
+
+  var index=1;
+  setInterval( function sisoy(){
+    var trigger="trigger";
+    var f=trigger+index;
+    if(index<9){
+    $('#'+f).prop("checked", true);
+    $('#'+f).focus();
+    index=index+1;
+    console.log(index);
+    }
+    else{
+      index=1;
+    }
+  }, 3000);
+
+</script>
