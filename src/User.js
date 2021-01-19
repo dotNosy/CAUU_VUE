@@ -6,11 +6,12 @@ class User {
         
     }
 
-    getToken() {
+    getToken(data = null) {
         this.getUser();
 
         const config = {
-            headers: { Authorization: `Bearer ${this.user.access_token}` }
+            headers: { Authorization: `Bearer ${this.user.access_token}` },
+            params: data
         };
 
         return config;
