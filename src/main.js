@@ -19,6 +19,7 @@ import 'intro.js/introjs.css';
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
+import "jquery";
 
 Vue.config.productionTip = false
 
