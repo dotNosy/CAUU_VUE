@@ -15,6 +15,16 @@
     import Footer from './components/Footer'
     // import Abajo from './components/Abajo'
     // import Arriba from './components/Arriba'
+
+    // Orientacion fijada en vertical para todo navegador en el que se abra
+    // TO-DO TEST EN REAL   
+    const orientation = "portrait";
+
+    ScreenOrientation.lock(orientation); //Android
+    screen.mozLockOrientation(orientation); //Mozzila
+    Screen.orientation.lock(orientation); // Chrome, Edge, Firefox, Internet Explorer, Opera, Android Chrome/Firefox and Samsung internet
+    // window.screen.lockOrientation(orientation); //
+    // screen.msLockOrientation(orientation); //
     
     export default {
       name: 'App',
