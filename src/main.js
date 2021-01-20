@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Router from "./router"
+import './css/style.css'
 
 import { BootstrapVue, BootstrapVueIcons, ProgressPlugin, FormPlugin, FormCheckboxPlugin, VBPopoverPlugin } from 'bootstrap-vue';
 Vue.use(BootstrapVue);

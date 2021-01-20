@@ -31,24 +31,43 @@
 <input type="radio" id="trigger8" name="slider">
 <label for="trigger8"></label>
 <div class="slide bg8"></div>
-<!-- <a href="http://localhost:8080/Login"><b-button variant="dark" id="btn" style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:1em;right:1em;position:fixed;" >ENTRAR</b-button></a>
-<article>Doctrina y movimiento social que pide para la mujer el reconocimiento de unas capacidades y unos derechos que tradicionalmente han estado reservados para los hombres.</article> -->
+<!-- <a href="http://localhost:8080/Login"><b-button variant="dark" id="btn" style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:1em;right:1em;position:fixed;" >ENTRAR</b-button></a> -->
+<div class="inicio">
+  <a href="./Login" ><b-button variant="dark" id="btn" class="boton" >ENTRAR</b-button></a><br>
+  <a href="./Registro"><b-button variant="dark" id="btn" class="boton" >REGISTRARSE</b-button></a><br>
 </div>
+<!-- <div style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:15%;right:50%;position:fixed;background-color:red;">
+<h1 style="color:white;">hola buenas tardes</h1>
+</div> -->
+</div>
+
 </template>
 
 <style>
-/* article{
+.boton{
+  width:100%;
+  height:6em;
+  border-radius:2%;
+  font-size:1em;
+  font-weight: bold;
+  margin-bottom: 1%;
+
+}
+
+.inicio{
   position:fixed;
-  bottom:8em;
-  left:1em;
-  right:1em;
+  top:2em;
+  left:3em;
+  right:3em;
   font-size:1.8em;
   text-align:justify;
   font-weight:bold;
   color:white;
-  background-color:#533B67;
+  /* background-color:#533B67; */
+  /* background-color: red; */
   opacity:0.94;
-} */
+}
+
 body, html {
   padding: 0;
   margin: 0;
@@ -135,9 +154,16 @@ input:checked + label + .slide {
   background-image: url(../assets/portada/8.jpg);
 }
 @media (max-width: 576px) {
-  article{
+  .inicio{
     text-align:left;
+    left:2em;
+    right: 2em;
   }
+  .boton{
+  font-size:0.6em;
+  font-weight: bold;
+}
+
 }
 </style>
 
@@ -148,12 +174,12 @@ window.$ = $
 
 
   var index=1;
-  setInterval( function sisoy(){
+  setInterval( function slider(){
     var trigger="trigger";
-    var f=trigger+index;
+    var id=trigger+index;
     if(index<9){
-    $('#'+f).prop("checked", true);
-    $('#'+f).focus();
+    $('#'+id).prop("checked", true);
+    $('#'+id).focus();
     index=index+1;
     console.log(index);
     }

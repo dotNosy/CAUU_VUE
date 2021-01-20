@@ -1,7 +1,5 @@
 <template>
-
     <section>
-
         <b-row>
             <h4>Mujeres en las ciencias sociales</h4>
         </b-row>
@@ -21,9 +19,7 @@
                     -> Si estan bloqueadas mostrar el candado y ? una opacidad gris ?
             -->
         </b-row>
-
     </section>
-
 </template>
 
 <script>
@@ -60,7 +56,3 @@
         }
     }
 </script>
-
-<style>
-
-</style>
