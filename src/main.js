@@ -14,12 +14,16 @@ Vue.use(FormCheckboxPlugin);
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
 
+import CircularCountDownTimer from "vue-circular-count-down-timer";
+Vue.use(CircularCountDownTimer);
+
 import VueIntro from 'vue-introjs';
 Vue.use(VueIntro);
 import 'intro.js/introjs.css';
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
+import "jquery";
 
 Vue.config.productionTip = false
 
