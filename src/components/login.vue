@@ -15,7 +15,7 @@
                             <button type="button" value="SARTU" class="btn btn-primary" @click="login">ENTRAR</button><br>
                         </div>
                         <div class="form-group">
-                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Haz click aquí.</a><br>
+                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Registrate</a><br>
                         </div>
                         <div class="form-group">
                             <a href="./passrec" class="ForgetPwd">¿Has olvidado tu contraseña?</a><br>
@@ -64,21 +64,3 @@
         }
     }
 </script>
-
-<style scoped>
-.formulario{
-    background-color: #e0d1e9;
-    
-}
-.form{
-    border-color: black;
-    border-width: 2px;
-    border-style: double;
-}
-input:invalid {
-    border: 2px solid red;
-}
-input:valid {
-    border: 2px solid black;
-}
-</style>

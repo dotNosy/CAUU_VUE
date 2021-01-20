@@ -3,21 +3,15 @@
     <!-- Copyright -->
     <div class="divfooter text-center p-3" id="footer">
     © 2020 Copyright:
-    <a class="text-light" href="./home">Desayunos Feministas</a>
+    <a class="text-light" href="https://desayunosfeministascantabria.wordpress.com">Desayunos Feministas</a>
     </div>
 </footer>
 </template>
 
-<script>
-    export default {
-        
-    }
-</script>
-
 <style>
     .divfooter{
         color: white;
-}
+    }
 @media (min-width: 1800px) {
     footer {
     position: absolute;;

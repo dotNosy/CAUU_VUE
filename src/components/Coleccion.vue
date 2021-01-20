@@ -1,7 +1,5 @@
 <template>
-
     <section>
-
         <b-row>
             <h4>Mujeres en las ciencias sociales</h4>
         </b-row>
@@ -61,7 +59,6 @@
 
         </b-row>
     </section>
-
 </template>
 
 <script>
@@ -158,7 +155,3 @@
         }
     }
 </script>
-
-<style>
-
-</style>

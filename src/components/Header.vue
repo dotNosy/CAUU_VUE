@@ -19,14 +19,14 @@
         <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Coleccion">Colección</a></button>
     </li>
         <li class="nav-item">
-        <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./ObtenerJuego">Obtener juego</a></button>
+        <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./ObtenerJuego">Obtener</a></button>
     </li>
     </ul>
     <!-- TO-DO Boton notificaciones -->
     <ul class="navbar-nav ml-auto">
     <li class="nav-item">
         <!-- <b-button variant="light" class="btn" pill > -->
-                <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="2.5"></b-icon>
+                <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="2.5" id="icono"></b-icon>
         <!-- </b-button> -->
     </li>
     <li class="nav-item">
@@ -54,10 +54,10 @@
 
                     if (user == null || user.token == '') {
                         this.laRuta = "/login";
-                        this.login = "LOGIN";
+                        this.login = "Login";
                     } else {
                             this.laRuta = "/logout";
-                            this.login = "LOGOUT"
+                            this.login = "Logout"
                     }
             },
             logout () {
@@ -113,16 +113,6 @@ li{
 }
 ul{
     display: inline;
-    
-}
-#btn{
-    background-color: #4e3757;
-    border-color:#4e3757;
-    color: white;
-}
-#btn:hover{
-    background-color: #918897;
-    border-color: #918897;
 }
 @media (min-width: 576px) {
     .link1{
@@ -144,6 +134,9 @@ ul{
         padding: 2%;
         margin: 0.5%;
         border-color: black;
+    }
+    #icono{
+        display: none;
     }
 }
 </style>

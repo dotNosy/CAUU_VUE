@@ -113,20 +113,6 @@
     .bottom{
         margin-bottom: 4%;
     }
-    .formulario{
-        background-color: #e0d1e9
-    }
-    .form{
-        border-color: black;
-        border-width: 2px;
-        border-style: double;
-    }
-    input:invalid {
-        border: 2px solid red;
-    }
-    input:valid {
-        border: 2px solid black;
-    }
 </style>
 
 <script>
