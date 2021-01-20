@@ -15,7 +15,7 @@
                     >
                     <b-card
                         :style="{ 
-                            backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ ambitos[mujer.ambito_id -1].nombre.toLowerCase() +'.png') + ')',
+                            backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ ambitos[mujer.ambito_id -1].nombre.trim().toLowerCase() +'.png') + ')',
                             color:'white',
                             backgroundSize: 'cover'
                         }"
