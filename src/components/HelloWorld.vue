@@ -1,10 +1,10 @@
 <template>
 <div>
-<input type="radio" id="trigger1" name="slider">
+<input type="radio" id="trigger1" name="slider" checked autofocus>
 <label for="trigger1"></label>
 <div class="slide bg1"></div>
 
-<input type="radio" id="trigger2" name="slider" checked autofocus>
+<input type="radio" id="trigger2" name="slider">
 <label for="trigger2"></label>
 <div class="slide bg2"></div>
 
@@ -31,21 +31,41 @@
 <input type="radio" id="trigger8" name="slider">
 <label for="trigger8"></label>
 <div class="slide bg8"></div>
-<a href="http://localhost:8080/registro"><b-button variant="dark" id="btn" style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:1em;right:1em;position:fixed;" >REGISTRARSE</b-button></a>
-<article style="position:fixed;bottom:8em;left:1em;right:1em;font-size:1.8em;text-align:left;font-weight:bold;color:white;background-color:#533B67;opacity:0.94;">desayunos no se que poner pero registrate por favor te lo suplico si te registras te doy dinero y esto tiene que ocupar dos lineas asi que voy a escribir un poco mas para poder ver como quedaria al reescalarlo</article>
+<!-- <a href="http://localhost:8080/Login"><b-button variant="dark" id="btn" style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:1em;right:1em;position:fixed;" >ENTRAR</b-button></a> -->
+<div class="inicio">
+  <a href="./Login" ><b-button variant="dark" id="btn" class="boton" >ENTRAR</b-button></a><br>
+  <a href="./Registro"><b-button variant="dark" id="btn" class="boton" >REGISTRARSE</b-button></a><br>
 </div>
+<!-- <div style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:15%;right:50%;position:fixed;background-color:red;">
+<h1 style="color:white;">hola buenas tardes</h1>
+</div> -->
+</div>
+
 </template>
 
 <style>
-#btn{
-    background-color: #4e3757;
-    border-color:#4e3757;
-    color: white;
+.boton{
+  width:100%;
+  height:6em;
+  border-radius:2%;
+  font-size:1em;
+  font-weight: bold;
+  margin-bottom: 1%;
+
 }
 
-#btn:hover{
-    background-color: #918897;
-    border-color: #918897;
+.inicio{
+  position:fixed;
+  top:2em;
+  left:3em;
+  right:3em;
+  font-size:1.8em;
+  text-align:justify;
+  font-weight:bold;
+  color:white;
+  /* background-color:#533B67; */
+  /* background-color: red; */
+  opacity:0.94;
 }
 
 body, html {
@@ -96,7 +116,7 @@ input:focus + label{
   left: 0;
   z-index: -1;
   transform: translateX(-100%);
-  transition-duration: .4s;
+  transition-duration: .8s;
   opacity: 1;
 }
 
@@ -133,5 +153,39 @@ input:checked + label + .slide {
 .bg8{
   background-image: url(../assets/portada/8.jpg);
 }
+@media (max-width: 576px) {
+  .inicio{
+    text-align:left;
+    left:2em;
+    right: 2em;
+  }
+  .boton{
+  font-size:0.6em;
+  font-weight: bold;
+}
+
+}
 </style>
 
+<script>
+const $ = require('jquery')
+window.$ = $
+
+
+
+  var index=1;
+  setInterval( function slider(){
+    var trigger="trigger";
+    var id=trigger+index;
+    if(index<9){
+    $('#'+id).prop("checked", true);
+    $('#'+id).focus();
+    index=index+1;
+    console.log(index);
+    }
+    else{
+      index=1;
+    }
+  }, 3000);
+
+</script>

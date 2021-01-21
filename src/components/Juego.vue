@@ -1,14 +1,14 @@
 <template>
 
     <div class="juego">
-        <b-row class="si">
+        <b-row class="full">
             <h3>Mujeres en las ciencias sociales</h3>
             <hr>
         </b-row>
-        <b-row class="si">
+        <b-row class="full">
             <b-link variant="Link" to="SelectNivel">Volver</b-link>
         </b-row>
-        <b-row class="si">
+        <b-row class="full">
             <!-- Cards of the game -->
             <b-col>
                 <b-row>
@@ -49,7 +49,7 @@
             </b-col>
 
             <!-- Return + Punctuation + Highscore + Begin -->
-            <b-col class="si">
+            <b-col class="full">
 
                 <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')" class="exclamation" style="cursor: hand;"></b-icon></p>
                 <h6>Tu puntuación</h6>
@@ -58,7 +58,9 @@
             </b-col>
         </b-row>
 
-        <b-row class="tempClas"> 
+
+        <b-row class="full"> 
+
             <!-- Temporizador -->
             <b-progress id="temporizador" v-show="!easyNormalGame" :value="value" :max="max" show-progress animated class="w-50 mb-2" variant="purple"></b-progress>
             <circular-count-down-timer
@@ -291,7 +293,8 @@ import Juego from "../Juego"
     #categoriatext{
         resize: none;
     }
-    .tempClas{
+
+    .full{
         /* background-color:red ; */
         max-width: 100%;
         padding-left:1%;
