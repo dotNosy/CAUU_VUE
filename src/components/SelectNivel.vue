@@ -61,9 +61,11 @@
                 >
                 </b-form-checkbox-group>
             </template>
-        
         </b-form-group>
-            
+
+        <!-- Cargando -->
+        <div id="ambitosLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando ambitos..."></b-spinner></div>
+        
         <b-button variant="dark" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
     </div>
 </template>
@@ -71,6 +73,7 @@
 <script>
 import InfoDataService from "../Services/InfoDataService"
 import Juego from "../Juego"
+import $ from "jquery";
 
     export default {
         data() {
@@ -118,6 +121,8 @@ import Juego from "../Juego"
         mounted () {
             let th = this;
 
+            $("#ambitosLoading").fadeIn("slow");
+
             InfoDataService.ambitos()
                 .then(response => {
                     let array = response.data.ambitos;
@@ -125,6 +130,9 @@ import Juego from "../Juego"
                     array.forEach(element=>{
                         th.ambitoLista.push(element.nombre);
                     });
+
+                    $("#ambitosLoading").hide();
+
                 })
                 .catch(e => {
                     console.log(e);

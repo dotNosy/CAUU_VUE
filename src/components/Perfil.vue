@@ -12,22 +12,7 @@
                 v-intro-position="'bottom'"
             >AAAAAAAAAA</div> -->
         </b-row>
-        <!-- <b-row>
-            <b-col>
-                <router-link to="SelectNivel"><b-button variant="dark" size="lg" pill data-intro="This is your message">Jugar</b-button></router-link>
-            </b-col>
-            <b-col>
-                <b-button variant="dark" size="lg" pill>Mi colección</b-button>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col>
-                <b-button variant="dark" size="lg" pill>Obtener juego</b-button>
-            </b-col>
-            <b-col>
-                <b-button variant="dark" size="lg" pill>Mis datos</b-button>
-            </b-col>
-        </b-row> -->
+
         <b-row>
             <b-col style="padding-left: 50px">
                 <b-row>

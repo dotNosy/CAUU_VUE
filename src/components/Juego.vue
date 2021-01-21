@@ -44,8 +44,8 @@
                 <b-row>{{bonus}}</b-row>
 
                 <!-- Notificacion -->
-                <b-row>Mujer descubierta</b-row>
-                <b-row>Dato descubierto</b-row>
+                <b-row hidden>Mujer descubierta</b-row>
+                <b-row hidden>Dato descubierto</b-row>
             </b-col>
 
             <!-- Return + Punctuation + Highscore + Begin -->
@@ -223,25 +223,25 @@ import Juego from "../Juego"
                     } else if (this.onRow == 1) {
                         this.puntos +=20;
                         this.onRow += 1;
-                        this.bonus("BONUS x {{onRow}}");
+                        this.bonus = ("BONUS x " + this.onRow);
                         
                     } else if (this.onRow == 2) {
                         this.puntos +=30;
                         this.onRow += 1;
-                        this.bonus("BONUS x" + this.onRow );
+                        this.bonus = ("BONUS x " + this.onRow );
 
                         
                     } else if (this.onRow >= 3) {
                         this.puntos +=35;
                         this.onRow += 1;
-                        this.bonus("BONUS x" + this.onRow );
+                        this.bonus = ("BONUS x " + this.onRow );
 
                     }
                 } else {
                     console.log("No has acertado");
                 }
 
-                console.log(this.puntos);
+                // console.log(this.puntos);
 
             },
             mandarError() {
