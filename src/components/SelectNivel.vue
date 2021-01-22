@@ -2,9 +2,10 @@
     <div>
 
         <b-row>
-            <b-col>
+            <!-- <b-col>
                 <b-link variant="Link" to="Perfil">Volver</b-link>
-            </b-col>
+            </b-col> -->
+            <b-col></b-col>
             <b-col><h5>{{titulo}}</h5></b-col>
             <b-col></b-col>
         </b-row>
@@ -65,7 +66,7 @@
 
         <!-- Cargando -->
         <div id="ambitosLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando ambitos..."></b-spinner></div>
-        
+        <br>
         <b-button variant="dark" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
     </div>
 </template>
