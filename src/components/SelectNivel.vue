@@ -1,15 +1,24 @@
 <template>
-    <div>
-
+    <div style="
+            border: 2px solid #4E3757;
+            height: 100%;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 4em;
+            "
+    >
+        <b-row> 
+            <br>
+            <br>
+        </b-row>
         <b-row>
             <!-- <b-col>
                 <b-link variant="Link" to="Perfil">Volver</b-link>
             </b-col> -->
-            <b-col></b-col>
-            <b-col><h5>{{titulo}}</h5></b-col>
-            <b-col></b-col>
+            <b-col><p class="h3">{{titulo}}</p></b-col>
         </b-row>
-
+        <b-row><br></b-row>
         <!-- Niveles -->
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-outline-secondary" :class="nivel_id === Number(key) ? 'active': ''" v-for="(n, key) in niveles" :key="key">
@@ -23,8 +32,9 @@
                 <b-button 
                     v-b-popover.hover.top="n.dificultad" 
                     :title="n.nombre" 
-                    variant="light" 
-                    pill >
+                    variant="link" 
+                    pill 
+                    >
                     <b-icon 
                         icon="info-circle-fill" 
                         scale="2" 
@@ -36,38 +46,48 @@
         </div>
 
         <!-- Checkboxes -->
+        <div style="
+                margin-top: 1em;
+                margin-left: auto;
+                margin-right: auto;
+                text-align:left; 
+                margin-left: 42%;
 
-        <b-form-group>
-            <template #label>
-                <b-form-checkbox
-                    v-model="allSelected"
-                    :indeterminate="indeterminate"
-                    aria-describedby="ambitos"
-                    aria-controls="ambitos"
-                    @change="selectAll"
-                >
-                    {{ allSelected ? 'Deseleccionar' : 'Seleccionar todos' }}
-                </b-form-checkbox>
-            </template>
+                ">
+            <b-form-group>
+                <template #label>
+                    <b-form-checkbox
+                        v-model="allSelected"
+                        :indeterminate="indeterminate"
+                        aria-describedby="ambitos"
+                        aria-controls="ambitos"
+                        @change="selectAll"
+                    >
+                        {{ allSelected ? 'Deseleccionar' : 'Seleccionar todos' }}
+                    </b-form-checkbox>
+                </template>
 
-            <template v-slot="{ ariaDescribedby }" >
-                <b-form-checkbox-group
-                    id="ambitos"
-                    v-model="selected"
-                    stacked
-                    :options="ambitoLista"
-                    :aria-describedby="ariaDescribedby"
-                    name="ambitos"
-                    aria-label="Ambitos individuales"           
-                >
-                </b-form-checkbox-group>
-            </template>
-        </b-form-group>
-
+                <template v-slot="{ ariaDescribedby }" >
+                    <b-form-checkbox-group
+                        id="ambitos"
+                        v-model="selected"
+                        stacked
+                        :options="ambitoLista"
+                        :aria-describedby="ariaDescribedby"
+                        name="ambitos"
+                        aria-label="Ambitos individuales" 
+                        style="text-align:left; 
+                        "   
+                    >
+                    </b-form-checkbox-group>
+                </template>
+            </b-form-group>
+        </div>
         <!-- Cargando -->
         <div id="ambitosLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando ambitos..."></b-spinner></div>
         <br>
         <b-button variant="dark" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
+        <b-row><br></b-row>
     </div>
 </template>
 
@@ -79,11 +99,11 @@ import $ from "jquery";
     export default {
         data() {
             return {
-                titulo: "Seleccione nivel y ámbitos para jugar, después pulse comenzar",
+                titulo: "Seleccione nivel y ámbitos para jugar, después pulse 'Ir al juego'",
                 niveles: [
-                    {nombre: "Nivel 1", dificultad: "Fácil"},
-                    {nombre: "Nivel 2", dificultad: "Normal"},
-                    {nombre: "Nivel 3", dificultad: "Difícil"},
+                    {nombre: "Nivel 1", dificultad: "Fácil: Juegas 10 rondas con los datos más fáciles de las mujeres."},
+                    {nombre: "Nivel 2", dificultad: "Normal: Juegas 10 rondas con todos los datos de las mujeres."},
+                    {nombre: "Nivel 3", dificultad: "Difícil: Anota la máxima puntuación disponible jugando contra el temporizador con todos los datos de las mujeres"},
                 ],
                 nivel_id: null,
                 ambitoLista: [],
@@ -159,3 +179,8 @@ import $ from "jquery";
         }
     }
 </script>
+<style>
+    template {
+        background-color: purple;
+    }
+</style>
