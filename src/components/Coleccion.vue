@@ -9,25 +9,37 @@
                     class="my-3" 
                     >
                     <b-card
-                        :style="{ 
-                            backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ ambitos[mujer.ambito_id -1].nombre.toLowerCase() +'.png') + ')',
-                            color:'white',
-                            backgroundSize: 'cover'
-                        }"
-                        :title= mujer.nombre
-                        img-src="https://picsum.photos/600/300/?image=25"
-                        img-alt="Image"
-                        img-top
+                        :id="mujer.id"
+                        :ref="'card' + mujer.id"
                         tag="article"
-                        style="max-width: 30rem;"
+                        style="max-width: 25rem;"
                         class="mb-2"
+                        :style="{ 
+                            backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ ambitos[mujer.ambito_id -1].nombre.trim().toLowerCase() +'_borde.png') + ')',
+                            color:'white',
+                            backgroundSize: 'cover',
+                            width: '100%',
+                        }"
                     >
-                        <h2>{{ambitos[mujer.ambito_id -1].nombre}}</h2>
-                        <b-card-text>
-                            {{mujer.lore_es}}
-                        </b-card-text>
+                    <div class="front">
+                        <div  @click="rotateCard(mujer.id)" class="" style="background-color: white; border-radius:50px;width:3rem;height:3rem;float:right;">
+                            <img src="../assets/keyboard.png" style="width:2rem;height:2rem;margin-top:0.5rem;">
+                        </div>
+                        <br><br>
+                        <b-avatar src="https://placekitten.com/300/300" size="14rem"></b-avatar>
+                        <div style="background: rgba(0, 0, 0, 0.25); " class="my-4 py-2">
+                            <h1>{{mujer.nombre}}</h1>
+                            <h2>{{ambitos[mujer.ambito_id -1].nombre}}</h2>
+                            <b-card-text>
+                                {{mujer.zona_geografica}}
+                            </b-card-text>
+                        </div>
+                        
+                        <b-button class="my-3" @click="mostrarDatosCarta(mujer.id)" variant="primary">View</b-button>
+                    </div>
+                    <div class="back">
 
-                        <b-button @click="mostrarDatosCarta(mujer.id)" variant="primary">View</b-button>
+                    </div>
                     </b-card>
                 </div>
             </b-col>
@@ -57,9 +69,13 @@
     </section>
 </template>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js">
+</script>
+
 <script>
     import InfoDataService from "../Services/InfoDataService";
     import $ from "jquery";
+    import anime from 'animejs';
 
     export default {
         name: 'obtener-juego',
@@ -87,7 +103,8 @@
                     datos: {
 
                     }
-                }
+                },
+                playing: false,
             }
         },
         methods: {
@@ -144,6 +161,25 @@
 
                 this.mujerDetail.mujer = null
                 this.mujerDetail.datos = null
+            },
+            rotateCard(id) {
+                if(this.playing)
+                    return;
+
+                //this.playing = true
+
+                let element = 'card'+id;
+
+                anime({
+                    targets: this.$refs[element][0],
+                    scale: [{value: 1}, {value: 1.4}, {value: 1, delay: 250}],
+                    rotateY: {value: '+=180', delay: 200},
+                    easing: 'easeInOutSine',
+                    duration: 400,
+                    complete: function(anim){
+                        this.playing = false;
+                    }
+                });
             }
         },
         mounted() {
@@ -151,3 +187,28 @@
         }
     }
 </script>
+
+<style>
+.card {
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1400px;
+}
+
+.back
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    transform: rotateY(180deg);
+
+    color: #2196f3;
+    background: #fff;
+}
+
+.back .front {
+    display: flex;
+        backface-visibility: hidden;
+}
+</style>

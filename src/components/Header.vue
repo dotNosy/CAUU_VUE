@@ -1,26 +1,26 @@
 <template>
 <header>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<nav class="navbar navbar-expand-sm" style="background-color: #2d2c2f">
+<nav class="navbar navbar-expand-sm" style="background-color: #2d2c2f" hidden>
     <a href="./home" class="logo">
-    <img src="../assets/logoDF.png" alt="logo" class="imglogo">
-</a>
+        <img src="../assets/logoDF.png" alt="logo" class="imglogo">
+    </a>
     <ul class="navbar-nav mr-auto">
-    <li class="nav-item link0">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./">Inicio</a></button>
-    </li>
-    <li class="nav-item link1">
-        <button v-show="perfil" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Perfil">Perfil</a></button>
-    </li>
-    <li class="nav-item">
-        <button v-show="juego" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./SelectNivel">Jugar</a></button>
-    </li>
-    <li class="nav-item">
-        <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Coleccion">Colección</a></button>
-    </li>
+        <li class="nav-item link0">
+            <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="./">Inicio</a></button>
+        </li>
+        <li class="nav-item link1">
+            <button v-show="perfil" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Perfil">Perfil</a></button>
+        </li>
         <li class="nav-item">
-        <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./ObtenerJuego">Obtener</a></button>
-    </li>
+            <button v-show="juego" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./SelectNivel">Jugar</a></button>
+        </li>
+        <li class="nav-item">
+            <button v-show="coleccion" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Coleccion">Colección</a></button>
+        </li>
+            <li class="nav-item">
+            <button v-show="obtener" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./ObtenerJuego">Obtener</a></button>
+        </li>
     </ul>
     <!-- TO-DO Boton notificaciones -->
     <ul class="navbar-nav ml-auto">
@@ -34,6 +34,36 @@
     </li>
     </ul>
 </nav>
+
+<!-- INI PRUEBA BOOTSTRAP VUE -->
+
+<div>
+    <b-navbar toggleable="lg"  style="background-color: #2d2c2f">
+        <b-navbar-brand href="./">
+            <img src="../assets/logoDF.png" alt="logo" class="imglogo">
+        </b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./Perfil">Perfil</b-nav-item>
+            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./SelectNivel">Jugar</b-nav-item>
+            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./Coleccion">Colección</b-nav-item>
+            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./ObtenerJuego">Obtener</b-nav-item>
+        </b-navbar-nav>
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+            <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="3" id="icono"></b-icon>
+            <button @click="logout()" type="button" class="btn" id="btn"><a class="nav-link text-light" href="./Login">{{ login }}</a></button>
+        </b-navbar-nav>
+        </b-collapse>
+    </b-navbar>
+</div>
+<!-- FIN PRUEBA BOOTSTRAP VUE -->
+
+
 </header>
 </template>
 <script>
@@ -91,29 +121,39 @@
             coleccion(){
                 return this.$route.name != 'coleccion';
             },
+            obtener(){
+                return this.$route.name != 'obtener';
+            },
         }
     };
 
 </script>
 <style>
-.imglogo{
-    width:100%;
-    border-radius: 50%;
-}
-li{
-    margin-left: 1%;
-    margin-right: 1%;
-    list-style: none;
-    display: inline;
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    font-size: 1.3em;
-    padding-left: 2%;
-    padding-right: 2%;
-    
-}
-ul{
-    display: inline;
-}
+    .imglogo{
+        width:100%;
+        border-radius: 50%;
+
+    }
+    li{
+        margin-left: 1%;
+        margin-right: 1%;
+        list-style: none;
+        display: inline;
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        font-size: 1.3em;
+        padding-left: 2%;
+        padding-right: 2%;
+        
+    }
+    ul{
+        display: inline;
+    }
+    #btn {
+        padding-left: 1em;
+        padding-right: 1em;
+        margin-left: .5em;
+    }
+
 @media (min-width: 576px) {
     .link1{
     margin-left: 8%;
@@ -126,7 +166,7 @@ ul{
     ul{
         width: 100%;
     }
-    .logo{
+    .logo, #icono{
         display: none;
     }
     #btn{
@@ -135,8 +175,6 @@ ul{
         margin: 0.5%;
         border-color: black;
     }
-    #icono{
-        display: none;
-    }
+
 }
 </style>

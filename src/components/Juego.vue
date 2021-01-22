@@ -12,38 +12,40 @@
             <!-- Cards of the game -->
             <b-col>
                 <b-row>
-                    <b-col>1</b-col>
-                    <b-col>2</b-col>
-                    <b-col>3</b-col>
-                    <b-col>4</b-col>
+                    <b-col class="kutxa" v-on:click="sumarPuntuacion()">1</b-col>
+                    <b-col class="kutxa" v-on:click="sumarPuntuacion()">2</b-col>
+                    <b-col class="kutxa">3</b-col>
+                    <b-col class="kutxa">4</b-col>
                 </b-row>
                 <b-row>
-                    <b-col>5</b-col>
-                    <b-col>6</b-col>
-                    <b-col>7</b-col>
-                    <b-col>8</b-col>
+                    <b-col class="kutxa">5</b-col>
+                    <b-col class="kutxa">6</b-col>
+                    <b-col class="kutxa">7</b-col>
+                    <b-col class="kutxa">8</b-col>
                 </b-row>               
                 <b-row>
-                    <b-col>9</b-col>
-                    <b-col>10</b-col>
-                    <b-col>11</b-col>
-                    <b-col>12</b-col>
+                    <b-col class="kutxa">9</b-col>
+                    <b-col class="kutxa">10</b-col>
+                    <b-col class="kutxa">11</b-col>
+                    <b-col class="kutxa">12</b-col>
                 </b-row>                
                 <b-row>
-                    <b-col>13</b-col>
-                    <b-col>14</b-col>
-                    <b-col>15</b-col>
-                    <b-col>16</b-col>
+                    <b-col class="kutxa">13</b-col>
+                    <b-col class="kutxa">14</b-col>
+                    <b-col class="kutxa">15</b-col>
+                    <b-col class="kutxa">16</b-col>
                 </b-row>
             </b-col>
 
             <!-- Facts + Alerts -->
             <b-col>
                 <b-row>DATO</b-row>
+                <b-row>{{prueba}}</b-row>
+                <b-row>{{bonus}}</b-row>
 
                 <!-- Notificacion -->
-                <b-row>Mujer descubierta</b-row>
-                <b-row>Dato descubierto</b-row>
+                <b-row hidden>Mujer descubierta</b-row>
+                <b-row hidden>Dato descubierto</b-row>
             </b-col>
 
             <!-- Return + Punctuation + Highscore + Begin -->
@@ -56,7 +58,9 @@
             </b-col>
         </b-row>
 
+
         <b-row class="full"> 
+
             <!-- Temporizador -->
             <b-progress id="temporizador" v-show="!easyNormalGame" :value="value" :max="max" show-progress animated class="w-50 mb-2" variant="purple"></b-progress>
             <circular-count-down-timer
@@ -143,6 +147,11 @@ import Juego from "../Juego"
                 easyNormalGame: false,
                 timerMobile: true,
                 puntos: 0,
+                onRow: 0,
+                bonus: '',
+
+                prueba: 1,
+
                 value: 100,
                 max: 100,
                 titulo: 'Bienvenido al reporte de errores',
@@ -203,6 +212,38 @@ import Juego from "../Juego"
                     text.style.display = "none";
                 }
             },
+            sumarPuntuacion() {
+
+                if (this.prueba === 1) {
+
+                    if (this.onRow == 0) {
+                        this.puntos +=10;
+                        this.onRow += 1;
+                        
+                    } else if (this.onRow == 1) {
+                        this.puntos +=20;
+                        this.onRow += 1;
+                        this.bonus = ("BONUS x " + this.onRow);
+                        
+                    } else if (this.onRow == 2) {
+                        this.puntos +=30;
+                        this.onRow += 1;
+                        this.bonus = ("BONUS x " + this.onRow );
+
+                        
+                    } else if (this.onRow >= 3) {
+                        this.puntos +=35;
+                        this.onRow += 1;
+                        this.bonus = ("BONUS x " + this.onRow );
+
+                    }
+                } else {
+                    console.log("No has acertado");
+                }
+
+                // console.log(this.puntos);
+
+            },
             mandarError() {
                 let checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
                 if(checkboxes.length == 0) {
@@ -252,10 +293,19 @@ import Juego from "../Juego"
     #categoriatext{
         resize: none;
     }
+
     .full{
         /* background-color:red ; */
         max-width: 100%;
         padding-left:1%;
+    }
+    .kutxa {
+        background-color: salmon;
+        color: black;
+        width: 50px;
+        height: 50px;
+        padding: 5%;
+        margin: 2%;
     }
 
     @media (max-width: 600px) {

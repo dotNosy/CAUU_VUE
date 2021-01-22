@@ -13,6 +13,7 @@
         color: white;
     }
     footer {
+    position: absolute;
     bottom:0;
     width:100%;
     }
@@ -28,7 +29,9 @@
 }
 @media (max-width: 1800px) {
     footer {
-    position: relative;
-    }
+    position: absolute;
+    bottom:0;
+    width:100%;
+}
 }
 </style>

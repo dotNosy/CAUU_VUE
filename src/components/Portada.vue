@@ -46,13 +46,13 @@
 
 <style>
 .boton{
-  width:60%;
+  width:100%;
   height:6em;
   border-radius:2%;
   font-size:1em;
   font-weight: bold;
-  margin-bottom: 3%;
-  margin-top: 3%;
+  margin-bottom: 1%;
+
 }
 
 .inicio{
@@ -173,19 +173,12 @@ input:checked + label + .slide {
     text-align:left;
     left:2em;
     right: 2em;
-    background-color:transparent;
-    border: none;
   }
   .boton{
   font-size:0.6em;
   font-weight: bold;
 }
-}
-@media (min-width: 1700px) {
-  .inicio{
-  left:20em;
-  right:20em;
-}
+
 }
 </style>
 

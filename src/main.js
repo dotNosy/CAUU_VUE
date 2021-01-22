@@ -3,13 +3,15 @@ import App from './App.vue'
 import Router from "./router"
 import './css/style.css'
 
-import { BootstrapVue, BootstrapVueIcons, ProgressPlugin, FormPlugin, FormCheckboxPlugin, VBPopoverPlugin } from 'bootstrap-vue';
+import { BootstrapVue, BootstrapVueIcons, ProgressPlugin, FormPlugin, FormCheckboxPlugin, VBPopoverPlugin, BNavbar, NavbarPlugin} from 'bootstrap-vue';
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(ProgressPlugin);
 Vue.use(FormPlugin);
 Vue.use(VBPopoverPlugin);
 Vue.use(FormCheckboxPlugin);
+Vue.component('b-navbar', BNavbar);
+Vue.use(NavbarPlugin)
 
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);

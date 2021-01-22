@@ -14,6 +14,8 @@
                         <div class="form-group">
                             <button type="button" value="SARTU" class="btn btn-primary" @click="login">ENTRAR</button><br>
                         </div>
+                        <!-- Cargando -->
+                        <div id="iniciandoSesionLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando..."></b-spinner></div>
                         <div class="form-group">
                             <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Regístrate</a><br>
                         </div>
@@ -30,6 +32,7 @@
 <script>
     import LoginDataService from "../Services/LoginDataService";
     import User from "../User";
+    import $ from "jquery";
 
     export default {
         name: "login",
@@ -49,6 +52,8 @@
                     password: this.user.password
                 };
 
+                $("#iniciandoSesionLoading").fadeIn("slow");
+
                 LoginDataService.login(data)
                     .then(response => {
                         sessionStorage.setItem('user', JSON.stringify(response.data));
@@ -58,9 +63,13 @@
                         }  
                     })
                     .catch(e => {
+                        alert("Usuario o contraseña incorrecto")
                         console.log(e);
                     });
             }
+        },
+        mounted() {
+                $("#iniciandoSesionLoading").hide();
         }
     }
 </script>
