@@ -15,7 +15,7 @@
                             <button type="button" value="SARTU" class="btn btn-primary" @click="login">ENTRAR</button><br>
                         </div>
                         <div class="form-group">
-                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Registrate</a><br>
+                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Regístrate</a><br>
                         </div>
                         <div class="form-group">
                             <a href="./passrec" class="ForgetPwd">¿Has olvidado tu contraseña?</a><br>

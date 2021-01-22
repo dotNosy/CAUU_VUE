@@ -1,7 +1,6 @@
 <template>
     <div>
 
-        <b-row>
             <b-col></b-col>
             <b-col><h1>Hola {{user.nombre}}</h1></b-col>
             <b-col></b-col>
@@ -11,7 +10,6 @@
                 v-intro="'Edit Project\'s Name Here'"
                 v-intro-position="'bottom'"
             >AAAAAAAAAA</div> -->
-        </b-row>
         <!-- <b-row>
             <b-col>
                 <router-link to="SelectNivel"><b-button variant="dark" size="lg" pill data-intro="This is your message">Jugar</b-button></router-link>
@@ -28,22 +26,16 @@
                 <b-button variant="dark" size="lg" pill>Mis datos</b-button>
             </b-col>
         </b-row> -->
-        <b-row>
             <b-col style="padding-left: 50px">
-                <b-row>
                     <label for="nomUsuario">Nombre:</label>
                     <b-form-input id="nomUsuario" v-model="name"></b-form-input>
                         <div class="error" v-if="!$v.name.required">Campo obligatorio</div>
                         <div class="error" v-if="!$v.name.minLength">Minimo {{$v.name.$params.minLength.min}} caracteres</div>
-                </b-row>
-                <b-row>
                     <label for="emailUsuario">Email:</label>
                     <b-form-input id="emailUsuario" v-model="email"></b-form-input>
                         <div class="error" v-if="!$v.email.required">Campo obligatorio</div>
                         <div class="error" v-if="!$v.email.minLength">Minimo {{$v.email.$params.minLength.min}} caracteres</div>
                         <div class="error" v-if="!$v.email.email">Formato de email incorrecto</div>
-                </b-row>
-                <b-row>
                     <!-- Contraseña -->
                         <b-form-group id="input-group-5" label="Contraseña:" label-for="input-5">
                             <b-form-input 
@@ -62,8 +54,7 @@
                             <div class="error" v-if="!$v.password1.required">Campo obligatorio</div>
                             <div class="error" v-if="!$v.password1.minLength">Minimo {{$v.password1.$params.minLength.min}} caracteres</div>
                         </b-form-group>
-                </b-row>
-                <b-row>
+
                     <!-- Confirmacion contraseña -->
                         <b-form-group id="input-group-6" label="Confirmar contraseña:" label-for="input-6">
                             <b-form-input 
@@ -76,22 +67,19 @@
 
                             <div class="error" v-if="!$v.password2.sameAs">Las contraseñas no coinciden.</div>
                         </b-form-group>
-                </b-row>
-                <b-row>
+
                     <b-button type="button" @click="editProfile()" variant="primary" class="bottom">Actualizar mis datos</b-button>
-                </b-row>
+
 
             </b-col>
             <b-col>
-                <b-row>
+
                     <h2>Tu posición en el ranking</h2>
-                </b-row>
-                <b-row>
+
                     {{ miPosicion }}
-                </b-row>
-                <b-row>
+
                     <!-- TO-DO mostrar con un template las ultimas 5 posiciones -->
-                </b-row>
+
 
                 <!-- <b-link variant="Link">Cerrar sesion</b-link> -->
                 <!-- <div v-intro="'The content of tooltip'">AAAAA</div>
@@ -99,7 +87,7 @@
                 <div v-intro="'The content of tooltip'" v-intro-tooltip-class="'red-bg'">cccccc</div>
                 <div v-hint="'The content of tooltip'" v-intro-position="'top'">DDDDDD</div> -->
             </b-col>
-        </b-row>
+
 
 
     </div>

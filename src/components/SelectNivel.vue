@@ -1,13 +1,11 @@
 <template>
     <div>
 
-        <b-row>
             <b-col>
                 <b-link variant="Link" to="Perfil">Volver</b-link>
             </b-col>
             <b-col><h5>{{titulo}}</h5></b-col>
             <b-col></b-col>
-        </b-row>
 
         <!-- Niveles -->
         <div class="btn-group btn-group-toggle" data-toggle="buttons">

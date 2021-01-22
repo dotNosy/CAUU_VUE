@@ -77,20 +77,20 @@
         </b-row>
 
         <!-- Formulario de reportar error -->
-        <b-modal id="report-error"  hide-footer >
+        <b-modal id="report-error" hide-footer>
             <template #modal-title>{{ titulo }}</template>
-            <div class="d-block text-center ">
+            <div class="d-block text-center text-dark">
                 <b-form v-on:submit.prevent class="formscss">
                     <b-form-group v-slot="{ ariaDescribedby }">
                     <b-form-checkbox-group v-model="selected" :options="options" :aria-describedby="ariaDescribedby" name="flavour-1a">
-                    <p class="my-4"> {{ explanationWhere }}</p>
+                    <p class="my-4 text-dark"> {{ explanationWhere }}</p>
                         <b-row>
-                            <b-col><b-form-checkbox name="check" value="cartas" v-model="reasonsChecked">Cartas</b-form-checkbox></b-col>
-                            <b-col><b-form-checkbox name="check" value="juego" v-model="reasonsChecked">Juego</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="cartas" v-model="reasonsChecked" class="text-dark">Cartas</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="juego" v-model="reasonsChecked" class="text-dark">Juego</b-form-checkbox></b-col>
                         </b-row>
                         <b-row>
-                            <b-col><b-form-checkbox name="check" value="puntuacion" v-model="reasonsChecked">Puntuacion</b-form-checkbox></b-col>
-                            <b-col><b-form-checkbox name="check" value="otros" id="otros" v-model="reasonsChecked" v-on:change="otros()">Otros</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="puntuacion" v-model="reasonsChecked" class="text-dark">Puntuacion</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="otros" id="otros" v-model="reasonsChecked" v-on:change="otros()" class="text-dark">Otros</b-form-checkbox></b-col>
                         </b-row>
                         <b-row>
                             <b-form-textarea id="otrostext" placeholder="Inserte la categoría del problema" rows="2" max-rows="6"></b-form-textarea>

@@ -32,9 +32,9 @@
 <label for="trigger8"></label>
 <div class="slide bg8"></div>
 <!-- <a href="http://localhost:8080/Login"><b-button variant="dark" id="btn" style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:1em;right:1em;position:fixed;" >ENTRAR</b-button></a> -->
-<div class="inicio">
-  <a href="./Login" ><b-button variant="dark" id="btn" class="boton" >ENTRAR</b-button></a><br>
-  <a href="./Registro"><b-button variant="dark" id="btn" class="boton" >REGISTRARSE</b-button></a><br>
+<div class="inicio text-center shadow-lg">
+  <a href="./Login" ><b-button variant="dark" id="btn" class="boton shadow-lg" >ENTRAR</b-button></a><br>
+  <a href="./Registro"><b-button variant="dark" id="btn" class="boton shadow-lg" >REGISTRARSE</b-button></a><br>
 </div>
 <!-- <div style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:15%;right:50%;position:fixed;background-color:red;">
 <h1 style="color:white;">hola buenas tardes</h1>
@@ -45,27 +45,32 @@
 
 <style>
 .boton{
-  width:100%;
+  width:60%;
   height:6em;
   border-radius:2%;
   font-size:1em;
   font-weight: bold;
-  margin-bottom: 1%;
-
+  margin-bottom: 3%;
+  margin-top: 3%;
 }
 
 .inicio{
   position:fixed;
   top:2em;
-  left:3em;
-  right:3em;
+  left:10%;
+  right:10%;
   font-size:1.8em;
-  text-align:justify;
   font-weight:bold;
-  color:white;
+  background-color:#333334;
   /* background-color:#533B67; */
   /* background-color: red; */
-  opacity:0.94;
+  opacity:0.9;
+  border-radius: 3%;
+  border: solid #131313;
+}
+
+#btn{
+  border-color:#35263B;
 }
 
 body, html {
@@ -158,20 +163,25 @@ input:checked + label + .slide {
     text-align:left;
     left:2em;
     right: 2em;
+    background-color:transparent;
+    border: none;
   }
   .boton{
   font-size:0.6em;
   font-weight: bold;
 }
-
+}
+@media (min-width: 1700px) {
+  .inicio{
+  left:20em;
+  right:20em;
+}
 }
 </style>
 
 <script>
 const $ = require('jquery')
 window.$ = $
-
-
 
   var index=1;
   setInterval( function slider(){

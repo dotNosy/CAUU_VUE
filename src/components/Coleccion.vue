@@ -1,9 +1,6 @@
 <template>
     <section>
-        <b-row>
             <h4>Mujeres en las ciencias sociales</h4>
-        </b-row>
-        <b-row>
             <b-col></b-col>
             <b-col>
                 <div id="mujerFullPageLoading"><b-spinner class="my-5" style="width: 5rem; height: 5rem;" variant="primary" label="Loading..."></b-spinner></div>
@@ -57,7 +54,6 @@
                 </div>
             </b-modal>
 
-        </b-row>
     </section>
 </template>
 
