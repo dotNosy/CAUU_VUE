@@ -29,7 +29,6 @@
     // locOrientation('portrait');
     
     var myScreenOrientation = window.screen.orientation;
-    myScreenOrientation.lock("portrait");
 
     export default {
       name: 'App',
@@ -43,6 +42,12 @@
         isHomePage () {
             return this.$route.name != 'home';
         }
+      },
+      mounted () {
+        
+          if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            myScreenOrientation.lock("portrait");
+          } 
       }
     }
 </script>

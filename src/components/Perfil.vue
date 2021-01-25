@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <b-row>
             <b-col></b-col>
             <b-col><h1>Hola {{user.nombre}}</h1></b-col>
@@ -13,7 +12,6 @@
             >AAAAAAAAAA</div> -->
         </b-row>
 
-        <b-row>
             <b-col style="padding-left: 50px">
                 <b-row>
                     <h2>Tus datos</h2>
@@ -106,24 +104,21 @@
                         <div class="error" v-if="!$v.password2.sameAs" style="text-align:left">Las contraseñas no coinciden.</div>
                 </b-row>
                 <!--  -->
-                <b-row>
                     <b-button type="button" @click="editProfile()" variant="primary" class="bottom">Actualizar mis datos</b-button>
-                </b-row>
+
 
             </b-col>
 <!-- SEPARADOR -->
 <div class="vl"></div>
 <!-- SEPARADOR -->
             <b-col>
-                <b-row>
+
                     <h2>Tu posición en el ranking</h2>
-                </b-row>
-                <b-row>
+
                     {{ miPosicion }}
-                </b-row>
-                <b-row>
+
                     <!-- TO-DO mostrar con un template las ultimas 5 posiciones -->
-                </b-row>
+
 
                 <!-- <b-link variant="Link">Cerrar sesion</b-link> -->
                 <!-- <div v-intro="'The content of tooltip'">AAAAA</div>
@@ -131,7 +126,7 @@
                 <div v-intro="'The content of tooltip'" v-intro-tooltip-class="'red-bg'">cccccc</div>
                 <div v-hint="'The content of tooltip'" v-intro-position="'top'">DDDDDD</div> -->
             </b-col>
-        </b-row>
+
 
 
     </div>
@@ -234,17 +229,9 @@
     }
 </script>
 <style>
-    .vl {
-        border-left: 4px solid #4E3757;
-        height: 500px;
-        margin-left: 1em;
-        margin-right: 2em;
-    }
-
     @media (max-width: 576px) {
         .vl {
             display: none;
         }
     }
-
 </style>
