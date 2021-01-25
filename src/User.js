@@ -1,9 +1,10 @@
 import LoginDataService from "./Services/LoginDataService";
+import router from './router.js';
+import $ from "jquery";
 
 class User {
     constructor (){
         this.user = JSON.parse(sessionStorage.getItem('user'));
-        
     }
 
     getToken(data = null) {
@@ -35,8 +36,11 @@ class User {
     revokeToken() {
         LoginDataService.logout()
             .then(() => {
-                //Delete sesion
+                $("#logoutLoading").fadeOut("fast");
+                $(".btnLog").text("Login");
+                this.user = null;
                 sessionStorage.removeItem('user');
+                router.push({name: 'login'})
             })
             .catch(e => {
                 console.log(e);

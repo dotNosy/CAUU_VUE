@@ -69,7 +69,12 @@
             }
         },
         mounted() {
-                $("#iniciandoSesionLoading").hide();
+
+            // if (User.getUser() !== null) {
+            //     this.$router.push({name: 'selectNivel'});
+            // }
+
+            $("#iniciandoSesionLoading").hide();
         }
     }
 </script>
