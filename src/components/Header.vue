@@ -132,7 +132,6 @@
     .imglogo{
         width:100%;
         border-radius: 50%;
-
     }
     li{
         margin-left: 1%;
@@ -143,7 +142,6 @@
         font-size: 1.3em;
         padding-left: 2%;
         padding-right: 2%;
-        
     }
     ul{
         display: inline;
@@ -152,6 +150,7 @@
         padding-left: 1em;
         padding-right: 1em;
         margin-left: .5em;
+        color: red;
     }
 
 @media (min-width: 576px) {

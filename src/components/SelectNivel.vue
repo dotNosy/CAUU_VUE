@@ -1,7 +1,6 @@
 <template>
     <div>
 
-        <b-row>
             <!-- <b-col>
                 <b-link variant="Link" to="Perfil">Volver</b-link>
             </b-col> -->

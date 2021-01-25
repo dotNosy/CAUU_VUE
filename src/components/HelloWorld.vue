@@ -46,7 +46,7 @@
 
 <style>
 .boton{
-  width:60%;
+  width:50%;
   height:6em;
   border-radius:2%;
   font-size:1em;
@@ -56,29 +56,29 @@
 }
 
 .inicio{
-  position:fixed;
+  position: absolute;
   top:2em;
-  /* left:3em; */
-  right:17.5em;
-  justify-content: center;
   font-size:1.8em;
   text-align:center;
   font-weight:bold;
+  /* justify-content: center; */
   background-color:whitesmoke;
   opacity:0.94;
   width: 27rem;
   height: 33rem;
 }
+
 .btn {
   margin-top: 1em;
-  width: 25rem;
+  width: 22rem;
   height: 7rem;
 }
+
 #logoDF {
   width: 7em;
   height: 7em;
   margin-top: .5em;
-  border-width: 5px;
+  border-width: 0px;
   border-style: solid;
   border-color: #4E3757;
 }
@@ -169,23 +169,14 @@ input:checked + label + .slide {
   background-image: url(../assets/portada/8.jpg);
 }
 @media (max-width: 576px) {
-  .inicio{
-    text-align:left;
-    left:2em;
-    right: 2em;
-    background-color:transparent;
-    border: none;
-  }
   .boton{
   font-size:0.6em;
   font-weight: bold;
 }
-}
-@media (min-width: 1700px) {
   .inicio{
-  left:20em;
-  right:20em;
-}
+    left: 0.5em;
+    right: 0.5em;
+  }
 }
 </style>
 
@@ -206,6 +197,6 @@ window.$ = $
     else{
       index=1;
     }
-  }, 3000);
+  }, 4000);
 
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        <b-row>
             <b-col></b-col>
             <b-col><h1>Hola {{user.nombre}}</h1></b-col>
             <b-col></b-col>
@@ -10,40 +10,17 @@
                 v-intro="'Edit Project\'s Name Here'"
                 v-intro-position="'bottom'"
             >AAAAAAAAAA</div> -->
-<<<<<<< HEAD
-        <!-- <b-row>
-            <b-col>
-                <router-link to="SelectNivel"><b-button variant="dark" size="lg" pill data-intro="This is your message">Jugar</b-button></router-link>
-            </b-col>
-            <b-col>
-                <b-button variant="dark" size="lg" pill>Mi colección</b-button>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col>
-                <b-button variant="dark" size="lg" pill>Obtener juego</b-button>
-            </b-col>
-            <b-col>
-                <b-button variant="dark" size="lg" pill>Mis datos</b-button>
-            </b-col>
-        </b-row> -->
-            <b-col style="padding-left: 50px">
-=======
         </b-row>
 
-        <b-row>
             <b-col style="padding-left: 50px">
                 <b-row>
                     <h2>Tus datos</h2>
                 </b-row>
                 <!-- <b-row>
->>>>>>> 8a7c91b19eba57fd057f28c024cb15e57c6ba20b
                     <label for="nomUsuario">Nombre:</label>
                     <b-form-input id="nomUsuario" v-model="name" style="width: 30em; padding:1em; margin-bottom:1em"></b-form-input>
                         <div class="error" v-if="!$v.name.required">Campo obligatorio</div>
                         <div class="error" v-if="!$v.name.minLength">Minimo {{$v.name.$params.minLength.min}} caracteres</div>
-<<<<<<< HEAD
-=======
                 </b-row> -->
                 <b-row>
                     <b-form-group id="input-group-2" label="Nombre:*" label-for="nomUsuario" style="text-align:left">
@@ -57,7 +34,6 @@
                     <div class="error" v-if="!$v.name.minLength">Minimo {{$v.name.$params.minLength.min}} caracteres</div>
                 </b-row>
                 <!-- <b-row>
->>>>>>> 8a7c91b19eba57fd057f28c024cb15e57c6ba20b
                     <label for="emailUsuario">Email:</label>
                     <b-form-input id="emailUsuario" v-model="email" style="width: 30em; padding:1em;"></b-form-input>
                         <div class="error" v-if="!$v.email.required">Campo obligatorio</div>
@@ -71,12 +47,9 @@
                         <div class="error" v-if="!$v.email.required">Campo obligatorio</div>
                         <div class="error" v-if="!$v.email.minLength">Minimo {{$v.email.$params.minLength.min}} caracteres</div>
                         <div class="error" v-if="!$v.email.email">Formato de email incorrecto</div>
-<<<<<<< HEAD
-=======
                 </b-row>
 
                 <b-row>
->>>>>>> 8a7c91b19eba57fd057f28c024cb15e57c6ba20b
                     <!-- Contraseña -->
                     <label for="password1">Contraseña:*</label>
                         <b-form-group id="input-group-5">
@@ -98,17 +71,11 @@
                             <div class="error" v-if="!$v.password1.required" style="text-align:left">Campo obligatorio</div>
                             <div class="error" v-if="!$v.password1.minLength" style="text-align:left">Minimo {{$v.password1.$params.minLength.min}} caracteres</div>
                         </b-form-group>
-<<<<<<< HEAD
-
-                    <!-- Confirmacion contraseña -->
-                        <b-form-group id="input-group-6" label="Confirmar contraseña:" label-for="input-6">
-=======
                 </b-row>
                 <!-- <b-row> -->
 <!--                   
                     <label for="password2">Confirmar contraseña:</label>
                         <b-form-group id="input-group-6">
->>>>>>> 8a7c91b19eba57fd057f28c024cb15e57c6ba20b
                             <b-form-input 
                                 type="password" 
                                 id="password2" 
@@ -120,9 +87,6 @@
 
                             <div class="error" v-if="!$v.password2.sameAs">Las contraseñas no coinciden.</div>
                         </b-form-group>
-<<<<<<< HEAD
-
-=======
                 </b-row> -->
                 <!--  -->
                 <b-row>
@@ -140,8 +104,6 @@
                         <div class="error" v-if="!$v.password2.sameAs" style="text-align:left">Las contraseñas no coinciden.</div>
                 </b-row>
                 <!--  -->
-                <b-row>
->>>>>>> 8a7c91b19eba57fd057f28c024cb15e57c6ba20b
                     <b-button type="button" @click="editProfile()" variant="primary" class="bottom">Actualizar mis datos</b-button>
 
 
