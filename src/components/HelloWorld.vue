@@ -45,42 +45,10 @@
 </template>
 
 <style>
-.boton{
-  width:50%;
-  height:6em;
-  border-radius:2%;
-  font-size:1em;
-  font-weight: bold;
-  margin-bottom: 3%;
-  margin-top: 3%;
-}
-
-.inicio{
-  position: absolute;
-  top:2em;
-  font-size:1.8em;
-  text-align:center;
-  font-weight:bold;
-  /* justify-content: center; */
-  background-color:whitesmoke;
-  opacity:0.94;
-  width: 27rem;
-  height: 33rem;
-}
-
 .btn {
   margin-top: 1em;
   width: 22rem;
   height: 7rem;
-}
-
-#logoDF {
-  width: 7em;
-  height: 7em;
-  margin-top: .5em;
-  border-width: 0px;
-  border-style: solid;
-  border-color: #4E3757;
 }
 
 body, html {
@@ -192,7 +160,7 @@ window.$ = $
     $('#'+id).prop("checked", true);
     $('#'+id).focus();
     index=index+1;
-    console.log(index);
+    // console.log(index);
     }
     else{
       index=1;

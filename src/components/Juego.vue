@@ -283,31 +283,6 @@ import Juego from "../Juego"
 
 
 <style>
-/* * {margin-left: 5px;} */
-    .exclamation:hover {
-        transform:scale(1.2,1.2);
-    }
-    #otrostext{
-        display: none;
-    }
-    #categoriatext{
-        resize: none;
-    }
-
-    .full{
-        /* background-color:red ; */
-        max-width: 100%;
-        padding-left:1%;
-    }
-    .kutxa {
-        background-color: salmon;
-        color: black;
-        width: 50px;
-        height: 50px;
-        padding: 5%;
-        margin: 2%;
-    }
-
     @media (max-width: 600px) {
 
         #temporizador {

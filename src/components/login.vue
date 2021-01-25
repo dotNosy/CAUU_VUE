@@ -1,7 +1,7 @@
 <template>
 <form>
     <div class="modal-body">
-        <div class="container login-container col-md-3">
+        <div class="container login-container col-md-4">
             <div class="row">
                 <div class="col-md-12 login-form-1 formulario form">
                     <br><h3>Iniciar Sesión</h3><br>
