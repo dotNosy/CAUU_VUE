@@ -229,17 +229,9 @@
     }
 </script>
 <style>
-    .vl {
-        border-left: 4px solid #4E3757;
-        height: 500px;
-        margin-left: 1em;
-        margin-right: 2em;
-    }
-
     @media (max-width: 576px) {
         .vl {
             display: none;
         }
     }
-
 </style>
