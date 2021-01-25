@@ -3,7 +3,7 @@
         <div class="container login-container col-md-4">
             <div>
                 <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
-                    <h3 style="margin-top:1%;">Registro</h3>
+                    <h3>Registro</h3>
                     <b-col>    
                         <b-form @reset="onReset" v-if="show">
                             <!-- Nombre -->
@@ -50,7 +50,6 @@
                                 id="input-4"
                                 v-model="$v.username.$model"
                                 placeholder="Introduce nombre usuario"
-                                v-b-popover.focus="'Tu nombre de usuario debe tener al menos 4 carácteres.'"
                                 ></b-form-input>
 
                                 <div class="error" v-if="!$v.username.required">Campo obligatorio</div>
@@ -65,13 +64,12 @@
                                 v-model="$v.password1.$model"
                                 aria-describedby="password-help-block"
                                 placeholder="Introduce una contraseña"
-                                v-b-popover.focus="'Tu contraseña debe tener 8-30 carácteres, letras y números. También debe contener una matúscula y una minúscula por lo menos.'"
                                 ></b-form-input>
 
-                                <!-- <b-form-text id="password-help-block">
+                                <b-form-text id="password-help-block">
                                     Tu contraseña debe de tener 8-30 carácteres, letras y números. 
                                     También debe contener una mayúscula y una minúscula por lo menos.
-                                </b-form-text> -->
+                                </b-form-text>
 
                                 <div class="error" v-if="!$v.password1.required">Campo obligatorio</div>
                                 <div class="error" v-if="!$v.password1.minLength">Minimo {{$v.password1.$params.minLength.min}} caracteres</div>
@@ -94,10 +92,10 @@
                             <b-row>
                                 <b-link variant="Link" href=".\login">Ya tengo cuenta, iniciar sesión</b-link>
                             </b-row>
-                            <b-tooltip :target="() => $refs['button-3']" title="Limpia el formulario"></b-tooltip>
+                            
                             <!-- Botones y registros -->
-                            <b-button type="button" @click="createUser()" variant="primary" class="bottom" v-b-popover.hover.top="'Al pulsar este botón aceptas los términos y condiciones'" title="AVISO">Registrarme</b-button>
-                            <b-button type="reset" variant="danger" class="bottom" ref="button-3">Limpiar</b-button>
+                            <b-button type="button" @click="createUser()" variant="primary" class="bottom">Registrarme</b-button>
+                            <b-button type="reset" variant="danger" class="bottom">Limpiar</b-button>
                         </b-form>
                     </b-col>
                 </div>

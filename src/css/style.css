@@ -1,18 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
-
-/* botones */
 #btn{
     background-color: #4e3757;
     border-color:#4e3757;
-    color: aliceblue;
-    margin-left: 1em;
+    color: white;
 }
 #btn:hover{
     background-color: #918897;
     border-color: #918897;
 }
-
-/* app */
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -20,17 +14,12 @@
     text-align: center;
     color: #2c3e50;
 }
-
-/* logo header */
-.imglogo{
-    width:100%;
-    border-radius: 50%;
+body{
+    background-color: #918897;
 }
-
-/* formularios */
 .formulario{
-    background-color: #CDB9D6;
-    color: aliceblue;
+    background-color: #e0d1e9;
+    
 }
 .form{
     border-color: black;
@@ -42,120 +31,4 @@ input:invalid {
 }
 input:valid {
     border: 2px solid black;
-}
-
-/* estilos body */
-a{
-    font-family: 'Hammersmith One', sans-serif;
-}
-div{
-    font-family: 'Hammersmith One', sans-serif;
-    color: #E3E0E4;
-}
-body{
-    background-color: aliceblue;
-}
-
-/* coleccion */
-.card {
-    position: relative;
-    transform-style: preserve-3d;
-    perspective: 1400px;
-}
-
-.back
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    transform: rotateY(180deg);
-
-    color: #2196f3;
-    background: #fff;
-}
-
-.back .front {
-    display: flex;
-        backface-visibility: hidden;
-}
-
-/* footer */
-.divfooter{
-    background-color:rgb(45, 44, 47);
-    color:white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    }
-
-/* pagina principal */
-.boton{
-    width:50%;
-    height:6em;
-    border-radius:2%;
-    font-size:1em;
-    font-weight: bold;
-    margin-bottom: 3%;
-    margin-top: 3%;
-}
-
-.inicio{
-    position: absolute;
-    top:2em;
-    left: 30rem;
-    right: 30rem;
-    font-size:1.8em;
-    text-align:center;
-    font-weight:bold;
-    background-color:whitesmoke;
-    opacity:0.94;
-    width: 27rem;
-    height: 33rem;
-    margin: auto;
-}
-
-#logoDF {
-    width: 7em;
-    height: 7em;
-    margin-top: .5em;
-    border-width: 0px;
-    border-style: solid;
-    border-color: #4E3757;
-}
-
-/* juego */
-.exclamation:hover {
-    transform:scale(1.2,1.2);
-}
-#otrostext{
-    display: none;
-}
-#categoriatext{
-    resize: none;
-}
-.full{
-    max-width: 100%;
-    padding-left:1%;
-}
-.kutxa {
-    background-color: salmon;
-    color: black;
-    width: 50px;
-    height: 50px;
-    padding: 5%;
-    margin: 2%;
-}
-
-/* perfil */
-.vl {
-    border-left: 4px solid #4E3757;
-    height: 500px;
-    margin-left: 1em;
-    margin-right: 2em;
-}
-
-/* select nivel */
-template {
-    background-color: purple;
 }

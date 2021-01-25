@@ -69,6 +69,7 @@
                 </div>
             </b-modal>
 
+        </b-row>
     </section>
 </template>
 
