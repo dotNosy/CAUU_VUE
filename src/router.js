@@ -16,7 +16,8 @@ const router = new Router({
         {
             path: "/login",
             name: "login",
-            component: () => import("./components/login")
+            component: () => import("./components/login"),
+            meta: { rule: 'doLogin'}
         },
         {
             path: "/perfil",
@@ -49,12 +50,14 @@ const router = new Router({
         {
             path: "/Coleccion",
             name: "coleccion",
-            component: () => import("./components/Coleccion")
+            component: () => import("./components/Coleccion"),
+            meta: { rule: 'logued'} 
         },
         {
             path: "/ObtenerJuego",
             name: "obtenerJuego",
-            component: () => import("./components/ObtenerJuego")
+            component: () => import("./components/ObtenerJuego"),
+            meta: { rule: 'logued'} 
         },
         // Si no coincide con nada
         { path: '*', redirect: '/' }
@@ -68,6 +71,12 @@ router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const authorize = to.meta;
     const user = User.getUser();
+
+        if (authorize.rule == 'doLogin' && user !== null) {
+            console.log('already logued, coming from ' + from.name);
+            // not logged in so redirect to login page with the return url
+            return next({ name: 'selectNivel'});
+        }
 
         if (authorize.rule == 'logued' && (user == null || user.token == '')) {
             console.log('rule logued');
