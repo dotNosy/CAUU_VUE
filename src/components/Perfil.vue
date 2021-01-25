@@ -140,7 +140,7 @@
 <script>
     import User from  "../User";
     import ProfileDataService from "../Services/ProfileDataService"
-    import { required, minLength, email, sameAs} from 'vuelidate/lib/validators';
+    import { required, minLength, maxLength, email, sameAs} from 'vuelidate/lib/validators';
 
         // import introJs from "intro.js";
         // import "intro.js/introjs.css";
@@ -224,6 +224,14 @@
                 password1: {
                     required,
                     minLength: minLength(8),
+                    maxLength: maxLength(30),
+                    goodPassword:(password1) => { 
+                        return password1.length >= 8 &&
+                        password1.length <=30 &&
+                        /[a-z]/.test(password1) &&
+                        /[A-Z]/.test(password1) &&
+                        /[0-9]/.test(password1)
+                    }
                 },
                 password2: {
                     minLength: minLength(8),
