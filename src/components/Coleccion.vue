@@ -1,48 +1,55 @@
 <template>
     <section>
         <b-row>
-            <h4>Mujeres en las ciencias sociales</h4>
-        </b-row>
-        <b-row>
-            <b-col></b-col>
+            <b-col><h4>Mujeres en las ciencias sociales</h4></b-col>
             <b-col>
                 <div id="mujerFullPageLoading"><b-spinner class="my-5" style="width: 5rem; height: 5rem;" variant="primary" label="Loading..."></b-spinner></div>
                 <div
-                    v-for="(mujer, key) in miDesbloqueadas" :key="key"
+                    v-for="(carta, key) in misCartasDesbloqueadas" :key="key"
                     class="my-3" 
                     >
                     <b-card
-                        :id="mujer.id"
-                        :ref="'card' + mujer.id"
+                        :id="carta.mujer.id"
+                        :ref="'card' + carta.mujer.id"
                         tag="article"
                         style="max-width: 25rem;"
                         class="mb-2"
                         :style="{ 
-                            backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ ambitos[mujer.ambito_id -1].nombre.trim().toLowerCase() +'_borde.png') + ')',
+                            backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ ambitos[carta.mujer.ambito_id -1].nombre.trim().toLowerCase() +'_borde.png') + ')',
                             color:'white',
                             backgroundSize: 'cover',
                             width: '100%',
                         }"
                     >
-                    <div class="front">
-                        <div  @click="rotateCard(mujer.id)" class="" style="background-color: white; border-radius:50px;width:3rem;height:3rem;float:right;">
+                        <div  @click="rotateCard(carta.mujer.id)" 
+                            style="background-color: white; 
+                                    border-radius:50px;
+                                    width:3rem;height:3rem;float:right;">
                             <img src="../assets/keyboard.png" style="width:2rem;height:2rem;margin-top:0.5rem;">
                         </div>
-                        <br><br>
-                        <b-avatar src="https://placekitten.com/300/300" size="14rem"></b-avatar>
-                        <div style="background: rgba(0, 0, 0, 0.25); " class="my-4 py-2">
-                            <h1>{{mujer.nombre}}</h1>
-                            <h2>{{ambitos[mujer.ambito_id -1].nombre}}</h2>
-                            <b-card-text>
-                                {{mujer.zona_geografica}}
-                            </b-card-text>
-                        </div>
-                        
-                        <b-button class="my-3" @click="mostrarDatosCarta(mujer.id)" variant="primary">View</b-button>
-                    </div>
-                    <div class="back">
 
-                    </div>
+                        <div class="front">
+                            <br><br>
+                            <b-avatar src="https://placekitten.com/300/300" size="14rem"></b-avatar>
+                            <div style="background: rgba(0, 0, 0, 0.25); " class="my-4 py-2">
+                                <h1>{{carta.mujer.nombre}}</h1>
+                                <h2>{{ambitos[carta.mujer.ambito_id -1].nombre}}</h2>
+                                <b-card-text>
+                                    {{carta.mujer.zona_geografica}}
+                                </b-card-text>
+                            </div>                            
+                        </div>
+
+                        <div class="back hide" style="margin-top: 4rem;">
+                            <div style="background: rgba(0, 0, 0, 0.25); " class="my-4 py-2">
+                                <h1>DATOS MUJER</h1>
+                                <h2>{{ambitos[carta.mujer.ambito_id -1].nombre}}</h2>
+                                <b-card-text v-for="(dato, key) in carta.datos" :key="key">
+                                    {{dato.dato}}
+                                </b-card-text>
+                                <b-button class="my-3" @click="mostrarDatosCarta(carta.mujer.id)" variant="primary">View</b-button>
+                            </div>
+                        </div>
                     </b-card>
                 </div>
             </b-col>
@@ -87,7 +94,7 @@
             return {
                 ambitos: null,
                 idBuscar: null,
-                miDesbloqueadas: null,
+                misCartasDesbloqueadas: null,
                 totalMujeres: '',
                 mujerDetail: {
                     mujer: {
@@ -127,9 +134,10 @@
                     .then((response) => {
                         $("#mujerFullPageLoading").fadeOut("fast");
 
-                        scope.miDesbloqueadas = response.data.mujeres;
+                        scope.misCartasDesbloqueadas = response.data.cartas;
                         scope.ambitos = response.data.ambitos;
-                        console.log(response.data);
+
+                        console.log(scope.misCartasDesbloqueadas);
                     })
                     .catch((e) => {
                         console.log(e);
@@ -138,8 +146,8 @@
             mujerModalShow() {
                 $("#mujerDetailLoading").fadeIn("slow");
 
-                for (let i = 0; i < this.miDesbloqueadas.length; i++) {
-                    const mujer = this.miDesbloqueadas[i];
+                for (let i = 0; i < this.misCartasDesbloqueadas.length; i++) {
+                    const mujer = this.misCartasDesbloqueadas[i];
 
                     if (mujer.id == this.idBuscar) {
                         this.mujerDetail.mujer = mujer;
@@ -163,15 +171,9 @@
             freeModal() {
                 $("#mujerDetailLoading").fadeOut("slow");
 
-                this.mujerDetail.mujer = null
                 this.mujerDetail.datos = null
             },
             rotateCard(id) {
-                if(this.playing)
-                    return;
-
-                //this.playing = true
-
                 let element = 'card'+id;
 
                 anime({
@@ -181,7 +183,8 @@
                     easing: 'easeInOutSine',
                     duration: 400,
                     complete: function(anim){
-                        this.playing = false;
+                        $('#'+id+" .front").toggle();
+                        $('#'+id+" .back").toggle();
                     }
                 });
             }
@@ -199,9 +202,7 @@
     perspective: 1400px;
 }
 
-.back
-{
-    position: absolute;
+.back {
     top: 0;
     left: 0;
 
@@ -213,6 +214,10 @@
 
 .back .front {
     display: flex;
-        backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.hide {
+    display: none;
 }
 </style>
