@@ -179,3 +179,8 @@ import $ from "jquery";
         }
     }
 </script>
+<style>
+    template {
+        background-color: purple;
+    }
+</style>

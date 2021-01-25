@@ -13,16 +13,16 @@
 
         <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btn" style="padding:1em;" href="./SelectNivel">Jugar</b-button>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btn" style="padding:1em;" href="./Coleccion">Colección</b-button>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btn" style="padding:1em;" href="./Perfil">Perfil</b-button>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btn" style="padding:1em;" href="./ObtenerJuego">Obtener</b-button>
+            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./Perfil">Perfil</b-nav-item>
+            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./SelectNivel">Jugar</b-nav-item>
+            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./Coleccion">Colección</b-nav-item>
+            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./ObtenerJuego">Obtener</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
             <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="3" id="icono"></b-icon>
-            <button @click="logout()" type="button" class="nav-item nav-link text-light btn log" id="btn">{{ login }} <div id="logoutLoading"><b-spinner class="my-1" label="Cargando..."></b-spinner></div></button>
+            <button @click="logout()" type="button" class="btnLog" id="btn">{{ login }} <div id="logoutLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="danger" label="Cargando..."></b-spinner></div></button>
         </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -89,6 +89,33 @@
 
 </script>
 <style>
+    .imglogo{
+        width:100%;
+        border-radius: 50%;
+    }
+
+    li{
+        margin-left: 1%;
+        margin-right: 1%;
+        list-style: none;
+        display: inline;
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        font-size: 1.3em;
+        padding-left: 2%;
+        padding-right: 2%;
+        
+    }
+
+    ul{
+        display: inline;
+    }
+
+    .btn {
+        padding-left: 1em;
+        padding-right: 1em;
+        margin-left: .5em;
+    }
+
     @media (min-width: 576px) {
         .link1{
         margin-left: 8%;
