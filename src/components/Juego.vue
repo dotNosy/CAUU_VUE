@@ -5,9 +5,9 @@
             <h3>Mujeres en las ciencias sociales</h3>
             <hr>
         </b-row>
-        <b-row class="full">
+        <!-- <b-row class="full">
             <b-link variant="Link" to="SelectNivel">Volver</b-link>
-        </b-row>
+        </b-row> -->
         <b-row class="full">
             <!-- Cards of the game -->
             <b-col>

@@ -65,7 +65,7 @@
                                 v-model="$v.password1.$model"
                                 aria-describedby="password-help-block"
                                 placeholder="Introduce una contraseña"
-                                v-b-popover.focus="'Tu contraseña debe tener 8-30 carácteres, letras y números. También debe contener una matúscula y una minúscula por lo menos.'"
+                                v-b-popover.focus="'Tu contraseña debe tener 8-30 carácteres, letras y números. También debe contener una mayúscula y una minúscula por lo menos.'"
                                 ></b-form-input>
 
                                 <!-- <b-form-text id="password-help-block">
@@ -119,8 +119,8 @@
 
 <script>
     import RegisterDataService from "../Services/RegisterDataService";
-    import { required, minLength, email, sameAs} from 'vuelidate/lib/validators';
-    // import 'vue-form-wizard/dist/vue-form-wizard.min.css';
+    import { required, minLength, maxLength, email, sameAs} from 'vuelidate/lib/validators';
+    // Vue.use(window.vuelidate.default)
 
     export default {
         name: 'Registro',
@@ -153,6 +153,14 @@
                 password1: {
                     required,
                     minLength: minLength(8),
+                    maxLength: maxLength(30),
+                    goodPassword:(password1) => { 
+                        return password1.length >= 8 &&
+                        password1.length <=30 &&
+                        /[a-z]/.test(password1) &&
+                        /[A-Z]/.test(password1) &&
+                        /[0-9]/.test(password1)
+                    }
                 },
                 password2: {
                     required,
