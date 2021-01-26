@@ -22,7 +22,7 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
             <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="3" id="icono"></b-icon>
-            <button @click="logout()" type="button" class="nav-item nav-link text-light btn log" id="btn">{{ login }} <div id="logoutLoading"><b-spinner class="my-1" label="Cargando..."></b-spinner></div></button>
+            <button @click="logout()" type="button" class="nav-item nav-link text-light btn" id="btn">{{ login }} <div id="logoutLoading"><b-spinner class="my-1" label="Cargando..."></b-spinner></div></button>
         </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -89,24 +89,13 @@
 
 </script>
 <style>
-    @media (min-width: 576px) {
-        .link1{
-        margin-left: 8%;
-        }
-        .link0{
-            display: none;
-        }
-    }
-
-    @media (max-width: 576px) {
-        ul{
-            width: 100%;
-        }
+    @media (max-width: 992px) {
+        
         .logo, #icono{
             display: none;
         }
         .btn{
-            width: 100%;
+            width: 94%;
             padding: 2%;
             margin: 0.5%;
             border-color: black;
