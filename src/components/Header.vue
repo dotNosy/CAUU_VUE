@@ -2,7 +2,6 @@
 <header>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- INI PRUEBA BOOTSTRAP VUE -->
 <div>
     <b-navbar toggleable="lg"  style="background-color: #2d2c2f">
         <b-navbar-brand href="./">
@@ -13,10 +12,10 @@
 
         <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./Perfil">Perfil</b-nav-item>
-            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./SelectNivel">Jugar</b-nav-item>
-            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./Coleccion">Colección</b-nav-item>
-            <b-nav-item class="nav-item nav-link text-light btn" id="btn" href="./ObtenerJuego">Obtener</b-nav-item>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnSelectnivel" style="padding:1em;" href="./SelectNivel">Jugar</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnColeccion" style="padding:1em;" href="./Coleccion">Colección</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnPerfil" style="padding:1em;" href="./Perfil">Perfil</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnObtenerJuego" style="padding:1em;" href="./ObtenerJuego">Obtener</b-button>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -27,7 +26,6 @@
         </b-collapse>
     </b-navbar>
 </div>
-<!-- FIN PRUEBA BOOTSTRAP VUE -->
 
 </header>
 </template>
@@ -89,46 +87,11 @@
 
 </script>
 <style>
-    .imglogo{
-        width:100%;
-        border-radius: 50%;
-    }
-
-    li{
-        margin-left: 1%;
-        margin-right: 1%;
-        list-style: none;
-        display: inline;
-        font-family: Avenir, Helvetica, Arial, sans-serif;
-        font-size: 1.3em;
-        padding-left: 2%;
-        padding-right: 2%;
-    }
-
-    ul{
-        display: inline;
-    }
-
-    .btn {
-        padding-left: 1em;
-        padding-right: 1em;
-        margin-left: .5em;
-        color: red;
-    }
-
-    @media (min-width: 576px) {
-        .link1{
-        margin-left: 8%;
-        }
-        .link0{
-            display: none;
-        }
-    }
-
-    @media (max-width: 576px) {
-        ul{
-            width: 100%;
-        }
+.imglogo{
+    border-radius: 50%;
+}
+    @media (max-width: 992px) {
+        
         .logo, #icono{
             display: none;
         }

@@ -5,9 +5,9 @@
             <h3>Mujeres en las ciencias sociales</h3>
             <hr>
         </b-row>
-        <b-row class="full">
+        <!-- <b-row class="full">
             <b-link variant="Link" to="SelectNivel">Volver</b-link>
-        </b-row>
+        </b-row> -->
         <b-row class="full">
             <!-- Cards of the game -->
             <b-col>
@@ -80,21 +80,36 @@
 
         </b-row>
 
+        <!-- INI Modal fin del juego -->
+
+        <b-modal id="modal-fin-juego" title="¡Partida finalizada!">
+            <p class="my-4">La partida ha finalizado.</p>
+            <p class="my-4">Puntuación obtenida: {{puntos}}</p>
+            <p class="my-4">Mujeres desbloqueadas en esta partida: {{mujeresDesbloqueadas}}</p>
+            <p class="my-4"> <b-icon icon="arrow-down"></b-icon>¡Descúbrelas en tu colección! <b-icon icon="arrow-down"></b-icon></p>
+            <b-link variant="Link" to="Coleccion">
+                <b-button class="mt-3" block>Ver colección</b-button>
+            </b-link>
+            
+        </b-modal>
+
+        <!-- FIN Modal fin del juego -->
+
         <!-- Formulario de reportar error -->
-        <b-modal id="report-error" hide-footer>
+        <b-modal id="report-error"  hide-footer >
             <template #modal-title>{{ titulo }}</template>
-            <div class="d-block text-center text-dark">
+            <div class="d-block text-center ">
                 <b-form v-on:submit.prevent class="formscss">
                     <b-form-group v-slot="{ ariaDescribedby }">
                     <b-form-checkbox-group v-model="selected" :options="options" :aria-describedby="ariaDescribedby" name="flavour-1a">
-                    <p class="my-4 text-dark"> {{ explanationWhere }}</p>
+                    <p class="my-4"> {{ explanationWhere }}</p>
                         <b-row>
-                            <b-col><b-form-checkbox name="check" value="cartas" v-model="reasonsChecked" class="text-dark">Cartas</b-form-checkbox></b-col>
-                            <b-col><b-form-checkbox name="check" value="juego" v-model="reasonsChecked" class="text-dark">Juego</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="cartas" v-model="reasonsChecked">Cartas</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="juego" v-model="reasonsChecked">Juego</b-form-checkbox></b-col>
                         </b-row>
                         <b-row>
-                            <b-col><b-form-checkbox name="check" value="puntuacion" v-model="reasonsChecked" class="text-dark">Puntuacion</b-form-checkbox></b-col>
-                            <b-col><b-form-checkbox name="check" value="otros" id="otros" v-model="reasonsChecked" v-on:change="otros()" class="text-dark">Otros</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="puntuacion" v-model="reasonsChecked">Puntuacion</b-form-checkbox></b-col>
+                            <b-col><b-form-checkbox name="check" value="otros" id="otros" v-model="reasonsChecked" v-on:change="otros()">Otros</b-form-checkbox></b-col>
                         </b-row>
                         <b-row>
                             <b-form-textarea id="otrostext" placeholder="Inserte la categoría del problema" rows="2" max-rows="6"></b-form-textarea>
@@ -149,6 +164,7 @@ import Juego from "../Juego"
                 puntos: 0,
                 onRow: 0,
                 bonus: '',
+                mujeresDesbloqueadas: 0,
 
                 prueba: 1,
 

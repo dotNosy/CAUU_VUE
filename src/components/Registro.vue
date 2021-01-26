@@ -3,7 +3,7 @@
         <div class="container login-container col-md-4">
             <div>
                 <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
-                    <h3 style="margin-top:1%;">Registro</h3>
+                    <h3>Registro</h3>
                     <b-col>    
                         <b-form @reset="onReset" v-if="show">
                             <!-- Nombre -->
@@ -12,10 +12,15 @@
                                     id="input-1"
                                     v-model="$v.name.$model"
                                     placeholder="Introduce nombre"
+                                    class="form-control" 
+                                    :class="{'is-invalid': $v.name.$error}" 
+                                    @blur="$v.name.$touch()"
                                 ></b-form-input>
-
-                                <div class="error" v-if="!$v.name.required">Campo obligatorio</div>
-                                <div class="error" v-if="!$v.name.minLength">Minimo {{$v.name.$params.minLength.min}} caracteres</div>
+                                <span v-if="!$v.name.error" class="invalid-feedback" role="alert">
+                                    <strong class="error" v-if="!$v.name.required">Campo obligatorio</strong>
+                                    <strong class="error" v-if="!$v.name.minLength">Mínimo {{$v.name.$params.minLength.min}} carácteres</strong>
+                                    <strong class="error" v-if="!$v.name.invalid"><br>Este campo no es válido</strong>
+                                </span>
                             </b-form-group>
 
                             <!-- Apellido -->
@@ -24,7 +29,15 @@
                                 id="input-2"
                                 v-model="$v.surname.$model"
                                 placeholder="Introduce apellido"
+                                class="form-control" 
+                                :class="{'is-invalid': $v.surname.$error}" 
+                                @blur="$v.surname.$touch()"
                                 ></b-form-input>
+                                <span v-if="!$v.surname.error" class="invalid-feedback" role="alert">
+                                    <strong class="error" v-if="!$v.surname.required">Campo obligatorio</strong>
+                                    <strong class="error" v-if="!$v.surname.minLength">Mínimo {{$v.surname.$params.minLength.min}} carácteres</strong>
+                                    <strong class="error" v-if="!$v.surname.invalid"><br>Este campo no es válido</strong>
+                                </span>
                             </b-form-group>
 
                             <!-- Email -->
@@ -37,11 +50,18 @@
                                 v-model="$v.email.$model"
                                 type="email"
                                 placeholder="Introduce tu email"
+                                class="form-control"
+                                :class="{'is-invalid': $v.email.$error}" 
+                                @blur="$v.email.$touch()"
                                 ></b-form-input>
 
-                                <div class="error" v-if="!$v.email.required">Campo obligatorio</div>
-                                <div class="error" v-if="!$v.email.minLength">Minimo {{$v.email.$params.minLength.min}} caracteres</div>
-                                <div class="error" v-if="!$v.email.email">Formato de email incorrecto</div>
+                                <span v-if="!$v.email.error" class="invalid-feedback" role="alert">
+                                    <strong class="error" v-if="!$v.email.required">Campo obligatorio</strong>
+                                    <strong class="error" v-if="!$v.email.email">Formato de email incorrecto</strong>
+                                    <strong class="error" v-if="!$v.email.minLength"><br>Mínimo {{$v.email.$params.minLength.min}} carácteres</strong>
+                                    <strong class="error" v-if="!$v.name.invalid"><br>Este campo no es válido</strong>
+                                </span>
+
                             </b-form-group>
 
                             <!-- Usuario -->
@@ -50,11 +70,17 @@
                                 id="input-4"
                                 v-model="$v.username.$model"
                                 placeholder="Introduce nombre usuario"
-                                v-b-popover.focus="'Tu nombre de usuario debe tener al menos 4 carácteres.'"
+                                class="form-control" 
+                                :class="{'is-invalid': $v.username.$error}" 
+                                @blur="$v.username.$touch()"
                                 ></b-form-input>
 
-                                <div class="error" v-if="!$v.username.required">Campo obligatorio</div>
-                                <div class="error" v-if="!$v.username.minLength">Minimo {{$v.username.$params.minLength.min}} caracteres</div>
+                                <span v-if="!$v.username.error" class="invalid-feedback" role="alert">
+                                    <strong class="error" v-if="!$v.username.required">Campo obligatorio</strong>
+                                    <strong class="error" v-if="!$v.username.minLength">Minimo {{$v.username.$params.minLength.min}} caracteres</strong>
+                                    <strong class="error" v-if="!$v.username.invalid"><br>Este campo no es válido</strong>
+                                </span>
+
                             </b-form-group>
 
                             <!-- Contraseña -->
@@ -65,16 +91,25 @@
                                 v-model="$v.password1.$model"
                                 aria-describedby="password-help-block"
                                 placeholder="Introduce una contraseña"
-                                v-b-popover.focus="'Tu contraseña debe tener 8-30 carácteres, letras y números. También debe contener una matúscula y una minúscula por lo menos.'"
+                                v-b-popover.focus="'Tu contraseña debe tener 8-30 carácteres, letras y números. También debe contener una mayúscula y una minúscula por lo menos.'"
+                                class="form-control"
+                                :class="{'is-invalid': $v.password1.$error}" 
+                                @blur="$v.email.$touch()"
                                 ></b-form-input>
 
-                                <!-- <b-form-text id="password-help-block">
+                                <b-form-text id="password-help-block">
                                     Tu contraseña debe de tener 8-30 carácteres, letras y números. 
                                     También debe contener una mayúscula y una minúscula por lo menos.
-                                </b-form-text> -->
+                                </b-form-text>
 
-                                <div class="error" v-if="!$v.password1.required">Campo obligatorio</div>
-                                <div class="error" v-if="!$v.password1.minLength">Minimo {{$v.password1.$params.minLength.min}} caracteres</div>
+                                <span v-if="!$v.password1.error" class="invalid-feedback" role="alert">
+                                    <strong class="error" v-if="!$v.password1.required">Campo obligatorio</strong>
+                                    <strong class="error" v-if="!$v.password1.maxLength">Máximo {{$v.password1.$params.maxLength.max}} carácteres</strong>
+                                    <strong class="error" v-if="!$v.password1.minLength"><br>Mínimo {{$v.password1.$params.minLength.min}} carácteres</strong>
+                                    <strong class="error" v-if="!$v.password1.goodPassword"><br>La contraseña no cumple los parámetros establecidos</strong>
+                                    <strong class="error" v-if="!$v.password1.invalid"><br>Este campo no es válido</strong>
+                                </span>
+
                             </b-form-group>
 
                             <!-- Confirmacion contraseña -->
@@ -85,19 +120,31 @@
                                 v-model="$v.password2.$model"
                                 aria-describedby="password-help-block"
                                 placeholder="Repite la contraseña"
+                                class="form-control"
+                                :class="{'is-invalid': $v.password2.$error}" 
+                                @blur="$v.password2.$touch()"
                                 ></b-form-input>
 
-                                <div class="error" v-if="!$v.password2.sameAs">Las contraseñas no coinciden.</div>
+                                <span v-if="!$v.password2.error" class="invalid-feedback" role="alert">
+                                    <strong class="error" v-if="!$v.password2.required">Campo obligatorio</strong>
+                                    <strong class="error" v-if="!$v.password2.minLength">Mínimo {{$v.password2.$params.minLength.min}} carácteres</strong>
+                                    <strong class="error" v-if="!$v.password2.sameAs"><br>Las contraseñas no coinciden</strong>
+                                    <strong class="error" v-if="!$v.password2.invalid"><br>Este campo no es válido</strong>
+                                </span>
+
+                                <!-- <div class="error" v-if="!$v.password2.sameAs">Las contraseñas no coinciden.</div>
+                                <div class="error" v-if="!$v.password2.invalid">Este campo no es válido</div> -->
+
                             </b-form-group>
 
                             <!-- Iniciar sesion -->
                             <b-row>
                                 <b-link variant="Link" href=".\login">Ya tengo cuenta, iniciar sesión</b-link>
                             </b-row>
-                            <b-tooltip :target="() => $refs['button-3']" title="Limpia el formulario"></b-tooltip>
+                            
                             <!-- Botones y registros -->
-                            <b-button type="button" @click="createUser()" variant="primary" class="bottom" v-b-popover.hover.top="'Al pulsar este botón aceptas los términos y condiciones'" title="AVISO">Registrarme</b-button>
-                            <b-button type="reset" variant="danger" class="bottom" ref="button-3">Limpiar</b-button>
+                            <b-button type="button" @click="createUser()" variant="primary" class="bottom">Registrarme</b-button>
+                            <b-button type="reset" variant="danger" class="bottom">Limpiar</b-button>
                         </b-form>
                     </b-col>
                 </div>
@@ -119,8 +166,8 @@
 
 <script>
     import RegisterDataService from "../Services/RegisterDataService";
-    import { required, minLength, email, sameAs} from 'vuelidate/lib/validators';
-    // import 'vue-form-wizard/dist/vue-form-wizard.min.css';
+    import { required, minLength, maxLength, email, sameAs} from 'vuelidate/lib/validators';
+    // Vue.use(window.vuelidate.default)
 
     export default {
         name: 'Registro',
@@ -132,12 +179,15 @@
                 username: '',
                 password1: '',
                 password2: '',
-
                 show: true,
             }
         },
         validations: {
                 name: {
+                    required,
+                    minLength: minLength(4),
+                },
+                surname: {
                     required,
                     minLength: minLength(4),
                 },
@@ -153,15 +203,21 @@
                 password1: {
                     required,
                     minLength: minLength(8),
+                    maxLength: maxLength(30),
+                    goodPassword:(password1) => { 
+                        return password1.length >= 8 &&
+                        password1.length <=30 &&
+                        /[a-z]/.test(password1) &&
+                        /[A-Z]/.test(password1) &&
+                        /[0-9]/.test(password1)
+                    }
                 },
                 password2: {
                     required,
                     minLength: minLength(8),
                     sameAs: sameAs('password1')
-                },
-                surname: {
-
                 }
+
         },
         methods: {
             createUser() {

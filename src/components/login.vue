@@ -9,7 +9,7 @@
                             <input id="email" class="form-control" type="email" placeholder="Email *" v-model="user.email"/><br>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" placeholder="Contraseña *" v-model="user.password"/><br>
+                            <input type="password" class="form-control" id="password" placeholder="Contraseña *" v-on:keyup.enter="login" v-model="user.password"/><br>
                         </div>
                         <div class="form-group">
                             <button type="button" value="SARTU" class="btn btn-primary" @click="login">ENTRAR</button><br>
@@ -17,7 +17,7 @@
                         <!-- Cargando -->
                         <div id="iniciandoSesionLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando..."></b-spinner></div>
                         <div class="form-group">
-                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Regístrate</a><br>
+                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Registrate</a><br>
                         </div>
                         <div class="form-group">
                             <a href="./passrec" class="ForgetPwd">¿Has olvidado tu contraseña?</a><br>

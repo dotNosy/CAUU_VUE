@@ -46,39 +46,39 @@
 
 <style>
 .boton{
-  width:50%;
+  width:100%;
   height:6em;
   border-radius:2%;
   font-size:1em;
   font-weight: bold;
-  margin-bottom: 3%;
-  margin-top: 3%;
+  margin-bottom: 1%;
+
 }
 
 .inicio{
-  position: absolute;
-  top:2em;
-  font-size:1.8em;
-  text-align:center;
-  font-weight:bold;
-  /* justify-content: center; */
-  background-color:whitesmoke;
-  opacity:0.94;
-  width: 27rem;
-  height: 33rem;
+    position: absolute;
+    top:2em;
+    left: 30rem;
+    right: 30rem;
+    font-size:1.8em;
+    text-align:center;
+    font-weight:bold;
+    background-color:whitesmoke;
+    opacity:0.94;
+    width: 27rem;
+    height: 33rem;
+    margin: auto;
 }
-
 .btn {
   margin-top: 1em;
-  width: 22rem;
+  width: 25rem;
   height: 7rem;
 }
-
 #logoDF {
   width: 7em;
   height: 7em;
   margin-top: .5em;
-  border-width: 0px;
+  border-width: 5px;
   border-style: solid;
   border-color: #4E3757;
 }
@@ -169,14 +169,15 @@ input:checked + label + .slide {
   background-image: url(../assets/portada/8.jpg);
 }
 @media (max-width: 576px) {
+  .inicio{
+    left:0em;
+    right: 0em;
+  }
   .boton{
   font-size:0.6em;
   font-weight: bold;
 }
-  .inicio{
-    left: 0.5em;
-    right: 0.5em;
-  }
+
 }
 </style>
 
@@ -197,6 +198,6 @@ window.$ = $
     else{
       index=1;
     }
-  }, 4000);
+  }, 3000);
 
 </script>
