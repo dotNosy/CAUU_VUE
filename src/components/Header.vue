@@ -13,16 +13,16 @@
 
         <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btn" style="padding:1em;" href="./SelectNivel">Jugar</b-button>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btn" style="padding:1em;" href="./Coleccion">Colección</b-button>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btn" style="padding:1em;" href="./Perfil">Perfil</b-button>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btn" style="padding:1em;" href="./ObtenerJuego">Obtener</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnSelectnivel" style="padding:1em;" href="./SelectNivel">Jugar</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnColeccion" style="padding:1em;" href="./Coleccion">Colección</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnPerfil" style="padding:1em;" href="./Perfil">Perfil</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnObtenerJuego" style="padding:1em;" href="./ObtenerJuego">Obtener</b-button>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
             <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="3" id="icono"></b-icon>
-            <button @click="logout()" type="button" class="nav-item nav-link text-light btn" id="btn">{{ login }} <div id="logoutLoading"><b-spinner class="my-1" label="Cargando..."></b-spinner></div></button>
+            <button @click="logout()" type="button" class="nav-item nav-link text-light btn" id="btnLogin">{{ login }} <div id="logoutLoading"><b-spinner class="my-1" label="Cargando..."></b-spinner></div></button>
         </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -89,20 +89,19 @@
 
 </script>
 <style>
+.imglogo{
+    border-radius: 50%;
+}
     @media (max-width: 992px) {
         
         .logo, #icono{
             display: none;
         }
         .btn{
-            width: 94%;
+            width: 100%;
             padding: 2%;
             margin: 0.5%;
             border-color: black;
         }
     }
-
-
-
-    
 </style>

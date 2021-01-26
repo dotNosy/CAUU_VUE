@@ -9,7 +9,7 @@
                             <input id="email" class="form-control" type="email" placeholder="Email *" v-model="user.email"/><br>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" placeholder="Contraseña *" v-model="user.password"/><br>
+                            <input type="password" class="form-control" id="password" placeholder="Contraseña *" v-on:keyup.enter="login" v-model="user.password"/><br>
                         </div>
                         <div class="form-group">
                             <button type="button" value="SARTU" class="btn btn-primary" @click="login">ENTRAR</button><br>

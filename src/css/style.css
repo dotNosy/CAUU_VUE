@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
-#btn{
+#btnSelectnivel,#btnColeccion,#btnPerfil,#btnObtenerJuego,#btnLogin{
     background-color: #4e3757;
     border-color:#4e3757;
     color: white;
+    margin-left: 1rem;
 }
-#btn:hover{
+#btnSelectnivel:hover,#btnColeccion:hover,#btnPerfil:hover,#btnObtenerJuego:hover,#btnLogin:hover{
     background-color: #918897;
     border-color: #918897;
 }
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Hammersmith One', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
