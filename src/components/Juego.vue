@@ -55,6 +55,7 @@
                 <h6>Tu puntuación</h6>
                 <h6>{{ puntos }}</h6>
                 <b-button v-show="!easyNormalGame"  v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="startTimer">Empezar!</b-button>
+                <b-button variant="dark" id="btnEmpezar" size="lg" pill @click="showModalPartidaFin">Fin juego</b-button>
             </b-col>
         </b-row>
 
@@ -82,13 +83,19 @@
 
         <!-- INI Modal fin del juego -->
 
-        <b-modal id="modal-fin-juego" title="¡Partida finalizada!">
-            <p class="my-4">La partida ha finalizado.</p>
-            <p class="my-4">Puntuación obtenida: {{puntos}}</p>
-            <p class="my-4">Mujeres desbloqueadas en esta partida: {{mujeresDesbloqueadas}}</p>
-            <p class="my-4"> <b-icon icon="arrow-down"></b-icon>¡Descúbrelas en tu colección! <b-icon icon="arrow-down"></b-icon></p>
+        <b-modal id="modal-fin-juego" ref="finJuego" title="¡Partida finalizada!" centered hide-footer>
+            <p class="my-4 text-center">La partida ha finalizado.</p>
+            <p class="my-4 text-center"><strong>Puntuación obtenida: {{puntos}}</strong></p>
+            <p class="my-4 text-center"><strong>Mujeres desbloqueadas en esta partida: {{mujeresDesbloqueadas}}</strong></p>
+            <p class="my-4 text-center">
+                <strong>
+                    <b-icon icon="arrow-down"></b-icon>
+                    ¡Descúbrelas en tu colección!
+                    <b-icon icon="arrow-down"></b-icon>
+                </strong>
+            </p>
             <b-link variant="Link" to="Coleccion">
-                <b-button class="mt-3" block>Ver colección</b-button>
+                <b-button variant="info" class="mt-3" block>Ver colección</b-button>
             </b-link>
             
         </b-modal>
@@ -179,10 +186,14 @@ import Juego from "../Juego"
                 reasonsChecked: {},
             }
         },
-        methods: {
+        methods: {            
+            showModalPartidaFin() {
+                this.$refs['finJuego'].show();
+            },
             startTimer() {
                 this.btnEmpezarClass = 'disabled outline-dark';
                 this.finished = false;
+                // let modalFinPartida = this.$refs.finJuego.$el;
 
                 this.timerMobile = false;
 
@@ -198,7 +209,10 @@ import Juego from "../Juego"
                             document.getElementById('btnEmpezar').innerText = "Empezar";
                             global.btnEmpezarClass = '';
                             global.value = 100;
-                            alert("se acabo!");
+                            // this.$refs['finJuego'].show();
+                            this.showModalPartidaFin();
+                            console.log("se acabo!");
+
                             clearInterval(global.timer);
                         }
                     }
