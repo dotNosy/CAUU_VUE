@@ -1,7 +1,7 @@
 <template>
 <form>
     <div class="modal-body">
-        <div class="container login-container col-md-4">
+        <div class="container login-container col-md-3">
             <div class="row">
                 <div class="col-md-12 login-form-1 formulario form">
                     <br><h3>Iniciar Sesión</h3><br>
@@ -17,7 +17,7 @@
                         <!-- Cargando -->
                         <div id="iniciandoSesionLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando..."></b-spinner></div>
                         <div class="form-group">
-                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Regístrate</a><br>
+                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Registrate</a><br>
                         </div>
                         <div class="form-group">
                             <a href="./passrec" class="ForgetPwd">¿Has olvidado tu contraseña?</a><br>

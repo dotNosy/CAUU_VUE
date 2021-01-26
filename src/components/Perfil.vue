@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <b-row>
             <b-col></b-col>
             <b-col><h1>Hola {{user.nombre}}</h1></b-col>
@@ -12,6 +13,7 @@
             >AAAAAAAAAA</div> -->
         </b-row>
 
+        <b-row>
             <b-col style="padding-left: 50px">
                 <b-row>
                     <h2>Tus datos</h2>
@@ -104,21 +106,24 @@
                         <div class="error" v-if="!$v.password2.sameAs" style="text-align:left">Las contraseñas no coinciden.</div>
                 </b-row>
                 <!--  -->
+                <b-row>
                     <b-button type="button" @click="editProfile()" variant="primary" class="bottom">Actualizar mis datos</b-button>
-
+                </b-row>
 
             </b-col>
 <!-- SEPARADOR -->
 <div class="vl"></div>
 <!-- SEPARADOR -->
             <b-col>
-
+                <b-row>
                     <h2>Tu posición en el ranking</h2>
-
+                </b-row>
+                <b-row>
                     {{ miPosicion }}
-
+                </b-row>
+                <b-row>
                     <!-- TO-DO mostrar con un template las ultimas 5 posiciones -->
-
+                </b-row>
 
                 <!-- <b-link variant="Link">Cerrar sesion</b-link> -->
                 <!-- <div v-intro="'The content of tooltip'">AAAAA</div>
@@ -126,7 +131,7 @@
                 <div v-intro="'The content of tooltip'" v-intro-tooltip-class="'red-bg'">cccccc</div>
                 <div v-hint="'The content of tooltip'" v-intro-position="'top'">DDDDDD</div> -->
             </b-col>
-
+        </b-row>
 
 
     </div>
@@ -135,7 +140,7 @@
 <script>
     import User from  "../User";
     import ProfileDataService from "../Services/ProfileDataService"
-    import { required, minLength, email, sameAs} from 'vuelidate/lib/validators';
+    import { required, minLength, maxLength, email, sameAs} from 'vuelidate/lib/validators';
 
         // import introJs from "intro.js";
         // import "intro.js/introjs.css";
@@ -219,6 +224,14 @@
                 password1: {
                     required,
                     minLength: minLength(8),
+                    maxLength: maxLength(30),
+                    goodPassword:(password1) => { 
+                        return password1.length >= 8 &&
+                        password1.length <=30 &&
+                        /[a-z]/.test(password1) &&
+                        /[A-Z]/.test(password1) &&
+                        /[0-9]/.test(password1)
+                    }
                 },
                 password2: {
                     minLength: minLength(8),
@@ -229,9 +242,17 @@
     }
 </script>
 <style>
+    .vl {
+        border-left: 4px solid #4E3757;
+        height: 500px;
+        margin-left: 1em;
+        margin-right: 2em;
+    }
+
     @media (max-width: 576px) {
         .vl {
             display: none;
         }
     }
+
 </style>
