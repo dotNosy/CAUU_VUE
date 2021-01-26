@@ -56,18 +56,18 @@
 }
 
 .inicio{
-  position:fixed;
-  top:2em;
-  /* left:3em; */
-  right:17.5em;
-  justify-content: center;
-  font-size:1.8em;
-  text-align:center;
-  font-weight:bold;
-  background-color:whitesmoke;
-  opacity:0.94;
-  width: 27rem;
-  height: 33rem;
+    position: absolute;
+    top:2em;
+    left: 30rem;
+    right: 30rem;
+    font-size:1.8em;
+    text-align:center;
+    font-weight:bold;
+    background-color:whitesmoke;
+    opacity:0.94;
+    width: 27rem;
+    height: 33rem;
+    margin: auto;
 }
 .btn {
   margin-top: 1em;
@@ -170,9 +170,8 @@ input:checked + label + .slide {
 }
 @media (max-width: 576px) {
   .inicio{
-    text-align:left;
-    left:2em;
-    right: 2em;
+    left:0em;
+    right: 0em;
   }
   .boton{
   font-size:0.6em;
