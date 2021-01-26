@@ -2,7 +2,6 @@
 <header>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- INI PRUEBA BOOTSTRAP VUE -->
 <div>
     <b-navbar toggleable="lg"  style="background-color: #2d2c2f">
         <b-navbar-brand href="./">
@@ -21,13 +20,12 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="3" id="icono"></b-icon>
+            <!-- <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="3" id="icono"></b-icon> -->
             <button @click="logout()" type="button" class="btnLog" id="btn">{{ login }} <div id="logoutLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="danger" label="Cargando..."></b-spinner></div></button>
         </b-navbar-nav>
         </b-collapse>
     </b-navbar>
 </div>
-<!-- FIN PRUEBA BOOTSTRAP VUE -->
 
 </header>
 </template>

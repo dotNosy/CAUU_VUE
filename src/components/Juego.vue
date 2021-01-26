@@ -80,6 +80,21 @@
 
         </b-row>
 
+        <!-- INI Modal fin del juego -->
+
+        <b-modal id="modal-fin-juego" title="¡Partida finalizada!">
+            <p class="my-4">La partida ha finalizado.</p>
+            <p class="my-4">Puntuación obtenida: {{puntos}}</p>
+            <p class="my-4">Mujeres desbloqueadas en esta partida: {{mujeresDesbloqueadas}}</p>
+            <p class="my-4"> <b-icon icon="arrow-down"></b-icon>¡Descúbrelas en tu colección! <b-icon icon="arrow-down"></b-icon></p>
+            <b-link variant="Link" to="Coleccion">
+                <b-button class="mt-3" block>Ver colección</b-button>
+            </b-link>
+            
+        </b-modal>
+
+        <!-- FIN Modal fin del juego -->
+
         <!-- Formulario de reportar error -->
         <b-modal id="report-error"  hide-footer >
             <template #modal-title>{{ titulo }}</template>
@@ -149,6 +164,7 @@ import Juego from "../Juego"
                 puntos: 0,
                 onRow: 0,
                 bonus: '',
+                mujeresDesbloqueadas: 0,
 
                 prueba: 1,
 
