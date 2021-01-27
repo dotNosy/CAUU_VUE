@@ -174,7 +174,7 @@ import $ from 'jquery'
                 mujeresDesbloqueadas: 0,
                 //Validar si es valido y si es pc o movil
                 validDeviceDimensions:this.enoughDimensionsToPlay(),
-                isPc: this.playWithMoreThanFour(),
+                isSmall: this.playWithFour(),
                 //valores bonus
                 bonus1:0,
                 bonu2:0,
@@ -263,7 +263,7 @@ import $ from 'jquery'
             },
             sumarPuntuacion() {
 
-                if (this.isPc) {
+                if (!this.isSmall) {
                     this.bonus1 = 10;
                     this.bonus2 = 20;
                     this.bonus3 = 30;
@@ -315,7 +315,7 @@ import $ from 'jquery'
                     return true;
                 }
             },
-            playWithMoreThanFour() {
+            playWithFour() {
                 let maxWidth = $('html').css('max-width');
                 if (maxWidth == '600px') {
                     return true;
