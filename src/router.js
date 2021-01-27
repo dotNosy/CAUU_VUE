@@ -67,8 +67,7 @@ const router = new Router({
 
 export default router
 
-const DEFAULT_TITLE = 'CAUU';
-
+const DEFAULT_TITLE = 'Mujeres en las ciencias sociales';
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const authorize = to.meta;

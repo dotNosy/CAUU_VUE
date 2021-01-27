@@ -97,11 +97,6 @@
                                 @blur="$v.email.$touch()"
                                 ></b-form-input>
 
-                                <b-form-text id="password-help-block">
-                                    Tu contraseña debe de tener 8-30 carácteres, letras y números. 
-                                    También debe contener una mayúscula y una minúscula por lo menos.
-                                </b-form-text>
-
                                 <span v-if="!$v.password1.error" class="invalid-feedback" role="alert">
                                     <strong class="error" v-if="!$v.password1.required">Campo obligatorio</strong>
                                     <strong class="error" v-if="!$v.password1.maxLength">Máximo {{$v.password1.$params.maxLength.max}} carácteres</strong>

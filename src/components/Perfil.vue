@@ -53,8 +53,7 @@
 
                 <b-row>
                     <!-- Contraseña -->
-                    <label for="password1">Contraseña:*</label>
-                        <b-form-group id="input-group-5">
+                        <b-form-group id="input-group-5" label="Contraseña:*" label-for="nomUsuario" style="text-align:left">
                             <b-form-input 
                                 type="password" 
                                 id="password1" 
@@ -62,14 +61,8 @@
                                 aria-describedby="password-help-block"
                                 placeholder="Introduce una contraseña"
                                 style="width: 30em; padding:1em;"
-                                
+                                v-b-popover.focus="'Tu contraseña debe tener 8-30 carácteres, letras y números. También debe contener una mayúscula y una minúscula por lo menos.'"
                             ></b-form-input>
-
-                            <b-form-text id="password-help-block">
-                                Tu contraseña debe de tener 8-30 carácteres, letras y números.
-                                También debe contener una mayúscula y una minúscula por lo menos.
-                            </b-form-text>
-
                             <div class="error" v-if="!$v.password1.required" style="text-align:left">Campo obligatorio</div>
                             <div class="error" v-if="!$v.password1.minLength" style="text-align:left">Minimo {{$v.password1.$params.minLength.min}} caracteres</div>
                         </b-form-group>
