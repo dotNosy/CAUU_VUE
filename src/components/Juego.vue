@@ -215,14 +215,16 @@ import $ from 'jquery'
                         global.value -= .1;
 
                         if (global.value >= 100) {
-                            this.showModalPartidaFin();
+                            // this.showModalPartidaFin();
                             clearInterval(global.timer);
                         }  else if (global.value < 0) {
                             document.getElementById('btnEmpezar').innerText = "Empezar";
                             global.btnEmpezarClass = '';
                             global.value = 100;
                             console.log("se acabo!");
+                            // this.showModalPartidaFin();
                             clearInterval(global.timer);
+                            // this.showModalPartidaFin();
                         }
                         // this.showModalPartidaFin();
 
@@ -292,6 +294,7 @@ import $ from 'jquery'
                         this.bonus = ("BONUS x " + this.onRow );
                     }
                 } else {
+                    this.onRow = 0;
                     console.log("No has acertado");
                 }
             },
