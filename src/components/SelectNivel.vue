@@ -6,6 +6,7 @@
             margin-left: auto;
             margin-right: auto;
             margin-top: 4em;
+            background-color:white;
             "
     >
         <b-row> 
@@ -180,4 +181,7 @@ import $ from "jquery";
     }
 </script>
 <style>
+body{
+    background-color:#BA9AC8;
+}
 </style>

@@ -34,8 +34,8 @@
 <!-- <a href="http://localhost:8080/Login"><b-button variant="dark" id="btn" style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:1em;right:1em;position:fixed;" >ENTRAR</b-button></a> -->
 <div class="inicio">
   <img src="../assets/logoDF2.png" alt="logo" class="imglogo" id="logoDF">
-  <a href="./Login" ><b-button variant="dark" id="btn" class="boton" >ENTRAR</b-button></a><br>
-  <a href="./Registro"><b-button variant="dark" id="btn" class="boton" >REGISTRARSE</b-button></a><br>
+  <a href="./Login" ><b-button variant="dark" id="btnHome1" class="boton" >ENTRAR</b-button></a><br>
+  <a href="./Registro"><b-button variant="dark" id="btnHome2" class="boton" >REGISTRARSE</b-button></a><br>
 </div>
 <!-- <div style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:15%;right:50%;position:fixed;background-color:red;">
 <h1 style="color:white;">hola buenas tardes</h1>
