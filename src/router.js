@@ -68,6 +68,7 @@ const router = new Router({
 export default router
 
 const DEFAULT_TITLE = 'CAUU';
+
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const authorize = to.meta;
