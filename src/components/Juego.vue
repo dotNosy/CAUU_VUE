@@ -309,6 +309,9 @@ import Juego from "../Juego"
     #categoriatext{
         resize: none;
     }
+    body{
+    background-color: aliceblue;
+}
 
     .full{
         /* background-color:red ; */
