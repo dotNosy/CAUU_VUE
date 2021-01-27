@@ -40,7 +40,7 @@
             <!-- Facts + Alerts -->
             <b-col>
                 <b-row>DATO</b-row>
-                <b-row>{{prueba}}</b-row>
+                <b-row>{{acierta}}</b-row>
                 <b-row>{{bonus}}</b-row>
 
                 <!-- Notificacion -->
@@ -55,6 +55,7 @@
                 <h6>Tu puntuación</h6>
                 <h6>{{ puntos }}</h6>
                 <b-button v-show="!easyNormalGame"  v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="startTimer">Empezar!</b-button>
+                <!-- <b-button variant="dark" id="btnEmpezar" size="lg" pill @click="showModalPartidaFin">Fin juego</b-button> -->
             </b-col>
         </b-row>
 
@@ -81,18 +82,22 @@
         </b-row>
 
         <!-- INI Modal fin del juego -->
-
-        <b-modal id="modal-fin-juego" title="¡Partida finalizada!">
-            <p class="my-4">La partida ha finalizado.</p>
-            <p class="my-4">Puntuación obtenida: {{puntos}}</p>
-            <p class="my-4">Mujeres desbloqueadas en esta partida: {{mujeresDesbloqueadas}}</p>
-            <p class="my-4"> <b-icon icon="arrow-down"></b-icon>¡Descúbrelas en tu colección! <b-icon icon="arrow-down"></b-icon></p>
+        <b-modal id="modal-fin-juego" ref="finJuego" title="¡Partida finalizada!" centered hide-footer>
+            <p class="my-4 text-center">La partida ha finalizado.</p>
+            <p class="my-4 text-center"><strong>Puntuación obtenida: {{puntos}}</strong></p>
+            <p class="my-4 text-center"><strong>Mujeres desbloqueadas en esta partida: {{mujeresDesbloqueadas}}</strong></p>
+            <p class="my-4 text-center">
+                <strong>
+                    <b-icon icon="arrow-down"></b-icon>
+                    ¡Descúbrelas en tu colección!
+                    <b-icon icon="arrow-down"></b-icon>
+                </strong>
+            </p>
             <b-link variant="Link" to="Coleccion">
-                <b-button class="mt-3" block>Ver colección</b-button>
+                <b-button variant="info" class="mt-3" block>Ver colección</b-button>
             </b-link>
             
         </b-modal>
-
         <!-- FIN Modal fin del juego -->
 
         <!-- Formulario de reportar error -->
@@ -153,6 +158,7 @@
 <script>
 // import func from '../../vue-temp/vue-editor-bridge';
 import Juego from "../Juego"
+import $ from 'jquery'
 
     export default {
         data() {
@@ -161,15 +167,25 @@ import Juego from "../Juego"
                 timer: null,
                 easyNormalGame: false,
                 timerMobile: true,
+                // Juego
                 puntos: 0,
                 onRow: 0,
                 bonus: '',
                 mujeresDesbloqueadas: 0,
-
-                prueba: 1,
-
+                //Validar si es valido y si es pc o movil
+                validDeviceDimensions:this.enoughDimensionsToPlay(),
+                isPc: this.playWithMoreThanFour(),
+                //valores bonus
+                bonus1:0,
+                bonu2:0,
+                bonus3:0,
+                bonus4:0,
+                // si aciertas
+                acierta: 1,
+                // valores timer
                 value: 100,
                 max: 100,
+                // Modal mandar datos
                 titulo: 'Bienvenido al reporte de errores',
                 explanationWhere: 'Por favor, indique dónde ha encontrado el error*:',
                 explanationReason: 'Por favor, indique el motivo del error*:',
@@ -179,30 +195,45 @@ import Juego from "../Juego"
                 reasonsChecked: {},
             }
         },
-        methods: {
+        methods: {            
+            showModalPartidaFin() {
+                this.$refs['finJuego'].show();
+            },
             startTimer() {
                 this.btnEmpezarClass = 'disabled outline-dark';
                 this.finished = false;
+                // let modalFinPartida = this.$refs.finJuego.$el;
 
                 this.timerMobile = false;
 
                 let global = this;
+                this.bonus = 0;
+                this.puntos = 0;
 
                 global.timer = setInterval(function() {
                     if (global.value > 0) {
                         global.value -= .1;
 
                         if (global.value >= 100) {
+                            this.showModalPartidaFin();
                             clearInterval(global.timer);
                         }  else if (global.value < 0) {
                             document.getElementById('btnEmpezar').innerText = "Empezar";
                             global.btnEmpezarClass = '';
                             global.value = 100;
-                            alert("se acabo!");
+                            console.log("se acabo!");
                             clearInterval(global.timer);
                         }
+                        // this.showModalPartidaFin();
+
                     }
+
+                // this.showModalPartidaFin();
+
                 }, 100);
+                
+                // this.showModalPartidaFin();
+
             
             },
             finished: () => {
@@ -230,35 +261,39 @@ import Juego from "../Juego"
             },
             sumarPuntuacion() {
 
-                if (this.prueba === 1) {
+                if (this.isPc) {
+                    this.bonus1 = 10;
+                    this.bonus2 = 20;
+                    this.bonus3 = 30;
+                    this.bonus4 = 35;
+                } else {
+                    this.bonus1 = 5;
+                    this.bonus2 = 10;
+                    this.bonus3 = 15;
+                    this.bonus4 = 20;
+                }
+
+                if (this.acierta === 1) {
 
                     if (this.onRow == 0) {
-                        this.puntos +=10;
-                        this.onRow += 1;
-                        
+                        this.puntos +=this.bonus1;
+                        this.onRow += 1;                        
                     } else if (this.onRow == 1) {
-                        this.puntos +=20;
+                        this.puntos +=this.bonus2;
                         this.onRow += 1;
-                        this.bonus = ("BONUS x " + this.onRow);
-                        
+                        this.bonus = ("BONUS x " + this.onRow);                        
                     } else if (this.onRow == 2) {
-                        this.puntos +=30;
+                        this.puntos +=this.bonus3;
                         this.onRow += 1;
-                        this.bonus = ("BONUS x " + this.onRow );
-
-                        
+                        this.bonus = ("BONUS x " + this.onRow );                        
                     } else if (this.onRow >= 3) {
-                        this.puntos +=35;
+                        this.puntos +=this.bonus4;
                         this.onRow += 1;
                         this.bonus = ("BONUS x " + this.onRow );
-
                     }
                 } else {
                     console.log("No has acertado");
                 }
-
-                // console.log(this.puntos);
-
             },
             mandarError() {
                 let checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
@@ -267,6 +302,22 @@ import Juego from "../Juego"
                 }
                 else{
                     alert('Processing');
+                }
+            },
+            enoughDimensionsToPlay() {
+                let maxWidth = $('html').css('max-width');
+                if (maxWidth == '600px') {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            playWithMoreThanFour() {
+                let maxWidth = $('html').css('max-width');
+                if (maxWidth == '600px') {
+                    return true;
+                } else {
+                    return false;
                 }
             }
         },
@@ -280,6 +331,11 @@ import Juego from "../Juego"
                 this.easyNormalGame = true;
             }
 
+            if (!this.enoughDimensionsToPlay()) {
+                alert("Tu dispositivo es demasiado pequeño para poder jugar :(");
+                this.$router.push({name: 'selectNivel'});
+            }
+            
             //
             this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
                 if (modalId === "report-error") {
@@ -295,8 +351,6 @@ import Juego from "../Juego"
     }
 
 </script>
-
-
 
 <style>
 /* * {margin-left: 5px;} */
