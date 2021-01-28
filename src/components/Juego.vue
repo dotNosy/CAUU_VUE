@@ -302,7 +302,12 @@ import $ from 'jquery'
             sendEmail() {
                 let checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
                 if(checkboxes.length == 0) {
-                    alert("Por favor seleccione al menos una categoría de error");
+                    this.$swal({  
+                            type: 'warning',
+                            icon: 'warning',  
+                            title: '¡Vaya!',  
+                            text: 'Parece que no has rellenado los datos necesarios, vuelve a intentarlo',
+                        });  
                 }
                 else{
 
