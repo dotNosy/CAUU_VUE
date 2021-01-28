@@ -145,7 +145,7 @@
                             <b-form-textarea id="categoriatext" placeholder="Su problema será revisado por nuestros técnicos en un plazo de 24-48 horas" rows="2" cols="50" max-rows="2" readonly></b-form-textarea>
                         </b-row>
                         <br>
-                    <b-button type="submit" variant="primary" id="btn" @click="mandarError()">{{send}}</b-button>
+                    <b-button type="submit" variant="primary" id="btn" @click="sendEmail()">{{send}}</b-button>
                 </b-form>
                 
             </div>
@@ -158,6 +158,7 @@
 <script>
 // import func from '../../vue-temp/vue-editor-bridge';
 import Juego from "../Juego"
+import GameErrorDataService from "../Services/GameErrorDataService"
 import $ from 'jquery'
 
     export default {
@@ -174,7 +175,7 @@ import $ from 'jquery'
                 mujeresDesbloqueadas: 0,
                 //Validar si es valido y si es pc o movil
                 validDeviceDimensions:this.enoughDimensionsToPlay(),
-                isPc: this.playWithMoreThanFour(),
+                isSmall: this.playWithFour(),
                 //valores bonus
                 bonus1:0,
                 bonu2:0,
@@ -215,14 +216,16 @@ import $ from 'jquery'
                         global.value -= .1;
 
                         if (global.value >= 100) {
-                            this.showModalPartidaFin();
+                            // this.showModalPartidaFin();
                             clearInterval(global.timer);
                         }  else if (global.value < 0) {
                             document.getElementById('btnEmpezar').innerText = "Empezar";
                             global.btnEmpezarClass = '';
                             global.value = 100;
                             console.log("se acabo!");
+                            // this.showModalPartidaFin();
                             clearInterval(global.timer);
+                            // this.showModalPartidaFin();
                         }
                         // this.showModalPartidaFin();
 
@@ -261,7 +264,7 @@ import $ from 'jquery'
             },
             sumarPuntuacion() {
 
-                if (this.isPc) {
+                if (!this.isSmall) {
                     this.bonus1 = 10;
                     this.bonus2 = 20;
                     this.bonus3 = 30;
@@ -292,16 +295,38 @@ import $ from 'jquery'
                         this.bonus = ("BONUS x " + this.onRow );
                     }
                 } else {
+                    this.onRow = 0;
                     console.log("No has acertado");
                 }
             },
-            mandarError() {
+            sendEmail() {
                 let checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
                 if(checkboxes.length == 0) {
                     alert("Por favor seleccione al menos una categoría de error");
                 }
                 else{
+
+                    let data = {
+                        who: this.user,
+                        subject: this.checkboxes,
+                        explanation: this.reason,
+                        // No tenemos puesto las imagenes
+                        photos: this.images,
+                    };
+
+                    //Log sending data
+                    console.log(data);
+
+                    GameErrorDataService.sendEmail(data)
+                        .then(() => {
+                            console.log(data);
+                        })
+                        .catch(e=> {
+                            console.log(e);
+                        })
+
                     alert('Processing');
+
                 }
             },
             enoughDimensionsToPlay() {
@@ -312,7 +337,7 @@ import $ from 'jquery'
                     return true;
                 }
             },
-            playWithMoreThanFour() {
+            playWithFour() {
                 let maxWidth = $('html').css('max-width');
                 if (maxWidth == '600px') {
                     return true;
