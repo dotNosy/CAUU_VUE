@@ -17,7 +17,10 @@
             <!-- <b-col>
                 <b-link variant="Link" to="Perfil">Volver</b-link>
             </b-col> -->
-            <b-col><p class="h3">{{titulo}}</p></b-col>
+            <b-col>
+                <p class="h3">{{titulo}}</p>
+                <p class="h3">{{subtitulo}}</p>
+            </b-col>
         </b-row>
         <b-row><br></b-row>
         <!-- Niveles -->
@@ -100,7 +103,8 @@ import $ from "jquery";
     export default {
         data() {
             return {
-                titulo: "Seleccione nivel y ámbitos para jugar, después pulse 'Ir al juego'",
+                titulo: "Seleccione nivel y ámbitos para jugar, ",
+                subtitulo: "después pulse 'Ir al juego'",
                 niveles: [
                     {nombre: "Nivel 1", dificultad: "Fácil: Juegas 10 rondas con los datos más fáciles de las mujeres."},
                     {nombre: "Nivel 2", dificultad: "Normal: Juegas 10 rondas con todos los datos de las mujeres."},
