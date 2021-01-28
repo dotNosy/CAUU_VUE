@@ -12,10 +12,10 @@
 
         <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btnSelectnivel" style="padding:1em;" href="./SelectNivel">Jugar</b-button>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btnColeccion" style="padding:1em;" href="./Coleccion">Colección</b-button>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btnPerfil" style="padding:1em;" href="./Perfil">Perfil</b-button>
-            <b-button type="button" class="nav-item nav-link text-light btn" id="btnObtenerJuego" style="padding:1em;" href="./ObtenerJuego">Obtener</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnSelectnivel" style="padding:1em;" href="./SelectNivel" @click="getPerfil(),getColeccion(),getObtener()">Jugar</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnColeccion" style="padding:1em;" href="./Coleccion" :disabled='coleccion' @click="getPerfil(),getColeccion(),getObtener()">Colección</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnPerfil" style="padding:1em;" href="./Perfil" :disabled='perfil' @click="getPerfil(),getColeccion(),getObtener()">Perfil</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnObtenerJuego" style="padding:1em;" href="./ObtenerJuego" :disabled='obtener' @click="getPerfil(),getColeccion(),getObtener()">Obtener</b-button>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -40,6 +40,9 @@
             return {
                 laRuta: "",
                 login: "",
+                perfil:false,
+                coleccion:false,
+                obtener:false,
             }
         },
         methods: {
@@ -64,25 +67,46 @@
                     this.$router.push({name: 'login'});
                 }
             },
+            getPerfil(){
+                setTimeout(() => {
+                        if(this.$route.name==="perfil"){
+                    this.perfil=true;
+                }
+                else{
+                    this.perfil=false;
+                }}, 200)
+            },
+            getColeccion(){
+                setTimeout(() => {
+                        if(this.$route.name==="coleccion"){
+                    this.coleccion=true;
+                }
+                else{
+                    this.coleccion=false;
+                }}, 200)
+            },
+            getObtener(){
+                setTimeout(() => {
+                        if(this.$route.name==="obtenerJuego"){
+                    this.obtener=true;
+                    console.log("true");
+                }
+                else{
+                    this.obtener=false;
+                    console.log("false");
+                }}, 200)
+            },
         },
         mounted () {
             $("#logoutLoading").hide();
             this.checkUserLogued();
+            this.perfil=null;
+            this.coleccion=null;
+            this.obtener=null;
+            this.getPerfil();
+            this.getColeccion();
+            this.getObtener();
         },
-        computed: {
-            perfil(){
-                return this.$route.name != 'perfil';
-            },     
-            juego(){
-                return this.$route.name != 'juego';
-            },
-            coleccion(){
-                return this.$route.name != 'coleccion';
-            },
-            obtener(){
-                return this.$route.name != 'obtener';
-            },
-        }
     };
 
 </script>
@@ -90,16 +114,14 @@
 .imglogo{
     border-radius: 50%;
 }
-    @media (max-width: 992px) {
-        
-        .logo, #icono{
-            display: none;
-        }
-        .btn{
-            width: 100%;
-            padding: 2%;
-            margin: 0.5%;
-            border-color: black;
-        }
+@media (max-width: 992px) {
+    .logo, #icono{
+        display: none;
     }
+    .btn{
+        width: 94%;
+        padding: 2%;
+        margin: 0.5%;
+    }
+}
 </style>

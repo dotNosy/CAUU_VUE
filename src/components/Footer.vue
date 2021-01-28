@@ -9,25 +9,11 @@
 </template>
 
 <style>
-    .divfooter{
-    background-color:rgb(45, 44, 47);
-    color:white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    }
-/* @media (min-width: 1800px) {
-    footer {
-    position: absolute;
-    bottom:0;
-    width:100%;
+.divfooter{
+background-color:rgb(45, 44, 47);
+color:white;
+position: fixed;
+bottom: 0;
+width: 100%;
 }
-}
-@media (max-width: 1800px) {
-    footer {
-    position: absolute;
-    bottom:0;
-    width:100%;
-} */
-/* } */
 </style>

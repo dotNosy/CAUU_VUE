@@ -97,11 +97,6 @@
                                 @blur="$v.email.$touch()"
                                 ></b-form-input>
 
-                                <b-form-text id="password-help-block">
-                                    Tu contraseña debe de tener 8-30 carácteres, letras y números. 
-                                    También debe contener una mayúscula y una minúscula por lo menos.
-                                </b-form-text>
-
                                 <span v-if="!$v.password1.error" class="invalid-feedback" role="alert">
                                     <strong class="error" v-if="!$v.password1.required">Campo obligatorio</strong>
                                     <strong class="error" v-if="!$v.password1.maxLength">Máximo {{$v.password1.$params.maxLength.max}} carácteres</strong>
@@ -132,9 +127,6 @@
                                     <strong class="error" v-if="!$v.password2.invalid"><br>Este campo no es válido</strong>
                                 </span>
 
-                                <!-- <div class="error" v-if="!$v.password2.sameAs">Las contraseñas no coinciden.</div>
-                                <div class="error" v-if="!$v.password2.invalid">Este campo no es válido</div> -->
-
                             </b-form-group>
 
                             <!-- Iniciar sesion -->
@@ -154,14 +146,14 @@
 </template>
 
 <style scoped>
-    .error {
-        color : red;
-        margin-top: 2%;
-        margin-bottom: 1rem;
-    }
-    .bottom{
-        margin-bottom: 4%;
-    }
+.error {
+    color : red;
+    margin-top: 2%;
+    margin-bottom: 1rem;
+}
+.bottom{
+    margin-bottom: 4%;
+}
 </style>
 
 <script>
@@ -241,7 +233,12 @@
                         || this.$v.password2.$invalid    
                     )
                     {
-                        alert("DATOS o FORMATO incorrectos!!");
+                        this.$swal({  
+                            type: 'error',
+                            icon: 'error',  
+                            title: '¡Vaya!',  
+                            text: 'Parece que tus datos no son correctos, vuelve a intentarlo',
+                        }); 
                         return false;
                     }
 
@@ -271,7 +268,6 @@
             }
         },
         mounted () {
-
         }
     }
 </script>
