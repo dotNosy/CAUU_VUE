@@ -5,9 +5,7 @@
             width: 50%;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 4em;
-            "
-    >
+            margin-top: 4em;">
         <b-row> 
             <br>
             <br>

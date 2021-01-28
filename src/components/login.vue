@@ -20,7 +20,7 @@
                             <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Registrate</a><br>
                         </div>
                         <div class="form-group">
-                            <a href="./passrec" class="ForgetPwd">¿Has olvidado tu contraseña?</a><br>
+                            <a href="http://localhost:8000/forgot-password" class="ForgetPwd">¿Has olvidado tu contraseña?</a><br>
                         </div>
                 </div>
             </div>
