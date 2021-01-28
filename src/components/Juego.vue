@@ -393,66 +393,56 @@ import $ from 'jquery'
 </script>
 
 <style>
-/* * {margin-left: 5px;} */
-    .exclamation:hover {
-        transform:scale(1.2,1.2);
-    }
-    #otrostext{
-        display: none;
-    }
-    #categoriatext{
-        resize: none;
-    }
-    body{
-    background-color: aliceblue;
+.exclamation:hover {
+    transform:scale(1.2,1.2);
 }
-
-    .full{
-        /* background-color:red ; */
-        max-width: 100%;
-        padding-left:1%;
+#otrostext{
+    display: none;
+}
+#categoriatext{
+    resize: none;
+}
+body{
+background-color: aliceblue;
+}
+.full{
+    max-width: 100%;
+    padding-left:1%;
+}
+.kutxa {
+    background-color: salmon;
+    color: black;
+    width: 50px;
+    height: 50px;
+    padding: 5%;
+    margin: 2%;
+}
+@media (max-width: 600px) {
+    #temporizador {
+        visibility: hidden;
     }
-    .kutxa {
-        background-color: salmon;
-        color: black;
-        width: 50px;
-        height: 50px;
-        padding: 5%;
-        margin: 2%;
+    #countdown {
+        visibility: visible;
     }
-
-    @media (max-width: 600px) {
-
-        #temporizador {
-            visibility: hidden;
-        }
-        #countdown {
-            visibility: visible;
-        }
-
+}
+@media (min-width: 600px) {
+    #countdown {
+        visibility: hidden;
     }
-
-    @media (min-width: 600px) {
-
-        #countdown {
-            visibility: hidden;
-        }
-
-    }
-
+}
 </style>
 <style lang="sass">
-    $color: #4e3757
-    $bg: #2d2c2f
+$color: #4e3757
+$bg: #2d2c2f
 
-    #btn
-        background-color: $color
-        border-color: $color
-    
-    .custom-checkbox .custom-control-input:checked~.custom-control-label::before
-        background-color: $color
+#btn
+    background-color: $color
+    border-color: $color
 
-    .bg-purple
-        background-color: $color
-    
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before
+    background-color: $color
+
+.bg-purple
+    background-color: $color
+
 </style>

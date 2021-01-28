@@ -114,16 +114,15 @@
 .imglogo{
     border-radius: 50%;
 }
-    @media (max-width: 992px) {
-        
-        .logo, #icono{
-            display: none;
-        }
-        .btn{
-            width: 100%;
-            padding: 2%;
-            margin: 0.5%;
-            border-color: black;
-        }
+@media (max-width: 992px) {
+    .logo, #icono{
+        display: none;
     }
+    .btn{
+        width: 100%;
+        padding: 2%;
+        margin: 0.5%;
+        border-color: black;
+    }
+}
 </style>

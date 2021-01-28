@@ -222,22 +222,17 @@
     transform-style: preserve-3d;
     perspective: 1400px;
 }
-
 .back {
     top: 0;
     left: 0;
-
     transform: rotateY(180deg);
-
     color: black;
     background: #fff;
 }
-
 .back .front {
     display: flex;
     backface-visibility: hidden;
 }
-
 .hide {
     display: none;
 }

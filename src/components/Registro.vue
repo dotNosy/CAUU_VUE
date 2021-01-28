@@ -127,9 +127,6 @@
                                     <strong class="error" v-if="!$v.password2.invalid"><br>Este campo no es válido</strong>
                                 </span>
 
-                                <!-- <div class="error" v-if="!$v.password2.sameAs">Las contraseñas no coinciden.</div>
-                                <div class="error" v-if="!$v.password2.invalid">Este campo no es válido</div> -->
-
                             </b-form-group>
 
                             <!-- Iniciar sesion -->
@@ -149,14 +146,14 @@
 </template>
 
 <style scoped>
-    .error {
-        color : red;
-        margin-top: 2%;
-        margin-bottom: 1rem;
-    }
-    .bottom{
-        margin-bottom: 4%;
-    }
+.error {
+    color : red;
+    margin-top: 2%;
+    margin-bottom: 1rem;
+}
+.bottom{
+    margin-bottom: 4%;
+}
 </style>
 
 <script>
@@ -266,7 +263,6 @@
             }
         },
         mounted () {
-
         }
     }
 </script>

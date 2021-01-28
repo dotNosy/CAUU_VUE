@@ -50,14 +50,7 @@
         </div>
 
         <!-- Checkboxes -->
-        <div style="
-                margin-top: 1em;
-                margin-left: auto;
-                margin-right: auto;
-                text-align:left; 
-                margin-left: 42%;
-
-                ">
+        <div class="divSelect">
             <b-form-group>
                 <template #label>
                     <b-form-checkbox
@@ -90,7 +83,7 @@
         <!-- Cargando -->
         <div id="ambitosLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando ambitos..."></b-spinner></div>
         <br>
-        <b-button variant="dark" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
+        <b-button variant="dark" class="btnJuego" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
         <b-row><br></b-row>
     </div>
 </template>
@@ -187,5 +180,32 @@ import $ from "jquery";
 <style>
 body{
     background-color:#BA9AC8;
+    overflow: auto;
+}
+.divSelect{
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:left; 
+    margin-left: 42%;
+}
+@media (max-width: 992px) {
+    body{
+        padding-bottom: 20%;
+    }
+    .btnJuego{
+        width: 70%;
+    }
+    .divSelect{
+        margin-left: 3rem;
+    }
+}
+@media (max-width: 576px) {
+    .btnJuego{
+        width: 80%;
+    }
+    .divSelect{
+        margin-left: 1rem;
+    }
 }
 </style>
