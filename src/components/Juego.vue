@@ -407,6 +407,9 @@ background-color: aliceblue;
     padding: 5%;
     margin: 2%;
 }
+body{
+    background-color: whitesmoke;
+}
 @media (max-width: 600px) {
     #temporizador {
         visibility: hidden;

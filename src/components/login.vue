@@ -1,9 +1,9 @@
 <template>
 <form>
     <div class="modal-body">
-        <div class="container login-container col-md-3">
+        <div class="container login-container col-md-5" style="margin-top:7%;">
             <div class="row">
-                <div class="col-md-12 login-form-1 formulario form">
+                <div class="col-md-12 login-form-1 formulario form" style="padding:7%;">
                     <br><h3>Iniciar Sesión</h3><br>
                         <div class="form-group">
                             <input id="email" class="form-control" type="email" placeholder="Email *" v-model="user.email"/><br>
