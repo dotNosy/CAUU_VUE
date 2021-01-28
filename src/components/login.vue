@@ -17,7 +17,7 @@
                         <!-- Cargando -->
                         <div id="iniciandoSesionLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando..."></b-spinner></div>
                         <div class="form-group">
-                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Registrate</a><br>
+                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Regístrate</a><br>
                         </div>
                         <div class="form-group">
                             <a href="./passrec" class="ForgetPwd">¿Has olvidado tu contraseña?</a><br>

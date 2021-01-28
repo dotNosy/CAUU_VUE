@@ -54,7 +54,7 @@
                 <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')" class="exclamation" style="cursor: hand;"></b-icon></p>
                 <h6>Tu puntuación</h6>
                 <h6>{{ puntos }}</h6>
-                <b-button v-show="!easyNormalGame"  v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="startTimer">Empezar!</b-button>
+                <b-button v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="jugar()">Empezar</b-button>
                 <!-- <b-button variant="dark" id="btnEmpezar" size="lg" pill @click="showModalPartidaFin">Fin juego</b-button> -->
             </b-col>
         </b-row>
@@ -196,9 +196,24 @@ import $ from 'jquery'
                 reasonsChecked: {},
             }
         },
-        methods: {            
+        methods: {   
+            jugar() {
+                // Iniciamos el juego
+                // Si es el nivel 3 --> iniciar el temporizador
+                if (!this.easyNormalGame) {
+                    this.startTimer()
+                } else {
+                    // Cargamos las mujeres por rondas
+
+                }
+                //Al acabar el juego --> Mostramos las estadisticas al terminar el juego
+                this.showModalPartidaFin();
+                // Guardamos la partida del usuario y sus mujeres desbloqueadas
+
+            },         
             showModalPartidaFin() {
                 this.$refs['finJuego'].show();
+                // $("#modal-fin-juego").show();
             },
             startTimer() {
                 this.btnEmpezarClass = 'disabled outline-dark';
@@ -225,7 +240,7 @@ import $ from 'jquery'
                             console.log("se acabo!");
                             // this.showModalPartidaFin();
                             clearInterval(global.timer);
-                            // this.showModalPartidaFin();
+                            this.showModalPartidaFin();
                         }
                         // this.showModalPartidaFin();
 
