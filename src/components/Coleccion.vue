@@ -1,68 +1,63 @@
 <template>
     <section>
-        <b-row>
-            <b-col><h4>Mujeres en las ciencias sociales</h4></b-col>
-            <b-col>
-                <div id="mujerFullPageLoading"><b-spinner class="my-5" style="width: 5rem; height: 5rem;" variant="primary" label="Loading..."></b-spinner></div>
+        <b-row><b-col><h4>Mujeres en las ciencias sociales</h4></b-col></b-row>
+        <b-row><b-col><div id="mujerFullPageLoading"><b-spinner class="my-5" style="width: 5rem; height: 5rem;" variant="primary" label="Loading..."></b-spinner></div></b-col></b-row>
+        <b-row cols="3">
                 <div
                     v-for="(carta, key) in misCartasDesbloqueadas" :key="key"
                     class="my-3" 
                     >
-                    <b-card
-                        :id="carta.mujer.id"
-                        :ref="'card' + carta.mujer.id"
-                        tag="article"
-                        style="max-width: 25rem;"
-                        class="mb-2"
-                        :style="{ 
-                            backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ ambitos[carta.mujer.ambito_id -1].nombre.trim().toLowerCase() +'_borde.png') + ')',
-                            color:'white',
-                            backgroundSize: 'cover',
-                            width: '100%',
-                        }"
-                    >
-                        <div  @click="rotateCard(carta.mujer.id)" 
-                            style="background-color: white; 
-                                    border-radius:50px;
-                                    width:3rem;height:3rem;float:right;">
-                            <img src="../assets/keyboard.png" style="width:2rem;height:2rem;margin-top:0.5rem;">
-                        </div>
-
-                        <div class="front">
-                            <br><br>
-                            <b-avatar src="https://placekitten.com/300/300" size="14rem"></b-avatar>
-                            <div style="background: rgba(0, 0, 0, 0.25); " class="my-4 py-2">
-                                <h1>{{carta.mujer.nombre}}</h1>
-                                <h2>{{ambitos[carta.mujer.ambito_id -1].nombre}}</h2>
-                                <b-card-text>
-                                    {{carta.mujer.zona_geografica}}
-                                </b-card-text>
-                            </div>                            
-                        </div>
-
-                        <div class="back hide" style="margin-top: 4rem;">
-                            <div style="background: rgba(0, 0, 0, 0.25); " class="my-4 py-2">
-                                <h1>DATOS MUJER</h1>
-                                <h2>{{ambitos[carta.mujer.ambito_id -1].nombre}}</h2>
-                                <b-card-text v-for="(dato, key) in carta.datos" :key="key">
-                                    {{dato.dato}}
-                                </b-card-text>
-                                <b-button class="my-3" @click="mostrarDatosCarta(carta.mujer.id)" variant="primary">View</b-button>
+                    <b-col style="padding: 3rem;">
+                        <b-card
+                            :id="carta.mujer.id"
+                            :ref="'card' + carta.mujer.id"
+                            tag="article"
+                            style="max-width: 25rem;"
+                            class="mb-2"
+                            :style="{ 
+                                backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ ambitos[carta.mujer.ambito_id -1].nombre.trim().toLowerCase() +'_borde.png') + ')',
+                                color:'white',
+                                backgroundSize: 'cover',
+                                width: '100%',
+                            }"
+                        >
+                            <div  @click="rotateCard(carta.mujer.id)" 
+                                style="background-color: white; 
+                                        border-radius:50px;
+                                        width:3rem;height:3rem;float:right;">
+                                <img src="../assets/keyboard.png" style="width:2rem;height:2rem;margin-top:0.5rem;">
                             </div>
-                        </div>
-                    </b-card>
-                </div>
-            </b-col>
-            <b-col>
-                <b-button type="button" @click="sugerirMujer()" variant="secondary" class="bottom">Sugerir mujer</b-button>
-            </b-col>
 
+                            <div class="front">
+                                <br><br>
+                                <b-avatar src="https://placekitten.com/300/300" size="14rem"></b-avatar>
+                                <div style="background: rgba(0, 0, 0, 0.6); " class="my-4 py-2">
+                                    <h1>{{carta.mujer.nombre}}</h1>
+                                    <h2>{{ambitos[carta.mujer.ambito_id -1].nombre}}</h2>
+                                    <b-card-text>
+                                        {{carta.mujer.zona_geografica}}
+                                    </b-card-text>
+                                </div>                            
+                            </div>
+
+                            <div class="back hide" style="margin-top: 4rem;">
+                                <div style="background: rgba(0, 0, 0, 0.25); " class="my-4 py-2">
+                                    <h1>DATOS MUJER</h1>
+                                    <h2>{{ambitos[carta.mujer.ambito_id -1].nombre}}</h2>
+                                    <b-card-text v-for="(dato, key) in carta.datos" :key="key">
+                                        {{dato.dato}}
+                                    </b-card-text>
+                                    <b-button class="my-3" @click="mostrarDatosCarta(carta.mujer.id)" variant="primary">View</b-button>
+                                </div>
+                            </div>
+                        </b-card>
+                    </b-col>
+                </div>
             <b-modal size="lg"
                 id="mujer_detail"  
                 hide-footer 
                 @show="mujerModalShow">
-                <div 
-                    >
+                <div>
                     <b-card
                         no-body 
                         class="overflow-hidden"
@@ -71,12 +66,12 @@
                         <b-col 
                             md="6" 
                             class="text-center"
-                            :style="{ 
+                            :style="{
                                 backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ mujerDetail.mujer.ambito.trim().toLowerCase() +'_borde.png') + ')',
                                 color:'white',
                                 backgroundSize: 'cover',
-                                width: '100%',}"
-                        >
+                                width: '100%', }">
+
                                 <br><br>
                                 <b-avatar src="https://placekitten.com/300/300" size="14rem"></b-avatar>
                                 <div style="background: rgba(0, 0, 0, 0.25); " class="my-4 py-2">

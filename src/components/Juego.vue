@@ -9,39 +9,9 @@
             <b-link variant="Link" to="SelectNivel">Volver</b-link>
         </b-row> -->
         <b-row class="full">
-            <!-- Cards of the game -->
-            <b-col>
-                <b-row>
-                    <b-col class="kutxa" v-on:click="sumarPuntuacion()">1</b-col>
-                    <b-col class="kutxa" v-on:click="sumarPuntuacion()">2</b-col>
-                    <b-col class="kutxa">3</b-col>
-                    <b-col class="kutxa">4</b-col>
-                </b-row>
-                <b-row>
-                    <b-col class="kutxa">5</b-col>
-                    <b-col class="kutxa">6</b-col>
-                    <b-col class="kutxa">7</b-col>
-                    <b-col class="kutxa">8</b-col>
-                </b-row>               
-                <b-row>
-                    <b-col class="kutxa">9</b-col>
-                    <b-col class="kutxa">10</b-col>
-                    <b-col class="kutxa">11</b-col>
-                    <b-col class="kutxa">12</b-col>
-                </b-row>                
-                <b-row>
-                    <b-col class="kutxa">13</b-col>
-                    <b-col class="kutxa">14</b-col>
-                    <b-col class="kutxa">15</b-col>
-                    <b-col class="kutxa">16</b-col>
-                </b-row>
-            </b-col>
-
             <!-- Facts + Alerts -->
             <b-col>
-                <b-row>DATO</b-row>
-                <b-row>{{acierta}}</b-row>
-                <b-row>{{bonus}}</b-row>
+                <b-row>{{this.currentDato}}</b-row>
 
                 <!-- Notificacion -->
                 <b-row hidden>Mujer descubierta</b-row>
@@ -58,7 +28,36 @@
                 <!-- <b-button variant="dark" id="btnEmpezar" size="lg" pill @click="showModalPartidaFin">Fin juego</b-button> -->
             </b-col>
         </b-row>
-
+        
+            <!-- Cards of the game -->
+            <b-row cols="3">
+                <div v-for="(mujer, key) in cardsDeck" :key="key" class="my-3" style="maxWidth:24rem;">
+                    <b-col >
+                        <b-card
+                            @click="comprobarDato(mujer.id)"
+                            :id="mujer.id"
+                            :ref="'card' + mujer.id"
+                            tag="article"
+                            class="mb-2"
+                            :style="{ 
+                                backgroundImage: 'url(' + require('@/assets/Cartas/single/derecho.png') + ')',
+                                color:'white',
+                                backgroundSize: 'cover',
+                                width: '100%',
+                                transform: 'scale(0.7)'
+                            }"
+                        >
+                        <div class="front">
+                            <br><br>
+                            <b-avatar src="https://placekitten.com/300/300" size="10rem"></b-avatar>
+                            <div style="background: rgba(0, 0, 0, 0.6); " class="my-4 py-2">
+                                <h1>{{mujer.nombre}}</h1>
+                            </div>                            
+                        </div>
+                        </b-card>
+                    </b-col>
+                </div>
+            </b-row>
 
         <b-row class="full"> 
 
@@ -158,7 +157,9 @@
 <script>
 // import func from '../../vue-temp/vue-editor-bridge';
 import Juego from "../Juego"
-import GameErrorDataService from "../Services/GameErrorDataService"
+import G_error from "../Services/GameErrorDataService"
+import GameDataService from "../Services/GameDataService";
+
 import $ from 'jquery'
 
     export default {
@@ -169,6 +170,15 @@ import $ from 'jquery'
                 easyNormalGame: false,
                 timerMobile: true,
                 // Juego
+                cardsDeck: {},
+                mujeres: null,
+                mujeresEnPantalla: [],
+                datos: null,
+                currentDato: {
+                    idMujer: null,
+                    dato: null,
+                },
+                alreadyAskedDatos : [],
                 puntos: 0,
                 onRow: 0,
                 bonus: '',
@@ -317,7 +327,7 @@ import $ from 'jquery'
                     //Log sending data
                     console.log(data);
 
-                    GameErrorDataService.sendEmail(data)
+                    G_error.sendEmail(data)
                         .then(() => {
                             console.log(data);
                         })
@@ -344,6 +354,28 @@ import $ from 'jquery'
                 } else {
                     return false;
                 }
+            },
+            selectDato() {
+                let index = Math.floor(Math.random() * this.datos.length);
+
+                while (this.alreadyAskedDatos.includes(index) || !this.mujeresEnPantalla.includes(this.datos[index].id)) {
+                    index = Math.floor(Math.random() * this.datos.length);
+                } 
+
+                this.alreadyAskedDatos.push(index);
+
+                this.currentDato = this.datos[index];
+                
+                console.log("preguntados:" + this.alreadyAskedDatos);
+            },
+            comprobarDato(idMujer) {
+                if (idMujer === this.currentDato.id) {
+                    alert("CORRECTO BOLUDO");
+                    this.sumarPuntuacion();
+                    this.selectDato();
+                } else {
+                    alert("INCOOOOOOOOORRECTO PAI");
+                }
             }
         },
         mounted() {
@@ -361,7 +393,33 @@ import $ from 'jquery'
                 this.$router.push({name: 'selectNivel'});
             }
             
-            //
+
+            //Validacion ok, start loading game
+
+            GameDataService.loadMujeresForGame()
+                .then((response) => {
+                    this.mujeres = response.data.mujeres;
+                    this.datos = response.data.datos;
+
+                    if (this.mujeres !== null && this.mujeres.length > 0) {
+                        this.cardsDeck = this.mujeres.slice(0, 12);
+
+                        for (let i = 0; i < this.cardsDeck.length; i++) {
+                            const carta = this.cardsDeck[i];
+
+                            this.mujeresEnPantalla.push(carta.id);    
+                        }
+
+                        //DATA IS LOADED, DO STUFF HERE
+                        this.selectDato();
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+
+            // Error modal
             this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
                 if (modalId === "report-error") {
                     clearInterval(this.timer);
@@ -372,7 +430,7 @@ import $ from 'jquery'
                     this.btnEmpezarClass = '';
                 }
             })
-        },
+        }
     }
 
 </script>
