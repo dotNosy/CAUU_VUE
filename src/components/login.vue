@@ -1,9 +1,9 @@
 <template>
 <form>
     <div class="modal-body">
-        <div class="container login-container col-md-3">
+        <div class="container login-container col-md-5" style="margin-top:7%;">
             <div class="row">
-                <div class="col-md-12 login-form-1 formulario form">
+                <div class="col-md-12 login-form-1 formulario form" style="padding:7%;">
                     <br><h3>Iniciar Sesión</h3><br>
                         <div class="form-group">
                             <input id="email" class="form-control" type="email" placeholder="Email *" v-model="user.email"/><br>
@@ -17,7 +17,7 @@
                         <!-- Cargando -->
                         <div id="iniciandoSesionLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando..."></b-spinner></div>
                         <div class="form-group">
-                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Registrate</a><br>
+                            <a href="./registro" class="ForgetPwd">¿No tienes cuenta? Regístrate</a><br>
                         </div>
                         <div class="form-group">
                             <a href="./passrec" class="ForgetPwd">¿Has olvidado tu contraseña?</a><br>
@@ -63,17 +63,18 @@
                         }  
                     })
                     .catch(e => {
-                        alert("Usuario o contraseña incorrecto")
+                        // alert("Usuario o contraseña incorrecto")
+                        this.$swal({  
+                            type: 'error',
+                            icon: 'error',  
+                            title: '¡Vaya!',  
+                            text: 'Parece que tus datos no son correctos, vuelve a intentarlo',
+                        });  
                         console.log(e);
                     });
             }
         },
         mounted() {
-
-            // if (User.getUser() !== null) {
-            //     this.$router.push({name: 'selectNivel'});
-            // }
-
             $("#iniciandoSesionLoading").hide();
         }
     }

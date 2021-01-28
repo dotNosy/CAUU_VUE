@@ -1,5 +1,5 @@
 <template>
-<div class="container login-container col-md-3">
+<div class="container login-container col-md-3" style="margin-top:1rem;">
     <div class="row">
         <div class="col-md-12 login-form-1 formulario form" style="background-color:;">
         <br>

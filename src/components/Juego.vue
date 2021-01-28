@@ -24,7 +24,7 @@
                 <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')" class="exclamation" style="cursor: hand;"></b-icon></p>
                 <h6>Tu puntuación</h6>
                 <h6>{{ puntos }}</h6>
-                <b-button v-show="!easyNormalGame"  v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="startTimer">Empezar!</b-button>
+                <b-button v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="jugar()">Empezar</b-button>
                 <!-- <b-button variant="dark" id="btnEmpezar" size="lg" pill @click="showModalPartidaFin">Fin juego</b-button> -->
             </b-col>
         </b-row>
@@ -206,9 +206,24 @@ import $ from 'jquery'
                 reasonsChecked: {},
             }
         },
-        methods: {            
+        methods: {   
+            jugar() {
+                // Iniciamos el juego
+                // Si es el nivel 3 --> iniciar el temporizador
+                if (!this.easyNormalGame) {
+                    this.startTimer()
+                } else {
+                    // Cargamos las mujeres por rondas
+
+                }
+                //Al acabar el juego --> Mostramos las estadisticas al terminar el juego
+                this.showModalPartidaFin();
+                // Guardamos la partida del usuario y sus mujeres desbloqueadas
+
+            },         
             showModalPartidaFin() {
                 this.$refs['finJuego'].show();
+                // $("#modal-fin-juego").show();
             },
             startTimer() {
                 this.btnEmpezarClass = 'disabled outline-dark';
@@ -235,7 +250,7 @@ import $ from 'jquery'
                             console.log("se acabo!");
                             // this.showModalPartidaFin();
                             clearInterval(global.timer);
-                            // this.showModalPartidaFin();
+                            this.showModalPartidaFin();
                         }
                         // this.showModalPartidaFin();
 
@@ -312,7 +327,12 @@ import $ from 'jquery'
             sendEmail() {
                 let checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
                 if(checkboxes.length == 0) {
-                    alert("Por favor seleccione al menos una categoría de error");
+                    this.$swal({  
+                            type: 'warning',
+                            icon: 'warning',  
+                            title: '¡Vaya!',  
+                            text: 'Parece que no has rellenado los datos necesarios, vuelve a intentarlo',
+                        });  
                 }
                 else{
 
@@ -436,66 +456,59 @@ import $ from 'jquery'
 </script>
 
 <style>
-/* * {margin-left: 5px;} */
-    .exclamation:hover {
-        transform:scale(1.2,1.2);
-    }
-    #otrostext{
-        display: none;
-    }
-    #categoriatext{
-        resize: none;
-    }
-    body{
-    background-color: aliceblue;
+.exclamation:hover {
+    transform:scale(1.2,1.2);
 }
-
-    .full{
-        /* background-color:red ; */
-        max-width: 100%;
-        padding-left:1%;
+#otrostext{
+    display: none;
+}
+#categoriatext{
+    resize: none;
+}
+body{
+background-color: aliceblue;
+}
+.full{
+    max-width: 100%;
+    padding-left:1%;
+}
+.kutxa {
+    background-color: salmon;
+    color: black;
+    width: 50px;
+    height: 50px;
+    padding: 5%;
+    margin: 2%;
+}
+body{
+    background-color: whitesmoke;
+}
+@media (max-width: 600px) {
+    #temporizador {
+        visibility: hidden;
     }
-    .kutxa {
-        background-color: salmon;
-        color: black;
-        width: 50px;
-        height: 50px;
-        padding: 5%;
-        margin: 2%;
+    #countdown {
+        visibility: visible;
     }
-
-    @media (max-width: 600px) {
-
-        #temporizador {
-            visibility: hidden;
-        }
-        #countdown {
-            visibility: visible;
-        }
-
+}
+@media (min-width: 600px) {
+    #countdown {
+        visibility: hidden;
     }
-
-    @media (min-width: 600px) {
-
-        #countdown {
-            visibility: hidden;
-        }
-
-    }
-
+}
 </style>
 <style lang="sass">
-    $color: #4e3757
-    $bg: #2d2c2f
+$color: #4e3757
+$bg: #2d2c2f
 
-    #btn
-        background-color: $color
-        border-color: $color
-    
-    .custom-checkbox .custom-control-input:checked~.custom-control-label::before
-        background-color: $color
+#btn
+    background-color: $color
+    border-color: $color
 
-    .bg-purple
-        background-color: $color
-    
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before
+    background-color: $color
+
+.bg-purple
+    background-color: $color
+
 </style>

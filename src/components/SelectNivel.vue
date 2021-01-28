@@ -17,7 +17,10 @@
             <!-- <b-col>
                 <b-link variant="Link" to="Perfil">Volver</b-link>
             </b-col> -->
-            <b-col><p class="h3">{{titulo}}</p></b-col>
+            <b-col>
+                <p class="h3">{{titulo}}</p>
+                <p class="h3">{{subtitulo}}</p>
+            </b-col>
         </b-row>
         <b-row><br></b-row>
         <!-- Niveles -->
@@ -47,14 +50,7 @@
         </div>
 
         <!-- Checkboxes -->
-        <div style="
-                margin-top: 1em;
-                margin-left: auto;
-                margin-right: auto;
-                text-align:left; 
-                margin-left: 42%;
-
-                ">
+        <div class="divSelect">
             <b-form-group>
                 <template #label>
                     <b-form-checkbox
@@ -87,7 +83,7 @@
         <!-- Cargando -->
         <div id="ambitosLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando ambitos..."></b-spinner></div>
         <br>
-        <b-button variant="dark" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
+        <b-button variant="dark" class="btnJuego" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
         <b-row><br></b-row>
     </div>
 </template>
@@ -100,7 +96,8 @@ import $ from "jquery";
     export default {
         data() {
             return {
-                titulo: "Seleccione nivel y ámbitos para jugar, después pulse 'Ir al juego'",
+                titulo: "Seleccione nivel y ámbitos para jugar, ",
+                subtitulo: "después pulse 'Ir al juego'",
                 niveles: [
                     {nombre: "Nivel 1", dificultad: "Fácil: Juegas 10 rondas con los datos más fáciles de las mujeres."},
                     {nombre: "Nivel 2", dificultad: "Normal: Juegas 10 rondas con todos los datos de las mujeres."},
@@ -183,5 +180,32 @@ import $ from "jquery";
 <style>
 body{
     background-color:#BA9AC8;
+    overflow: auto;
+}
+.divSelect{
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:left; 
+    margin-left: 42%;
+}
+@media (max-width: 992px) {
+    body{
+        padding-bottom: 20%;
+    }
+    .btnJuego{
+        width: 70%;
+    }
+    .divSelect{
+        margin-left: 3rem;
+    }
+}
+@media (max-width: 576px) {
+    .btnJuego{
+        width: 80%;
+    }
+    .divSelect{
+        margin-left: 1rem;
+    }
 }
 </style>
