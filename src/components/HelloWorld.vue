@@ -48,13 +48,12 @@
   font-size:1em;
   font-weight: bold;
   margin-bottom: 1%;
-
 }
 .inicio{
     position: absolute;
     top:2em;
-    left: 30rem;
-    right: 30rem;
+    left: 0em;
+    right: 0em;
     font-size:1.8em;
     text-align:center;
     font-weight:bold;
@@ -154,15 +153,9 @@ input:checked + label + .slide {
 .bg8{
   background-image: url(../assets/portada/8.jpg);
 }
-@media (max-width: 576px) {
-.inicio{
-  left:0em;
-  right: 0em;
-}
 .boton{
   font-size:0.6em;
   font-weight: bold;
-}
 }
 </style>
 
@@ -184,5 +177,4 @@ window.$ = $
       index=1;
     }
   }, 3000);
-
 </script>
