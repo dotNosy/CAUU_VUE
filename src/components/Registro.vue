@@ -233,7 +233,12 @@
                         || this.$v.password2.$invalid    
                     )
                     {
-                        alert("DATOS o FORMATO incorrectos!!");
+                        this.$swal({  
+                            type: 'error',
+                            icon: 'error',  
+                            title: '¡Vaya!',  
+                            text: 'Parece que tus datos no son correctos, vuelve a intentarlo',
+                        }); 
                         return false;
                     }
 

@@ -119,10 +119,9 @@
         display: none;
     }
     .btn{
-        width: 100%;
+        width: 94%;
         padding: 2%;
         margin: 0.5%;
-        border-color: black;
     }
 }
 </style>

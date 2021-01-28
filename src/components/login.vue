@@ -63,7 +63,13 @@
                         }  
                     })
                     .catch(e => {
-                        alert("Usuario o contraseña incorrecto")
+                        // alert("Usuario o contraseña incorrecto")
+                        this.$swal({  
+                            type: 'error',
+                            icon: 'error',  
+                            title: '¡Vaya!',  
+                            text: 'Parece que tus datos no son correctos, vuelve a intentarlo',
+                        });  
                         console.log(e);
                     });
             }
