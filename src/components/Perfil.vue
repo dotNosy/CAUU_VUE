@@ -3,19 +3,10 @@
             
             <b-col><h1>Hola {{user.nombre}}</h1></b-col>
             <div class="divdatos">
-            <!-- <div data-title="Farewell!" 
-                data-intro="And this is the last step!"
-                v-intro="'Edit Project\'s Name Here'"
-                v-intro-position="'bottom'"
-            >AAAAAAAAAA</div> -->
+
                     <h2>Tus datos</h2>
                     <div style="padding-left:5%;">
-                <!-- <b-row>
-                    <label for="nomUsuario">Nombre:</label>
-                    <b-form-input id="nomUsuario" v-model="name" style="width: 30em; padding:1em; margin-bottom:1em"></b-form-input>
-                        <div class="error" v-if="!$v.name.required">Campo obligatorio</div>
-                        <div class="error" v-if="!$v.name.minLength">Minimo {{$v.name.$params.minLength.min}} caracteres</div>
-                </b-row> -->
+
                     <b-form-group id="input-group-2" label="Nombre:*" label-for="nomUsuario" style="text-align:left">
                         <b-form-input
                             id="nomUsuario"
@@ -25,13 +16,7 @@
                     </b-form-group>
                     <div class="error" v-if="!$v.name.required">Campo obligatorio</div>
                     <div class="error" v-if="!$v.name.minLength">Minimo {{$v.name.$params.minLength.min}} caracteres</div>
-                <!-- <b-row>
-                    <label for="emailUsuario">Email:</label>
-                    <b-form-input id="emailUsuario" v-model="email" style="width: 30em; padding:1em;"></b-form-input>
-                        <div class="error" v-if="!$v.email.required">Campo obligatorio</div>
-                        <div class="error" v-if="!$v.email.minLength">Minimo {{$v.email.$params.minLength.min}} caracteres</div>
-                        <div class="error" v-if="!$v.email.email">Formato de email incorrecto</div>
-                </b-row> -->
+
                     <b-form-group id="input-group-2" label="Email:*" label-for="nomUsuario" style="text-align:left">
                         <b-form-input id="emailUsuario" v-model="email" style="width: 94%;"></b-form-input>
                     </b-form-group>
@@ -53,23 +38,7 @@
                             <div class="error" v-if="!$v.password1.required" style="text-align:left">Campo obligatorio</div>
                             <div class="error" v-if="!$v.password1.minLength" style="text-align:left">Minimo {{$v.password1.$params.minLength.min}} caracteres</div>
                         </b-form-group>
-                <!-- <b-row> -->
-<!--                   
-                    <label for="password2">Confirmar contraseña:</label>
-                        <b-form-group id="input-group-6">
-                            <b-form-input 
-                                type="password" 
-                                id="password2" 
-                                v-model="$v.password2.$model"
-                                aria-describedby="password-help-block"
-                                placeholder="Repite la contraseña"
-                                style="width: 30em; padding:1em;"
-                            ></b-form-input>
 
-                            <div class="error" v-if="!$v.password2.sameAs">Las contraseñas no coinciden.</div>
-                        </b-form-group>
-                </b-row> -->
-                <!--  -->
                     <!-- Confirmacion contraseña -->
                     <b-form-group id="input-group-6" label="Confimar contraseña:*" label-for="nomUsuario" style="text-align:left">
                         <b-form-input 
@@ -99,11 +68,6 @@
                     <h3>TOP 2: <h2>27000</h2></h3>
                     <h3>TOP 3: <h2>12000</h2></h3>
                     <!-- TO-DO mostrar con un template las ultimas 5 posiciones -->
-                <!-- <b-link variant="Link">Cerrar sesion</b-link> -->
-                <!-- <div v-intro="'The content of tooltip'">AAAAA</div>
-                <div v-intro="'The content of tooltip'" v-intro-step="2">BBB</div>
-                <div v-intro="'The content of tooltip'" v-intro-tooltip-class="'red-bg'">cccccc</div>
-                <div v-hint="'The content of tooltip'" v-intro-position="'top'">DDDDDD</div> -->
                 </div>
                 </div>
 
@@ -173,8 +137,6 @@
                 
                 ProfileDataService.editProfile(data)
                     .then(() => {
-                        // console.log(this.name);
-                        // console.log(this.email);
                         console.log(data);
                         User.setDatosUser(this.name, this.email);
                     })
@@ -216,36 +178,36 @@
     }
 </script>
 <style>
+.vl {
+    border-left: 4px solid #4E3757;
+    height: 33rem;
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+}
+.divdatos{
+    width:48.5%;
+    padding-top:2%;
+    padding-bottom: 2%;
+    background-color:#E6D9EB;
+    float:left;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    border: solid #846790;
+    border-radius: 2%;
+}
+.divranking{
+    width:49%;
+    float:right;
+}
+.btnactualizar{
+    width:15rem;
+}
+@media (max-width: 992px){
     .vl {
-        border-left: 4px solid #4E3757;
-        height: 33rem;
-        margin-left: 0.1em;
-        margin-right: 0.1em;
+        display: none;
     }
-    .divdatos{
-        width:48.5%;
-        padding-top:2%;
-        padding-bottom: 2%;
-        background-color:#E6D9EB;
-        float:left;
-        margin-left: 0.3rem;
-        margin-right: 0.3rem;
-        border: solid #846790;
-        border-radius: 2%;
-    }
-    .divranking{
-        width:49%;
-        float:right;
-    }
-    .btnactualizar{
-        width:15rem;
-    }
-    @media (max-width: 992px){
-        .vl {
-            display: none;
-        }
-    }
-    @media (max-width: 768px){
+}
+@media (max-width: 768px){
     .btnactualizar{
         width:94%;
     }
@@ -257,6 +219,5 @@
         text-align: center;
         width: 90%;
     }
-    }
-
+}
 </style>

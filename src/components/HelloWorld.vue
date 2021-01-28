@@ -31,15 +31,11 @@
 <input type="radio" id="trigger8" name="slider">
 <label for="trigger8"></label>
 <div class="slide bg8"></div>
-<!-- <a href="http://localhost:8080/Login"><b-button variant="dark" id="btn" style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:1em;right:1em;position:fixed;" >ENTRAR</b-button></a> -->
 <div class="inicio">
   <img src="../assets/logoDF2.png" alt="logo" class="imglogo" id="logoDF">
   <a href="./Login" ><b-button variant="dark" id="btnHome1" class="boton" >ENTRAR</b-button></a><br>
   <a href="./Registro"><b-button variant="dark" id="btnHome2" class="boton" >REGISTRARSE</b-button></a><br>
 </div>
-<!-- <div style="width:20em;height:4em;opacity:1;font-size:1.3em;font-weight:bold;border-radius:2%;top:15%;right:50%;position:fixed;background-color:red;">
-<h1 style="color:white;">hola buenas tardes</h1>
-</div> -->
 </div>
 
 </template>
@@ -54,7 +50,6 @@
   margin-bottom: 1%;
 
 }
-
 .inicio{
     position: absolute;
     top:2em;
@@ -82,7 +77,6 @@
   border-style: solid;
   border-color: #4E3757;
 }
-
 body, html {
   padding: 0;
   margin: 0;
@@ -91,14 +85,12 @@ body, html {
   text-align: center;
   overflow: hidden;
 }
-
 input {
   position: absolute;  
   opacity: 0;
   margin-top: 95vh;
   cursor: pointer;
 }
-
 label {
   display: inline-block;
   width: 12px;
@@ -111,15 +103,12 @@ label {
   cursor: pointer;
   transition-duration: .4s;
 }
-
 input:checked + label{
   background-color: white;
 }
-
 input:focus + label{
   box-shadow: 0 0 0 2px teal, 0 0 18px white;
 }
-
 .slide {
   position: absolute;
   background-position: center;
@@ -134,16 +123,13 @@ input:focus + label{
   transition-duration: .8s;
   opacity: 1;
 }
-
 input:checked ~ .slide {
   transform: translateX(100%);
 }
-
 input:checked + label + .slide {
   transform: translateX(0);
   opacity: 1;
 }
-
 .bg1{
   background-image: url(../assets/portada/1.jpg);
 }
@@ -169,15 +155,14 @@ input:checked + label + .slide {
   background-image: url(../assets/portada/8.jpg);
 }
 @media (max-width: 576px) {
-  .inicio{
-    left:0em;
-    right: 0em;
-  }
-  .boton{
+.inicio{
+  left:0em;
+  right: 0em;
+}
+.boton{
   font-size:0.6em;
   font-weight: bold;
 }
-
 }
 </style>
 

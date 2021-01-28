@@ -14,9 +14,6 @@
             <br>
         </b-row>
         <b-row>
-            <!-- <b-col>
-                <b-link variant="Link" to="Perfil">Volver</b-link>
-            </b-col> -->
             <b-col><p class="h3">{{titulo}}</p></b-col>
         </b-row>
         <b-row><br></b-row>
