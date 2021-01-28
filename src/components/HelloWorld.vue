@@ -171,7 +171,6 @@ window.$ = $
     $('#'+id).prop("checked", true);
     $('#'+id).focus();
     index=index+1;
-    console.log(index);
     }
     else{
       index=1;
