@@ -5,14 +5,10 @@
             <h3>Mujeres en las ciencias sociales</h3>
             <hr>
         </b-row>
-        <!-- <b-row class="full">
-            <b-link variant="Link" to="SelectNivel">Volver</b-link>
-        </b-row> -->
-        <b-row class="full">
+
+        <b-row class="full mb-5">
             <!-- Facts + Alerts -->
             <b-col>
-                <b-row>{{this.currentDato}}</b-row>
-
                 <!-- Notificacion -->
                 <b-row hidden>Mujer descubierta</b-row>
                 <b-row hidden>Dato descubierto</b-row>
@@ -24,17 +20,31 @@
                 <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')" class="exclamation" style="cursor: hand;"></b-icon></p>
                 <h6>Tu puntuación</h6>
                 <h6>{{ puntos }}</h6>
-                <b-button v-bind:class="[btnEmpezarClass]" variant="dark" id="btnEmpezar" size="lg" pill @click="jugar()">Empezar</b-button>
-                <!-- <b-button variant="dark" id="btnEmpezar" size="lg" pill @click="showModalPartidaFin">Fin juego</b-button> -->
+                <b-button :variant="btnEmpezarClass" id="btnEmpezar" size="lg" pill @click="jugar()">Empezar</b-button>
             </b-col>
         </b-row>
-        
+            
+            <!-- LOADING -->
+            <b-row style=""  class="full"><b-col cols="12">
+                <div id="loading" class="text-center"><b-spinner class="my-1" style="width: 15rem; height: 15rem;" variant="danger" label="Cargando..."></b-spinner></div>
+            </b-col></b-row>
+
+            <!-- DATO -->
+            <b-row class="full mt-5" id="dato" style="display:none;">
+                <b-col>
+                    <b-alert show variant="warning" style="color:black"><h2>{{this.currentDato}}</h2></b-alert>
+                </b-col>
+            </b-row>
+
             <!-- Cards of the game -->
             <b-row cols="3">
-                <div v-for="(mujer, key) in cardsDeck" :key="key" class="my-3" style="maxWidth:24rem;">
+                <div v-for="(mujer, key) in cardsDeck" :key="key" 
+                    class="my-3" style="maxWidth:24rem;"  
+                    @click="clickCarta(mujer.id)"
+                    @mouseenter="cartaHoverEnter(mujer.id)"
+                    @mouseleave="cartaHoverLeave(mujer.id)">
                     <b-col >
                         <b-card
-                            @click="comprobarDato(mujer.id)"
                             :id="mujer.id"
                             :ref="'card' + mujer.id"
                             tag="article"
@@ -44,7 +54,8 @@
                                 color:'white',
                                 backgroundSize: 'cover',
                                 width: '100%',
-                                transform: 'scale(0.7)'
+                                transform: 'scale(0.7)',
+                                cursor:'pointer'
                             }"
                         >
                         <div class="front">
@@ -159,43 +170,54 @@
 import Juego from "../Juego"
 import G_error from "../Services/GameErrorDataService"
 import GameDataService from "../Services/GameDataService";
+import anime from 'animejs';
 
 import $ from 'jquery'
 
     export default {
         data() {
             return {
-                btnEmpezarClass : '',
-                timer: null,
-                easyNormalGame: false,
-                timerMobile: true,
+                //Timer
+                    timer: null,
+                    timerMobile: true,
+                    value: 100,
+                    max: 100,
                 // Juego
-                cardsDeck: {},
-                mujeres: null,
-                mujeresEnPantalla: [],
-                datos: null,
-                currentDato: {
-                    idMujer: null,
-                    dato: null,
-                },
-                alreadyAskedDatos : [],
-                puntos: 0,
-                onRow: 0,
-                bonus: '',
-                mujeresDesbloqueadas: 0,
+                    btnEmpezarClass : 'dark disabled',
+                    easyNormalGame: false,
+                    start: false,
+                //Cartas
+                    //Total cartas partida
+                    mujeres: null,
+                    //Cartas en pantalla (9)
+                    cardsDeck: {},
+                    cartasCorrectas: 0,
+                    vueltasDeck: 1,
+                    //IDs de las cartas en pantalla
+                    mujeresEnPantalla: [],
+                //Datos cartas
+                    datos: null,
+                    currentDato: {
+                        idMujer: null,
+                        dato: null,
+                    },
+                    alreadyAskedDatos : [],
+                //valores bonus
+                    bonus1:0,
+                    bonu2:0,
+                    bonus3:0,
+                    bonus4:0,
+                // si aciertas
+                    acierta: 1,
+                    puntos: 0,
+                    onRow: 0,
+                    bonus: '',
+                    mujeresDesbloqueadas: 0,
+
                 //Validar si es valido y si es pc o movil
                 validDeviceDimensions:this.enoughDimensionsToPlay(),
                 isSmall: this.playWithFour(),
-                //valores bonus
-                bonus1:0,
-                bonu2:0,
-                bonus3:0,
-                bonus4:0,
-                // si aciertas
-                acierta: 1,
-                // valores timer
-                value: 100,
-                max: 100,
+               
                 // Modal mandar datos
                 titulo: 'Bienvenido al reporte de errores',
                 explanationWhere: 'Por favor, indique dónde ha encontrado el error*:',
@@ -206,27 +228,40 @@ import $ from 'jquery'
                 reasonsChecked: {},
             }
         },
-        methods: {   
+        methods: {
+            enoughDimensionsToPlay() {
+                let maxWidth = $('html').css('max-width');
+                if (maxWidth == '600px') {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            playWithFour() {
+                let maxWidth = $('html').css('max-width');
+                if (maxWidth == '600px') {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
             jugar() {
-                // Iniciamos el juego
+                if (this.start) {
+                    return false;
+                }
+
                 // Si es el nivel 3 --> iniciar el temporizador
                 if (!this.easyNormalGame) {
                     this.startTimer()
-                } else {
-                    // Cargamos las mujeres por rondas
-
                 }
-                //Al acabar el juego --> Mostramos las estadisticas al terminar el juego
-                this.showModalPartidaFin();
-                // Guardamos la partida del usuario y sus mujeres desbloqueadas
 
-            },         
-            showModalPartidaFin() {
-                this.$refs['finJuego'].show();
-                // $("#modal-fin-juego").show();
+                this.selectDato();
+
+                $("#dato").fadeIn("Slow");
+
+                this.start = true;
             },
             startTimer() {
-                this.btnEmpezarClass = 'disabled outline-dark';
                 this.finished = false;
                 // let modalFinPartida = this.$refs.finJuego.$el;
 
@@ -261,34 +296,102 @@ import $ from 'jquery'
                 }, 100);
                 
                 // this.showModalPartidaFin();
-
-            
             },
-            finished: () => {
-                this.$refs.countdown.updateTime(100);
-                this.timerMobile = false;
-                console.log("patata");
+            selectDato() {
+                //Coger una posicion aleatoria del array de datos
+                let index = Math.floor(Math.random() * this.datos.length);
 
+                //Si la posicion ya ha salido o el dato no es de una mujer que esta en pantalla --> tirar otra vez
+                while (this.alreadyAskedDatos.includes(index) || !this.mujeresEnPantalla.includes(this.datos[index].id)) {
+                    index = Math.floor(Math.random() * this.datos.length);
+                } 
+
+                //Apuntar el dato que ha salido
+                this.alreadyAskedDatos.push(index);
+
+                //Preguntar el dato en pantalla
+                this.currentDato = this.datos[index];
             },
-            otrosSeleccionado() {
-                if (this.otrosSelected) {
-                    this.otrosSelected = false;
-                } else {
-                    this.otrosSelected = true;
+            comprobarDato(idMujer) {
+                if (idMujer === this.currentDato.id) {
+                    //* Animacion DATO OK   
+                    let card = 'card'+idMujer;
+                    anime({
+                        targets: this.$refs[card][0],
+                        rotateZ: ['0', '360'],
+                        duration: 600,
+                        easing:'easeInOutQuad'
+                    });
+
+                    this.sumarPuntuacion();
+
+                    this.comprobarMano();
+
+                    $('#' + idMujer).fadeOut("slow");
+
+                    //* Quitar de los datos en pantalla
+                    let copiaMujeresEnPantalla = [];
+                    for (let i = 0; i < this.mujeresEnPantalla.length; i++) {
+                        const element = this.mujeresEnPantalla[i];
+                        copiaMujeresEnPantalla.push(element);
+                    }
+
+                    this.mujeresEnPantalla.splice(0)
+                    
+                    for (let i = 0; i < copiaMujeresEnPantalla.length; i++) {
+                        const muujer = copiaMujeresEnPantalla[i];
+
+                        if (idMujer !== muujer) {
+                            this.mujeresEnPantalla.push(muujer);
+                        }
+                    }
+
+                    this.selectDato();
+                } 
+                else {
+                    //* Animacion DATA KO
+                    let card = 'card'+idMujer;
+                    anime({
+                        targets: this.$refs[card][0],
+                        translateX: ['-.40rem', '.40rem'],
+                        duration: 50,    
+                        direction: 'alternate',
+                        loop: 10,
+                        easing: 'easeOutBack',
+                    });
                 }
             },
-            otros() {
-                var checkBox = document.getElementById("otros");
-                var text = document.getElementById("otrostext");
+            comprobarMano () {
+                this.cartasCorrectas++;
+                if (this.cartasCorrectas === 9 || this.cartasCorrectas === 18 || this.cartasCorrectas === 27 || this.cartasCorrectas === 36) {
+                    //* Mano completa sacar otros 12
 
-                if (checkBox.checked == true){
-                    text.style.display = "block";
-                } else {
-                    text.style.display = "none";
+                    let mujeresSiguienteVuelta = this.mujeres.slice((9 * this.vueltasDeck) + 1, (9 * this.vueltasDeck) + 9);
+
+                    for (let i = 0; i < mujeresSiguienteVuelta.length; i++) {
+                        const mujer = mujeresSiguienteVuelta[i];
+
+                        this.cardsDeck.push(mujer);
+                    }
+
+                    this.mujeresEnPantalla = [];
+                    for (let i = 0; i < mujeresSiguienteVuelta.length; i++) {
+                            const carta = mujeresSiguienteVuelta[i];
+
+                            this.mujeresEnPantalla.push(carta.id);  
+                    }
+
+                    console.log(this.mujeresEnPantalla);
+                    this.vueltasDeck++;
+
+                    console.log("siguiente mano");
+                }
+                else if (this.cartasCorrectas === 45) {
+                    //* ERES BUENISIMO HAS GANADO CRACK
+                    console.log("crack");
                 }
             },
             sumarPuntuacion() {
-
                 if (!this.isSmall) {
                     this.bonus1 = 10;
                     this.bonus2 = 20;
@@ -322,6 +425,66 @@ import $ from 'jquery'
                 } else {
                     this.onRow = 0;
                     console.log("No has acertado");
+                }
+            },
+            clickCarta(idMujer) {
+                this.comprobarDato(idMujer);
+            },
+            finished: () => {
+                this.$refs.countdown.updateTime(100);
+                console.log("patata");
+
+            },
+            showModalPartidaFin() {
+                this.$refs['finJuego'].show();
+                // $("#modal-fin-juego").show();
+            },
+            //Animaciones carta
+            cartaHoverEnter(id) {
+                if (this.start) {
+                    let element = 'card'+id;
+
+                    anime.remove(this.$refs[element][0]);
+                    anime({
+                        targets: this.$refs[element][0],
+                        scale: 1,
+                        duration: 1000,
+                        elasticity: 400
+                    });
+                } 
+            },
+            cartaHoverLeave(id) {
+                if (this.start) {
+                    let element = 'card'+id;
+
+                    anime.remove(this.$refs[element][0]);
+                    anime({
+                        targets: this.$refs[element][0],
+                        scale: 0.7,
+                        duration: 400,
+                        elasticity: 300
+                    });
+                }
+            },
+
+
+            //* MODAL ERROR REPORT
+
+            otrosSeleccionado() {
+                if (this.otrosSelected) {
+                    this.otrosSelected = false;
+                } else {
+                    this.otrosSelected = true;
+                }
+            },
+            otros() {
+                var checkBox = document.getElementById("otros");
+                var text = document.getElementById("otrostext");
+
+                if (checkBox.checked == true){
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
                 }
             },
             sendEmail() {
@@ -358,44 +521,6 @@ import $ from 'jquery'
                     alert('Processing');
 
                 }
-            },
-            enoughDimensionsToPlay() {
-                let maxWidth = $('html').css('max-width');
-                if (maxWidth == '600px') {
-                    return false;
-                } else {
-                    return true;
-                }
-            },
-            playWithFour() {
-                let maxWidth = $('html').css('max-width');
-                if (maxWidth == '600px') {
-                    return true;
-                } else {
-                    return false;
-                }
-            },
-            selectDato() {
-                let index = Math.floor(Math.random() * this.datos.length);
-
-                while (this.alreadyAskedDatos.includes(index) || !this.mujeresEnPantalla.includes(this.datos[index].id)) {
-                    index = Math.floor(Math.random() * this.datos.length);
-                } 
-
-                this.alreadyAskedDatos.push(index);
-
-                this.currentDato = this.datos[index];
-                
-                console.log("preguntados:" + this.alreadyAskedDatos);
-            },
-            comprobarDato(idMujer) {
-                if (idMujer === this.currentDato.id) {
-                    alert("CORRECTO BOLUDO");
-                    this.sumarPuntuacion();
-                    this.selectDato();
-                } else {
-                    alert("INCOOOOOOOOORRECTO PAI");
-                }
             }
         },
         mounted() {
@@ -415,14 +540,13 @@ import $ from 'jquery'
             
 
             //Validacion ok, start loading game
-
             GameDataService.loadMujeresForGame()
                 .then((response) => {
                     this.mujeres = response.data.mujeres;
                     this.datos = response.data.datos;
 
                     if (this.mujeres !== null && this.mujeres.length > 0) {
-                        this.cardsDeck = this.mujeres.slice(0, 12);
+                        this.cardsDeck = this.mujeres.slice(0, 9);
 
                         for (let i = 0; i < this.cardsDeck.length; i++) {
                             const carta = this.cardsDeck[i];
@@ -430,8 +554,11 @@ import $ from 'jquery'
                             this.mujeresEnPantalla.push(carta.id);    
                         }
 
-                        //DATA IS LOADED, DO STUFF HERE
-                        this.selectDato();
+                        //DATA IS LOADED, DO STUFF
+                        $('#loading').fadeOut("fast");
+                        this.btnEmpezarClass = 'success'
+  
+                        $("#btnEmpezar").removeAttr("disabled");
                     }
                 })
                 .catch((error) => {

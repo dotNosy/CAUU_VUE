@@ -5,28 +5,22 @@
             width: 50%;
             margin-left: auto;
             margin-right: auto;
-<<<<<<< HEAD
             margin-top: 4em;">
-=======
-            margin-top: 4em;
-            background-color:white;
-            "
-    >
->>>>>>> 72619030d07384f535db9dbb54fa518022a974bf
+
         <b-row> 
             <br>
             <br>
         </b-row>
+
         <b-row>
-            <!-- <b-col>
-                <b-link variant="Link" to="Perfil">Volver</b-link>
-            </b-col> -->
             <b-col>
                 <p class="h3">{{titulo}}</p>
                 <p class="h3">{{subtitulo}}</p>
             </b-col>
         </b-row>
-        <b-row><br></b-row>
+
+        <br><br>
+
         <!-- Niveles -->
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-outline-secondary" :class="nivel_id === Number(key) ? 'active': ''" v-for="(n, key) in niveles" :key="key">
@@ -83,12 +77,12 @@
                     </b-form-checkbox-group>
                 </template>
             </b-form-group>
+            <b-button variant="dark" class="btnJuego mt-2 mb-5" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
         </div>
         <!-- Cargando -->
         <div id="ambitosLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="primary" label="Cargando ambitos..."></b-spinner></div>
         <br>
-        <b-button variant="dark" class="btnJuego" size="lg" pill @click="comprobarSeleccion()">Ir al juego</b-button>
-        <b-row><br></b-row>
+        <br>
     </div>
 </template>
 
