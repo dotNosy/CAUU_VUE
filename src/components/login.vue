@@ -18,7 +18,7 @@
                             <a href="#" class="ForgetPwd">Ez daukazu konturik? Klik emen egin.</a><br>
                         </div>
                         <div class="form-group">
-                            <a href="./passrec" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>
+                            <a href="" class="ForgetPwd">Ahaztu duzu pasahitza?</a><br>
                         </div>
                 </div>
             </div>
