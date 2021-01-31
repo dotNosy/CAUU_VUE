@@ -140,7 +140,10 @@ import $ from "jquery";
 
             $("#ambitosLoading").fadeIn("slow");
 
-            InfoDataService.ambitos()
+            let ambitosCache = localStorage.getItem('ambitos');
+
+            if (ambitosCache === null) {
+                InfoDataService.ambitos()
                 .then(response => {
                     let array = response.data.ambitos;
 
@@ -148,12 +151,26 @@ import $ from "jquery";
                         th.ambitoLista.push(element.nombre);
                     });
 
+                    localStorage.setItem('ambitos', th.ambitoLista);
+
                     $("#ambitosLoading").hide();
 
                 })
                 .catch(e => {
                     console.log(e);
                 });
+            } else {
+
+                console.log(ambitosCache);
+                let ambitos = ambitosCache.split(',');
+
+                for (let i = 0; i < ambitos.length; i++) {
+                    const element = ambitos[i];
+                    this.ambitoLista.push(element);
+                }
+
+                    $("#ambitosLoading").hide();
+            }
         },
         watch: {
             selected(newValue) {

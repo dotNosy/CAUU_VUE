@@ -7,16 +7,26 @@
         </b-row>
 
         <b-row class="full mb-5">
-            <!-- Facts + Alerts -->
-            <b-col>
-                <!-- Notificacion -->
-                <b-row hidden>Mujer descubierta</b-row>
-                <b-row hidden>Dato descubierto</b-row>
-            </b-col>
+                 <b-col class="full"> 
+            <!-- Temporizador -->
+            <b-progress id="temporizador" v-show="!easyNormalGame" :value="value" :max="max" show-progress animated class="w-50 mb-2" variant="purple"></b-progress>
+            <circular-count-down-timer
+                :initial-value="100"
+                :steps=".1"
+                :stroke-width="8"
+                :seconds-stroke-color="'#4e3757'"
+                :underneath-stroke-color="'lightgrey'"
+                :size="200"
+                :padding="45"
+                :paused= timerMobile
+                :second-label="''"
+                id="countdown"
+                v-show="!easyNormalGame"
+            ></circular-count-down-timer>
+        </b-col>
 
             <!-- Return + Punctuation + Highscore + Begin -->
             <b-col class="full">
-
                 <p class="h1 mb-2"><b-icon icon="exclamation-circle-fill" variant="danger" @click="$bvModal.show('report-error')" class="exclamation" style="cursor: hand;"></b-icon></p>
                 <h6>Tu puntuación</h6>
                 <h6>{{ puntos }}</h6>
@@ -50,7 +60,7 @@
                             tag="article"
                             class="mb-2"
                             :style="{ 
-                                backgroundImage: 'url(' + require('@/assets/Cartas/single/derecho.png') + ')',
+                                backgroundImage: 'url(' + require('@/assets/Cartas/single/'+ mujer.ambito.trim().toLowerCase() +'_borde.png') + ')',
                                 color:'white',
                                 backgroundSize: 'cover',
                                 width: '100%',
@@ -70,32 +80,12 @@
                 </div>
             </b-row>
 
-        <b-row class="full"> 
-
-            <!-- Temporizador -->
-            <b-progress id="temporizador" v-show="!easyNormalGame" :value="value" :max="max" show-progress animated class="w-50 mb-2" variant="purple"></b-progress>
-            <circular-count-down-timer
-                :initial-value="100"
-                :steps=".1"
-                :stroke-width="8"
-                :seconds-stroke-color="'#4e3757'"
-                :underneath-stroke-color="'lightgrey'"
-                :size="200"
-                :padding="45"
-                :paused= timerMobile
-                :second-label="''"
-                id="countdown"
-                @finish="finished"
-                v-show="!easyNormalGame"
-            ></circular-count-down-timer>
-
-        </b-row>
-
         <!-- INI Modal fin del juego -->
         <b-modal id="modal-fin-juego" ref="finJuego" title="¡Partida finalizada!" centered hide-footer>
             <p class="my-4 text-center">La partida ha finalizado.</p>
             <p class="my-4 text-center"><strong>Puntuación obtenida: {{puntos}}</strong></p>
-            <p class="my-4 text-center"><strong>Mujeres desbloqueadas en esta partida: {{mujeresDesbloqueadas}}</strong></p>
+            <p class="my-4 text-center"><strong>Mujeres desbloqueadas en esta partida: {{ mujeresDesbloqueadas.length }} </strong></p>
+            <p class="my-4 text-center"><strong>Datos desbloqueados en esta partida: {{ datosDesbloqueados.length }} </strong></p>
             <p class="my-4 text-center">
                 <strong>
                     <b-icon icon="arrow-down"></b-icon>
@@ -105,6 +95,10 @@
             </p>
             <b-link variant="Link" to="Coleccion">
                 <b-button variant="info" class="mt-3" block>Ver colección</b-button>
+            </b-link>
+
+            <b-link variant="Link" to="selectNivel">
+                <b-button variant="info" class="mt-3" block>Jugar de nuevo</b-button>
             </b-link>
             
         </b-modal>
@@ -177,6 +171,7 @@ import $ from 'jquery'
     export default {
         data() {
             return {
+                helperThis: this,
                 //Timer
                     timer: null,
                     timerMobile: true,
@@ -186,6 +181,10 @@ import $ from 'jquery'
                     btnEmpezarClass : 'dark disabled',
                     easyNormalGame: false,
                     start: false,
+                    coleccion: null,
+                    datosColeccion: null,
+                    mujeresDesbloqueadas: [],
+                    datosDesbloqueados: [],
                 //Cartas
                     //Total cartas partida
                     mujeres: null,
@@ -198,6 +197,7 @@ import $ from 'jquery'
                 //Datos cartas
                     datos: null,
                     currentDato: {
+                        idDato: null,
                         idMujer: null,
                         dato: null,
                     },
@@ -212,7 +212,6 @@ import $ from 'jquery'
                     puntos: 0,
                     onRow: 0,
                     bonus: '',
-                    mujeresDesbloqueadas: 0,
 
                 //Validar si es valido y si es pc o movil
                 validDeviceDimensions:this.enoughDimensionsToPlay(),
@@ -276,26 +275,33 @@ import $ from 'jquery'
                         global.value -= .1;
 
                         if (global.value >= 100) {
-                            // this.showModalPartidaFin();
                             clearInterval(global.timer);
                         }  else if (global.value < 0) {
-                            document.getElementById('btnEmpezar').innerText = "Empezar";
-                            global.btnEmpezarClass = '';
-                            global.value = 100;
-                            console.log("se acabo!");
-                            // this.showModalPartidaFin();
+                            global.value = 0;
                             clearInterval(global.timer);
-                            this.showModalPartidaFin();
-                        }
-                        // this.showModalPartidaFin();
 
+                            let gameInfo = {
+                                    level: Juego.getNivel(),
+                                    score: global.puntos
+                                }
+
+                            let data = {
+                                gameInfo: gameInfo,
+                                mujeresDesbloqueadas: global.mujeresDesbloqueadas,
+                                datosDesbloqueados: global.datosDesbloqueados,
+                            }
+
+                            GameDataService.gameScore(data)
+                                .then(() => {
+                                    global.$bvModal.show('modal-fin-juego');
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                });
+                        }
                     }
 
-                // this.showModalPartidaFin();
-
                 }, 100);
-                
-                // this.showModalPartidaFin();
             },
             selectDato() {
                 //Coger una posicion aleatoria del array de datos
@@ -323,9 +329,36 @@ import $ from 'jquery'
                         easing:'easeInOutQuad'
                     });
 
-                    this.sumarPuntuacion();
+                    //Comprobar si la mujer estaba en la coleccion
+                        let isInColeccion = false;
+                        for (let i = 0; i < this.coleccion.length; i++) {
+                            const cartaCol = this.coleccion[i];
 
-                    this.comprobarMano();
+                            if (cartaCol.id == idMujer) {
+                                isInColeccion = true;
+                                break;
+                            }
+                        }
+
+                        if (!isInColeccion) {
+                            this.mujeresDesbloqueadas.push(idMujer);
+                        }
+
+                    //Comprobar si el dato estaba en la collecion
+                        isInColeccion = false;
+                        for (let i = 0; i < this.datosColeccion.length; i++) {
+                            const datoCol = this.datosColeccion[i];
+                            
+                            if (datoCol.id == this.currentDato.idDato ) {
+                                isInColeccion = true;
+                                break;
+                            }
+                        }
+
+                        this.datosDesbloqueados.push(this.currentDato.idDato);
+
+
+                    this.sumarPuntuacion();
 
                     $('#' + idMujer).fadeOut("slow");
 
@@ -346,7 +379,7 @@ import $ from 'jquery'
                         }
                     }
 
-                    this.selectDato();
+                    this.comprobarMano();
                 } 
                 else {
                     //* Animacion DATA KO
@@ -363,10 +396,25 @@ import $ from 'jquery'
             },
             comprobarMano () {
                 this.cartasCorrectas++;
-                if (this.cartasCorrectas === 9 || this.cartasCorrectas === 18 || this.cartasCorrectas === 27 || this.cartasCorrectas === 36) {
-                    //* Mano completa sacar otros 12
 
-                    let mujeresSiguienteVuelta = this.mujeres.slice((9 * this.vueltasDeck) + 1, (9 * this.vueltasDeck) + 9);
+                if (this.cartasCorrectas === 9 || this.cartasCorrectas === 18 || this.cartasCorrectas === 27 || this.cartasCorrectas === 36) {
+                    //* Mano completa sacar otros 9
+                    let cartasPorMano = 9 * this.vueltasDeck;
+                    let mujeresSiguienteVuelta 
+                    const ambitos = Juego.getAmbito();
+
+                    if (cartasPorMano + 9 <= this.mujeres.length) {
+                        mujeresSiguienteVuelta = this.mujeres.slice(cartasPorMano + 1, cartasPorMano + 9);
+                    }
+                    else{
+                        if (cartasPorMano == this.mujeres.length) {
+                            mujeresSiguienteVuelta = this.mujeres[cartasPorMano];
+                        }
+                        else {
+                            mujeresSiguienteVuelta = this.mujeres.slice(cartasPorMano, this.mujeres.length);
+                            console.log('no da para mas mujeres');
+                        }
+                    }
 
                     for (let i = 0; i < mujeresSiguienteVuelta.length; i++) {
                         const mujer = mujeresSiguienteVuelta[i];
@@ -377,18 +425,65 @@ import $ from 'jquery'
                     this.mujeresEnPantalla = [];
                     for (let i = 0; i < mujeresSiguienteVuelta.length; i++) {
                             const carta = mujeresSiguienteVuelta[i];
-
+                            carta.ambito = ambitos[carta.ambito_id -1];
                             this.mujeresEnPantalla.push(carta.id);  
                     }
 
-                    console.log(this.mujeresEnPantalla);
                     this.vueltasDeck++;
 
                     console.log("siguiente mano");
                 }
+                //* ERES BUENISIMO HAS GANADO CRACK
                 else if (this.cartasCorrectas === 45) {
-                    //* ERES BUENISIMO HAS GANADO CRACK
                     console.log("crack");
+                    this.start = false;
+                    
+                    let gameInfo = {
+                        level: Juego.getNivel(),
+                        score: this.puntos
+                    }
+
+                    let data = {
+                        gameInfo: gameInfo,
+                        mujeresDesbloqueadas: this.mujeresDesbloqueadas,
+                        datosDesbloqueados: this.datosDesbloqueados,
+                    }
+
+                    GameDataService.gameScore(data)
+                    .then(() => {
+                        this.$bvModal.show('modal-fin-juego');
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                }
+                //* NO QUEDAN MAS MUJERES
+                else if (this.cartasCorrectas >= this.mujeres.length) {
+                    this.start = false;
+                    console.log('No quedan mas mujeres');
+
+                    let gameInfo = {
+                        level: Juego.getNivel(),
+                        score: this.puntos
+                    }
+
+                    let data = {
+                        gameInfo: gameInfo,
+                        mujeresDesbloqueadas: this.mujeresDesbloqueadas,
+                        datosDesbloqueados: this.datosDesbloqueados,
+                    }
+
+                    GameDataService.gameScore(data)
+                    .then(() => {
+                        this.$bvModal.show('modal-fin-juego');
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });                    
+                }
+                
+                if (this.cartasCorrectas <= this.mujeres.length && this.mujeresEnPantalla.length > 0) {
+                    this.selectDato();
                 }
             },
             sumarPuntuacion() {
@@ -428,16 +523,9 @@ import $ from 'jquery'
                 }
             },
             clickCarta(idMujer) {
-                this.comprobarDato(idMujer);
-            },
-            finished: () => {
-                this.$refs.countdown.updateTime(100);
-                console.log("patata");
-
-            },
-            showModalPartidaFin() {
-                this.$refs['finJuego'].show();
-                // $("#modal-fin-juego").show();
+                if (this.start) {
+                    this.comprobarDato(idMujer);
+                }
             },
             //Animaciones carta
             cartaHoverEnter(id) {
@@ -544,13 +632,16 @@ import $ from 'jquery'
                 .then((response) => {
                     this.mujeres = response.data.mujeres;
                     this.datos = response.data.datos;
+                    this.coleccion = response.data.coleccion;
+                    this.datosColeccion = response.data.datos_coleccion;
 
                     if (this.mujeres !== null && this.mujeres.length > 0) {
                         this.cardsDeck = this.mujeres.slice(0, 9);
+                        const ambitos = Juego.getAmbito();
 
                         for (let i = 0; i < this.cardsDeck.length; i++) {
                             const carta = this.cardsDeck[i];
-
+                            carta.ambito = ambitos[carta.ambito_id -1];
                             this.mujeresEnPantalla.push(carta.id);    
                         }
 
