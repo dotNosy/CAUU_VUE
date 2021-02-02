@@ -13,6 +13,10 @@ class InfoDataService {
     coleccionMujerDatos (data) {
         return http.get("auth/data/Coleccion/mujer", User.getToken(data));
     }
+
+    imprimirMujeres () {
+        return http.get("auth/data/imprimirJuego", User.getToken());
+    }
 }
 
 export default new InfoDataService();
