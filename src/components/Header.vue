@@ -1,83 +1,127 @@
 <template>
 <header>
-<nav class="navbar navbar-expand-sm" style="background-color: #2d2c2f">
-    <a href="./home" class="logo">
-    <img src="../assets/logoDF.png" alt="logo" class="imglogo">
-</a>
-    <ul class="navbar-nav">
-    <li class="nav-item" style="margin-left: 8%">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link1</a></button>
-    </li>
-    <li class="nav-item">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link2</a></button>
-    </li>
-    <li class="nav-item">
-        <button type="button" class="btn" id="btn"><a class="nav-link text-light" href="#">Link3</a></button>
-    </li>
-    <li class="nav-item">
-        <button @click="checkUserLogued()" type="button" class="btn" id="btn" style="position: absolute; right: 0; margin-right:1%;"><a v-bind:href="laRuta" class="nav-link text-light">{{ login }}</a></button>
-    </li>
-    </ul>
-</nav>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div>
+    <b-navbar toggleable="lg"  style="background-color: #2d2c2f">
+        <b-navbar-brand href="./">
+            <img src="../assets/logoDF.png" alt="logo" class="imglogo">
+        </b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnSelectnivel" style="padding:1em;" href="./SelectNivel" @click="getPerfil(),getColeccion(),getObtener()">Jugar</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnColeccion" style="padding:1em;" href="./Coleccion" :disabled='coleccion' @click="getPerfil(),getColeccion(),getObtener()">Colección</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnPerfil" style="padding:1em;" href="./Perfil" :disabled='perfil' @click="getPerfil(),getColeccion(),getObtener()">Perfil</b-button>
+            <b-button type="button" class="nav-item nav-link text-light btn" id="btnObtenerJuego" style="padding:1em;" href="./ObtenerJuego" :disabled='obtener' @click="getPerfil(),getColeccion(),getObtener()">Obtener</b-button>
+        </b-navbar-nav>
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+            <b-icon icon="bell-fill" class="rounded-circle p-2" variant="light" font-scale="3" id="icono"></b-icon>
+            <button @click="logout()" type="button" class="btnLog" id="btn">{{ login }} <div id="logoutLoading"><b-spinner class="my-1" style="width: 2rem; height: 2rem;" variant="danger" label="Cargando..."></b-spinner></div></button>
+        </b-navbar-nav>
+        </b-collapse>
+    </b-navbar>
+</div>
+
 </header>
 </template>
 <script>
+    import User from "../User";
+    import $ from "jquery";
+
     export default {
-    name: 'header',
-    data(){
-        return {
-        laRuta: "",
-        login: "",
-        }
-    },
-    methods: {
-        checkUserLogued () {
-            const user = sessionStorage.getItem("user");
-                if (!user) {
-                    this.laRuta = "/login";
-                    this.login = "LOGIN";
+        
+        name: 'my-header',
+        data(){
+            return {
+                laRuta: "",
+                login: "",
+                perfil:false,
+                coleccion:false,
+                obtener:false,
+            }
+        },
+        methods: {
+            checkUserLogued () {
+                const user = User.getUser();
+
+                    if (user == null || user.token == '') {
+                        this.login = "Login";
+                    } 
+                    else {
+                        this.login = "Logout"
+                    }
+            },
+            logout () {
+                const user = User.getUser();
+
+                if (user !== null && user.token !== '') {
+                    this.login = "";
+                    $("#logoutLoading").fadeIn("slow");
+                    User.revokeToken();
                 } else {
-                        this.laRuta = "/logout";
-                        this.login = "LOGOUT"
+                    this.$router.push({name: 'login'});
                 }
-        }
-    }
-    ,
-    mounted () {
-        this.checkUserLogued();
-    }
+            },
+            getPerfil(){
+                setTimeout(() => {
+                        if(this.$route.name==="perfil"){
+                    this.perfil=true;
+                }
+                else{
+                    this.perfil=false;
+                }}, 200)
+            },
+            getColeccion(){
+                setTimeout(() => {
+                        if(this.$route.name==="coleccion"){
+                    this.coleccion=true;
+                }
+                else{
+                    this.coleccion=false;
+                }}, 200)
+            },
+            getObtener(){
+                setTimeout(() => {
+                        if(this.$route.name==="obtenerJuego"){
+                    this.obtener=true;
+                    console.log("true");
+                }
+                else{
+                    this.obtener=false;
+                    console.log("false");
+                }}, 200)
+            },
+        },
+        mounted () {
+            $("#logoutLoading").hide();
+            this.checkUserLogued();
+            this.perfil=null;
+            this.coleccion=null;
+            this.obtener=null;
+            this.getPerfil();
+            this.getColeccion();
+            this.getObtener();
+        },
     };
 
 </script>
 <style>
-.logo{
-    width: 4%;
-}
 .imglogo{
-    width:100%;
     border-radius: 50%;
 }
-li{
-    margin-left: 1%;
-    margin-right: 1%;
-    list-style: none;
-    display: inline;
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    font-size: 1.3em;
-    padding-left: 2%;
-    padding-right: 2%;
-}
-ul{
-    display: inline;
-}
-#btn{
-    background-color: #4e3757;
-    border-color:#4e3757;
-    color:red;
-}
-
-#btn:hover{
-    background-color: #918897;
-    border-color: #918897;
+@media (max-width: 992px) {
+    .logo, #icono{
+        display: none;
+    }
+    .btn{
+        width: 94%;
+        padding: 2%;
+        margin: 0.5%;
+    }
 }
 </style>

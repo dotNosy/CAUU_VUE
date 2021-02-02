@@ -1,5 +1,5 @@
 import http from "../http-common";
-import token from "./getToken";
+import User from "../User";
 
 class LoginDataService {
     login(data) {
@@ -7,7 +7,7 @@ class LoginDataService {
     }
 
     logout() {
-        return http.get("/auth/logout", token.getUserToken());
+        return http.get("/auth/logout", User.getToken());
     }
 }
 
